@@ -16,7 +16,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin", "editor"],
-        navLink: "/analyticsDashboard",
+        navLink: "/",
       },
     ],
   },
@@ -105,7 +105,7 @@ const navigationConfig = [
   },
   {
     id: "courseCategory",
-    title: "Course Category",
+    title: "Category",
     type: "collapse",
     icon: <Icon.ShoppingBag size={20} />,
     children: [
@@ -117,14 +117,14 @@ const navigationConfig = [
         permissions: ["admin", "editor"],
         navLink: "/app/category/categoryList",
       },
-      {
-        id: "subCategory",
-        title: "Sub-Category",
-        type: "item",
-        icon: <Icon.Circle size={12} />,
-        permissions: ["admin", "editor"],
-        navLink: "/app/category/subCategory",
-      },
+      // {
+      //   id: "subCategory",
+      //   title: "Sub-Category",
+      //   type: "item",
+      //   icon: <Icon.Circle size={12} />,
+      //   permissions: ["admin", "editor"],
+      //   navLink: "/app/category/subCategory",
+      // },
     ],
   },
   {

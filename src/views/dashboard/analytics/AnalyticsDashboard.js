@@ -117,48 +117,48 @@ class AnalyticsDashboard extends React.Component {
               style={{ borderColor: "white" }}
             >
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Total Products
+                Total Student
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {this.state.product.data}
+                {/* {this.state.product.data} */} 100
               </CardText>
             </Card>
           </Col>
           <Col lg="3" md="12">
             <Card className="bg-success" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Total Users
+                Total Teachers
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {this.state.users.totalUser}
+                {/* {this.state.users.totalUser} */}50
               </CardText>
             </Card>
           </Col>
           <Col lg="3" md="12">
             <Card className="bg-danger" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Total Store
+                Total Courses
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {this.state.staff.totalStaff}
+                {/* {this.state.staff.totalStaff}*/} 40
               </CardText>
             </Card>
           </Col>
           <Col lg="3" md="12">
             <Card className="bg-warning" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Total Seller
+                Wallet Balance
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {this.state.brand.totalBrand}
+                {/* {this.state.brand.totalBrand} */} 1500
               </CardText>
             </Card>
           </Col>
-          <Col lg="3" md="12">
+          {/* <Col lg="3" md="12">
             <Card className="bg-info" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
                 Total Order
@@ -201,7 +201,7 @@ class AnalyticsDashboard extends React.Component {
                 {this.state.brand.totalBrand}
               </CardText>
             </Card>
-          </Col>
+          </Col> 
 
           <Col lg="3" md="12">
             <Card className="bg-primary" body inverse>
@@ -213,15 +213,15 @@ class AnalyticsDashboard extends React.Component {
                 {this.state.product.totalProduct}
               </CardText>
             </Card>
-          </Col>
+          </Col>*/}
         </Row>
 
         {/* theme Componets  */}
-        <Row>
+        {/* <Row>
           <Col sm="12">
             <DispatchedOrders />
           </Col>
-        </Row>
+        </Row> */}
         {/* <Row className="match-height">
           <Col md="6" sm="12">
             <AvgSession labelColor={$label_color} primary={$primary} />

@@ -39,33 +39,33 @@ export class AddCategory extends Component {
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("name", this.state.name);
-    data.append("desc", this.state.desc);
-    data.append("sortorder", this.state.sortorder);
-    data.append("status", this.state.status);
-    if (this.state.selectedFile !== null) {
-      data.append(
-        "product_img",
-        this.state.selectedFile,
-        this.state.selectedName
-      );
-    }
-    //   for (var value of data.values()) {
-    //     console.log(value);
-    //  }
-    axiosConfig
-      .post("/addproductcategory", data)
-      .then((response) => {
-        console.log(response);
-        this.props.history.push("/app/category/categoryList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // submitHandler = (e) => {
+  //   e.preventDefault();
+  //   const data = new FormData();
+  //   data.append("name", this.state.name);
+  //   data.append("desc", this.state.desc);
+  //   data.append("sortorder", this.state.sortorder);
+  //   data.append("status", this.state.status);
+  //   if (this.state.selectedFile !== null) {
+  //     data.append(
+  //       "product_img",
+  //       this.state.selectedFile,
+  //       this.state.selectedName
+  //     );
+  //   }
+  //   //   for (var value of data.values()) {
+  //   //     console.log(value);
+  //   //  }
+  //   axiosConfig
+  //     .post("/addproductcategory", data)
+  //     .then((response) => {
+  //       console.log(response);
+  //       this.props.history.push("/app/category/categoryList");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   render() {
     return (
       <div>
@@ -108,7 +108,7 @@ export class AddCategory extends Component {
                   />
                 </Col>
 
-                <Col lg="6" md="6">
+                {/* <Col lg="6" md="6">
                   <Label>Sort Order</Label>
                   <Input
                     type="number"
@@ -117,13 +117,13 @@ export class AddCategory extends Component {
                     value={this.state.sortorder}
                     onChange={this.changeHandler}
                   />
-                </Col>
+                </Col> */}
 
                 <Col lg="6" md="6">
                   <Label>Image</Label>
                   <CustomInput type="file" onChange={this.onChangeHandler} />
                 </Col>
-                <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
+                {/* <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
                   <Label className="mb-1">Status</Label>
                   <div
                     className="form-label-group"
@@ -145,7 +145,7 @@ export class AddCategory extends Component {
                     />
                     <span style={{ marginRight: "3px" }}>Inactive</span>
                   </div>
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Button.Ripple

@@ -148,19 +148,19 @@ class CategoryList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig.get("/getproductCategory").then((response) => {
-      let rowData = response.data.data;
-      this.setState({ rowData });
-    });
-  }
+  // async componentDidMount() {
+  //   await axiosConfig.get("/getproductCategory").then((response) => {
+  //     let rowData = response.data.data;
+  //     this.setState({ rowData });
+  //   });
+  // }
 
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/del_productcategory/${id}`).then((response) => {
-      console.log(response);
-    });
-  }
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/del_productcategory/${id}`).then((response) => {
+  //     console.log(response);
+  //   });
+  // }
 
   onGridReady = (params) => {
     this.gridApi = params.api;
