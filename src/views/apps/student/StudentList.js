@@ -36,40 +36,28 @@ class StudentList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 100,
+        width: 80,
         filter: true,
         // checkboxSelection: true,
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
-      {
-        headerName: "Student Id",
-        field: "customerId",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customerId}</span> */}
-            </div>
-          );
-        },
-      },
+
       {
         headerName: "Image",
-        field: "image",
+        field: "userimg",
         filter: false,
-        width: 120,
+        width: 80,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <img
+              <img
                 className="rounded-circle  mr-4"
-                src={params.data.image}
+                src={params.data.userimg}
                 alt=" brand"
                 height="40"
                 width="40"
-              /> */}
+              />
             </div>
           );
         },
@@ -77,13 +65,13 @@ class StudentList extends React.Component {
 
       {
         headerName: "Name",
-        field: "first_name",
+        field: "fullname",
         filter: true,
-        width: 150,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.first_name}</span> */}
+            <div className="ml-1 mr-4">
+              <span>{params.data.fullname}</span>
             </div>
           );
         },
@@ -91,30 +79,43 @@ class StudentList extends React.Component {
 
       {
         headerName: "Email",
-        field: "customer_email",
+        field: "email",
         filter: true,
-        width: 150,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customer_email}</span> */}
+            <div className="ml-1 mr-4">
+              <span>{params.data.email}</span>
             </div>
           );
         },
       },
       {
         headerName: "Mobile No.",
-        field: "mobile_no",
+        field: "mobile",
         filter: true,
-        width: 150,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+            <div className="ml-1 mr-4">
+              <span>{params.data.mobile}</span>
             </div>
           );
         },
       },
+      // {
+      //   headerName: "Student Id",
+      //   field: "customerId",
+      //   filter: true,
+      //   width: 150,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="ml-2 mr-4">
+      //         {/* <span>{params.data.customerId}</span> */}
+      //       </div>
+      //     );
+      //   },
+      // },
 
       //   {
       //     headerName: "Status",
@@ -166,24 +167,24 @@ class StudentList extends React.Component {
     ],
   };
 
-  //   async componentDidMount() {
-  //     await axiosConfig
-  //       .get("http://35.154.86.59/api/user/allcustomer")
-  //       .then((response) => {
-  //         let rowData = response.data.data;
-  //         console.log(rowData);
-  //         this.setState({ rowData });
-  //       });
-  //   }
+  async componentDidMount() {
+    await axiosConfig
+      .get("http://13.127.52.128/v1/api/admin/allusers")
+      .then((response) => {
+        let rowData = response.data.data;
+        console.log(rowData);
+        this.setState({ rowData });
+      });
+  }
 
-  //   async runthisfunction(id) {
-  //     console.log(id);
-  //     await axiosConfig
-  //       .get(`http://35.154.86.59/api/user/delcustomer/${id}`)
-  //       .then((response) => {
-  //         console.log(response);
-  //       });
-  //   }
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig
+      .get(`http://13.127.52.128/v1/api/admin/deleteuser/${id}`)
+      .then((response) => {
+        console.log(response);
+      });
+  }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
