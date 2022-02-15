@@ -43,74 +43,75 @@ class CourseList extends React.Component {
         // headerCheckboxSelection: true,
       },
       {
-        headerName: "Student Id",
-        field: "customerId",
+        headerName: "Course Title",
+        field: "course_title",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customerId}</span> */}
+            <div className=" mr-2">
+              <span>{params.data.course_title}</span>
             </div>
           );
         },
       },
       {
-        headerName: "Image",
-        field: "image",
+        headerName: "Teacher Name",
+        field: "teacher_name",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className=" mr-2">
+              <span>{params.data.teacher_name}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Description",
+        field: "desc",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className=" mr-2">
+              <span>{params.data.desc}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "PDF",
+        field: "pdf",
         filter: false,
         width: 120,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <img
-                className="rounded-circle  mr-4"
-                src={params.data.image}
-                alt=" brand"
-                height="40"
-                width="40"
-              /> */}
+              {params.data.pdf.map((i) => (
+                <img
+                  className=" rounded-circle border-black m-0"
+                  src={i}
+                  alt="user avatar"
+                  height="40"
+                  width="40"
+                />
+              ))}
             </div>
           );
         },
       },
 
       {
-        headerName: "Name",
-        field: "first_name",
+        headerName: "Video Link",
+        field: "video_link",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.first_name}</span> */}
-            </div>
-          );
-        },
-      },
-
-      {
-        headerName: "Email",
-        field: "customer_email",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customer_email}</span> */}
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Mobile No.",
-        field: "mobile_no",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+            <div className=" mr-4">
+              <span>{params.data.video_link}</span>
             </div>
           );
         },
@@ -166,15 +167,15 @@ class CourseList extends React.Component {
     ],
   };
 
-  //   async componentDidMount() {
-  //     await axiosConfig
-  //       .get("http://35.154.86.59/api/user/allcustomer")
-  //       .then((response) => {
-  //         let rowData = response.data.data;
-  //         console.log(rowData);
-  //         this.setState({ rowData });
-  //       });
-  //   }
+  async componentDidMount() {
+    await axiosConfig
+      .get("http://13.127.52.128/v1/api/admin/allcourse")
+      .then((response) => {
+        let rowData = response.data.data;
+        console.log(rowData);
+        this.setState({ rowData });
+      });
+  }
 
   //   async runthisfunction(id) {
   //     console.log(id);

@@ -42,19 +42,7 @@ class TeacherList extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
-      {
-        headerName: "Teacher ID",
-        field: "customerId",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customerId}</span> */}
-            </div>
-          );
-        },
-      },
+
       {
         headerName: "Image",
         field: "image",
@@ -63,27 +51,27 @@ class TeacherList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <img
+              <img
                 className="rounded-circle  mr-4"
                 src={params.data.image}
                 alt=" brand"
                 height="40"
                 width="40"
-              /> */}
+              />
             </div>
           );
         },
       },
 
       {
-        headerName: "Name",
-        field: "first_name",
+        headerName: "FullName",
+        field: "fullname",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.first_name}</span> */}
+              <span>{params.data.fullname}</span>
             </div>
           );
         },
@@ -91,26 +79,91 @@ class TeacherList extends React.Component {
 
       {
         headerName: "Email",
-        field: "customer_email",
+        field: "email",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.customer_email}</span> */}
+              <span>{params.data.email}</span>
             </div>
           );
         },
       },
       {
         headerName: "Mobile No.",
-        field: "mobile_no",
+        field: "mobile",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+              <span>{params.data.mobile}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Date Of Birth",
+        field: "dob",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.dob}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Institute",
+        field: "institute",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.institute}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "City",
+        field: "city",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.city}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "State",
+        field: "state",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.state}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Mobile No.",
+        field: "mobile",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.mobile}</span>
             </div>
           );
         },
@@ -166,15 +219,15 @@ class TeacherList extends React.Component {
     ],
   };
 
-  //   async componentDidMount() {
-  //     await axiosConfig
-  //       .get("http://35.154.86.59/api/user/allcustomer")
-  //       .then((response) => {
-  //         let rowData = response.data.data;
-  //         console.log(rowData);
-  //         this.setState({ rowData });
-  //       });
-  //   }
+  async componentDidMount() {
+    await axiosConfig
+      .get("http://13.127.52.128/v1/api/admin/allstaff")
+      .then((response) => {
+        let rowData = response.data.data;
+        console.log(rowData);
+        this.setState({ rowData });
+      });
+  }
 
   //   async runthisfunction(id) {
   //     console.log(id);
