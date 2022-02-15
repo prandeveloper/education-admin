@@ -19,7 +19,7 @@ import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 
-class StudentList extends React.Component {
+class KycList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -36,86 +36,111 @@ class StudentList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 80,
+        width: 100,
         filter: true,
         // checkboxSelection: true,
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
-
       {
-        headerName: "Image",
-        field: "userimg",
+        headerName: "Name",
+        field: "customerId",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              {/* <span>{params.data.customerId}</span> */}
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Date Of Birth",
+        field: "image",
         filter: false,
-        width: 80,
+        width: 120,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <img
+              {/* <img
                 className="rounded-circle  mr-4"
-                src={params.data.userimg}
+                src={params.data.image}
                 alt=" brand"
                 height="40"
                 width="40"
-              />
+              /> */}
             </div>
           );
         },
       },
 
       {
-        headerName: "Name",
-        field: "fullname",
+        headerName: "Gender",
+        field: "first_name",
         filter: true,
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-1 mr-4">
-              <span>{params.data.fullname}</span>
+            <div className="ml-2 mr-4">
+              {/* <span>{params.data.first_name}</span> */}
             </div>
           );
         },
       },
 
       {
-        headerName: "Email",
-        field: "email",
+        headerName: "Nationality",
+        field: "customer_email",
         filter: true,
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-1 mr-4">
-              <span>{params.data.email}</span>
+            <div className="ml-2 mr-4">
+              {/* <span>{params.data.customer_email}</span> */}
             </div>
           );
         },
       },
       {
-        headerName: "Mobile No.",
-        field: "mobile",
+        headerName: "Aadhar No.",
+        field: "mobile_no",
         filter: true,
-        width: 200,
+        width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className="ml-1 mr-4">
-              <span>{params.data.mobile}</span>
+            <div className="ml-2 mr-4">
+              {/* <span>{params.data.mobile_no}</span> */}
             </div>
           );
         },
       },
-      // {
-      //   headerName: "Student Id",
-      //   field: "customerId",
-      //   filter: true,
-      //   width: 150,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="ml-2 mr-4">
-      //         {/* <span>{params.data.customerId}</span> */}
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        headerName: "Document Image",
+        field: "mobile_no",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              {/* <span>{params.data.mobile_no}</span> */}
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Selfie Image",
+        field: "mobile_no",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              {/* <span>{params.data.mobile_no}</span> */}
+            </div>
+          );
+        },
+      },
 
       //   {
       //     headerName: "Status",
@@ -141,7 +166,7 @@ class StudentList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Edit
+              <Edit
                 className="mr-50"
                 size="20px"
                 color="blue"
@@ -150,7 +175,7 @@ class StudentList extends React.Component {
                     `/app/contactUs/customer/editCustomer/${params.data._id}`
                   )
                 }
-              /> */}
+              />
               <Trash2
                 size="20px"
                 color="red"
@@ -167,24 +192,24 @@ class StudentList extends React.Component {
     ],
   };
 
-  async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1/api/admin/allusers")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
-  }
+  //   async componentDidMount() {
+  //     await axiosConfig
+  //       .get("http://35.154.86.59/api/user/allcustomer")
+  //       .then((response) => {
+  //         let rowData = response.data.data;
+  //         console.log(rowData);
+  //         this.setState({ rowData });
+  //       });
+  //   }
 
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig
-      .get(`http://13.127.52.128/v1/api/admin/deleteuser/${id}`)
-      .then((response) => {
-        console.log(response);
-      });
-  }
+  //   async runthisfunction(id) {
+  //     console.log(id);
+  //     await axiosConfig
+  //       .get(`http://35.154.86.59/api/user/delcustomer/${id}`)
+  //       .then((response) => {
+  //         console.log(response);
+  //       });
+  //   }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -219,19 +244,17 @@ class StudentList extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Student List
+                  KYC List
                 </h1>
               </Col>
-              {/* <Col>
-                <Button
+              <Col>
+                {/* <Button
                   className=" btn btn-danger float-right"
-                  onClick={() =>
-                    history.push("/app/contactUs/customer/addCustomer")
-                  }
+                  onClick={() => history.push("/app/course/addCourse")}
                 >
-                  Add New Customer
-                </Button>
-              </Col> */}
+                  Add New Course
+                </Button> */}
+              </Col>
             </Row>
             <CardBody>
               {this.state.rowData === null ? null : (
@@ -329,4 +352,4 @@ class StudentList extends React.Component {
     );
   }
 }
-export default StudentList;
+export default KycList;

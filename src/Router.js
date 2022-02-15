@@ -37,6 +37,7 @@ const transactionList = lazy(() =>
 const commentsList = lazy(() => import("./views/apps/comment/CommentsList"));
 const enrollList = lazy(() => import("./views/apps/enrollment/EnrollList"));
 const walletList = lazy(() => import("./views/apps/wallet/WalletList"));
+const kycList = lazy(() => import("./views/apps/kyc/KycList"));
 // My Component starts here
 
 const sellerList = lazy(() => import("./views/apps/seller/SellerList"));
@@ -575,6 +576,7 @@ class AppRouter extends React.Component {
           <AppRoute path="/app/comment/commentsList" component={commentsList} />
           <AppRoute path="/app/enrollment/enrollList" component={enrollList} />
           <AppRoute path="/app/wallet/walletList" component={walletList} />
+          <AppRoute path="/app/kyc/kycList" component={kycList} />
 
           {/* My components starts all my app components*/}
           <AppRoute path="/app/seller/sellerList" component={sellerList} />

@@ -151,6 +151,14 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/wallet/walletList",
   },
+  {
+    id: "kycList",
+    title: "KYC",
+    type: "item",
+    icon: <Icon.Youtube size={20} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/kyc/kycList",
+  },
   // {
   //   id: "Store",
   //   title: "Store",
