@@ -169,23 +169,6 @@ class TeacherList extends React.Component {
         },
       },
 
-      //   {
-      //     headerName: "Status",
-      //     field: "status",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: (params) => {
-      //       return params.value === "Active" ? (
-      //         <div className="badge badge-pill badge-success ml-2">
-      //           {/* {params.data.status} */}
-      //         </div>
-      //       ) : params.value === "Inactive" ? (
-      //         <div className="badge badge-pill badge-danger">
-      //           {/* {params.data.status} */}
-      //         </div>
-      //       ) : null;
-      //     },
-      //   },
       {
         headerName: "Actions",
         field: "transactions",
