@@ -159,6 +159,14 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/kyc/kycList",
   },
+  {
+    id: "notification",
+    title: "Notification",
+    type: "item",
+    icon: <Icon.Circle size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/notifications/notification",
+  },
   // {
   //   id: "Store",
   //   title: "Store",

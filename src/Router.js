@@ -24,6 +24,9 @@ const home = lazy(() => import("./views/pages/landingPage/Home"));
 //  Expert Education Tabs
 const studentList = lazy(() => import("./views/apps/student/StudentList"));
 const teacherList = lazy(() => import("./views/apps/teacher/TeacherList"));
+const addNotification = lazy(() =>
+  import("./views/apps/notifications/AddNotification")
+);
 const addTeacher = lazy(() => import("./views/apps/teacher/AddTeacher"));
 const courseList = lazy(() => import("./views/apps/course/CourseList"));
 const addCourse = lazy(() => import("./views/apps/course/AddCourse"));
@@ -91,6 +94,9 @@ const addMaterial = lazy(() => import("./views/apps/material/AddMaterial"));
 const editMaterial = lazy(() => import("./views/apps/material/EditMaterial"));
 const notificationList = lazy(() =>
   import("./views/apps/notification/NotificationList")
+);
+const notification = lazy(() =>
+  import("./views/apps/notifications/Notification")
 );
 const pendingPaymentsList = lazy(() =>
   import("./views/apps/sellerPayout/pendingPayments/PendingPaymentsList")
@@ -506,10 +512,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => {
+    render={props => {
       return (
         <ContextLayout.Consumer>
-          {(context) => {
+          {context => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -529,7 +535,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // user: state.auth.login.userRole,
   };
@@ -553,6 +559,10 @@ class AppRouter extends React.Component {
           {/* Teacher App Tabs */}
           <AppRoute path="/app/student/studentList" component={studentList} />
           <AppRoute path="/app/teacher/teacherList" component={teacherList} />
+          <AppRoute
+            path="/app/notification/addNotification"
+            component={addNotification}
+          />
           <AppRoute path="/app/teacher/addTeacher" component={addTeacher} />
           <AppRoute path="/app/course/addCourse" component={addCourse} />
           <AppRoute path="/app/course/courseList" component={courseList} />
@@ -669,6 +679,10 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/app/notification/notificationList"
             component={notificationList}
+          />
+          <AppRoute
+            path="/app/notifications/notification"
+            component={notification}
           />
           <AppRoute
             path="/app/sellerPayout/pendingPayments/pendingPaymentsList"
