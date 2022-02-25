@@ -130,13 +130,13 @@ export class AddNotification extends Component {
                 </Col>
                 <Col lg="6" md="6">
                   <FormGroup>
-                    <Label>Mobile Number</Label>
+                    <Label>Description</Label>
                     <Input
-                      type="number"
-                      placeholder="Mobile Number"
-                      name="mobile_no"
-                      value={this.state.mobile_no}
-                      onChange={this.changeHandler2}
+                      type="text"
+                      placeholder="Description"
+                      name="description"
+                      // value={this.state.mobile_no}
+                      // onChange={this.changeHandler2}
                     />
                   </FormGroup>
                 </Col>
