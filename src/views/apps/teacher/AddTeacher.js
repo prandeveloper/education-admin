@@ -19,17 +19,29 @@ export class AddTeacher extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: "",
-      last_name: "",
-      customer_email: "",
-      mobile_no: "",
-      sortorder: "",
-      status: "",
+      fullname: "",
+      email: "",
+      mobile: "",
+      password: "",
+      cnfmPassword: "",
+      image: "",
+      gender: "",
+      dob: "",
+      state: "",
+      city: "",
+      institute: "",
+      selectedFile: null,
+      selectedName: "",
     };
   }
+  onChangeHandler = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedName: event.target.files[0].name });
+    console.log(event.target.files[0]);
+  };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
+  changeHandler3 = (e) => {
+    this.setState({ gender: e.target.value });
   };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -42,26 +54,32 @@ export class AddTeacher extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    // const data = new FormData();
-    // data.append("employee_name", this.state.employee_name);
-    // data.append("phone_no", this.state.phone_no);
-    // data.append("email", this.state.email);
-    // data.append("password", this.state.password);
-    // data.append("designation", this.state.designation);
-    // data.append("sortorder", this.state.sortorder);
-    // data.append("status", this.state.status);
-    // if (this.state.selectedFile !== null) {
-    //   data.append("image", this.state.selectedFile, this.state.selectedName);
-    // }
-    //   for (var value of data.values()) {
-    //     console.log(value);
-    //  }
+    const data = new FormData();
+    data.append("fullname", this.state.fullname);
+    data.append("email", this.state.email);
+    data.append("mobile", this.state.mobile);
+    data.append("password", this.state.password);
+    data.append("cnfmPassword", this.state.cnfmPassword);
+    data.append("gender", this.state.gender);
+    data.append("dob", this.state.dob.toString());
+    data.append("state", this.state.state);
+    data.append("city", this.state.city);
+    data.append("institute", this.state.institute);
+    if (this.state.selectedFile !== null) {
+      data.append("image", this.state.selectedFile, this.state.selectedName);
+    }
+    for (var value of data.values()) {
+      console.log(value);
+    }
+    for (var key of data.keys()) {
+      console.log(key);
+    }
     axiosConfig
-      .post("http://35.154.86.59/api/user/customersignup", this.state)
+      .post("http://13.127.52.128/v1/api/admin/addstaff", data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/contactUs/customer/customerList");
+        // this.props.history.push("/app/contactUs/customer/customerList");
       })
       .catch((error) => {
         console.log(error);
@@ -81,9 +99,7 @@ export class AddTeacher extends Component {
             <Col>
               <Button
                 className=" btn btn-danger float-right"
-                onClick={() =>
-                  history.push("/app/contactUs/customer/customerList")
-                }
+                onClick={() => history.push("/app/teacher/teacherList")}
               >
                 Back
               </Button>
@@ -97,53 +113,153 @@ export class AddTeacher extends Component {
                     <Label>Full Name</Label>
                     <Input
                       type="text"
-                      placeholder="First Name"
-                      name="first_name"
-                      value={this.state.first_name}
+                      placeholder="Full Name"
+                      name="fullname"
+                      value={this.state.fullname}
                       onChange={this.changeHandler}
                     />
                   </FormGroup>
                 </Col>
-                {/* <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>LastName</Label>
-                    <Input
-                      type="text"
-                      placeholder="Last Name"
-                      name="last_name"
-                      value={this.state.last_name}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col> */}
+
                 <Col lg="6" md="6">
                   <FormGroup>
-                    <Label>Teachers Email</Label>
+                    <Label>Image</Label>
+                    <CustomInput type="file" onChange={this.onChangeHandler} />
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Email</Label>
                     <Input
                       type="email"
-                      placeholder="Customer Email"
-                      name="customer_email"
-                      value={this.state.customer_email}
+                      placeholder="Email"
+                      name="email"
+                      value={this.state.email}
                       onChange={this.changeHandler}
                     />
                   </FormGroup>
                 </Col>
+
                 <Col lg="6" md="6">
                   <FormGroup>
                     <Label>Mobile Number</Label>
                     <Input
                       type="number"
                       placeholder="Mobile Number"
-                      name="mobile_no"
-                      value={this.state.mobile_no}
+                      name="mobile"
+                      value={this.state.mobile}
                       onChange={this.changeHandler2}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Password</Label>
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.changeHandler}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Confirm Password</Label>
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      name="cnfmPassword"
+                      value={this.state.cnfmPassword}
+                      onChange={this.changeHandler}
                     />
                   </FormGroup>
                 </Col>
 
                 <Col lg="6" md="6" sm="6" className="mb-1 ">
                   <FormGroup>
-                    <Label className="mb-1">Status</Label>
+                    <Label className="mb-1">Gender</Label>
+                    <div
+                      className="form-label-group"
+                      onChange={(e) => this.changeHandler3(e)}
+                    >
+                      <input
+                        style={{ marginRight: "3px", fontWeight: 800 }}
+                        type="radio"
+                        name="gender"
+                        value="Male"
+                      />
+                      <span style={{ marginRight: "20px", fontWeight: 800 }}>
+                        Male
+                      </span>
+
+                      <input
+                        style={{ marginRight: "3px" }}
+                        type="radio"
+                        name="gender"
+                        value="Female"
+                      />
+                      <span style={{ marginRight: "3px" }}>Female</span>
+                    </div>
+                  </FormGroup>
+                </Col>
+
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Birth Date</Label>
+                    <Input
+                      type="date"
+                      placeholder="Birth Date"
+                      name="dob"
+                      value={this.state.dob}
+                      onChange={this.changeHandler}
+                    />
+                  </FormGroup>
+                </Col>
+
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>City</Label>
+                    <Input
+                      type="text"
+                      placeholder="City"
+                      name="city"
+                      value={this.state.city}
+                      onChange={this.changeHandler}
+                    />
+                  </FormGroup>
+                </Col>
+
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>State</Label>
+                    <Input
+                      type="text"
+                      placeholder="State"
+                      name="state"
+                      value={this.state.state}
+                      onChange={this.changeHandler}
+                    />
+                  </FormGroup>
+                </Col>
+
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Institute</Label>
+                    <Input
+                      type="text"
+                      placeholder="Institute"
+                      name="institute"
+                      value={this.state.institute}
+                      onChange={this.changeHandler}
+                    />
+                  </FormGroup>
+                </Col>
+
+                {/* <Col lg="6" md="6" sm="6" className="mb-1 ">
+                  <FormGroup>
+                    <Label className="mb-1">Approved Status</Label>
                     <div
                       className="form-label-group"
                       onChange={(e) => this.changeHandler1(e)}
@@ -151,7 +267,7 @@ export class AddTeacher extends Component {
                       <input
                         style={{ marginRight: "3px", fontWeight: 800 }}
                         type="radio"
-                        name="status"
+                        name="approvedstatus"
                         value="Active"
                       />
                       <span style={{ marginRight: "20px", fontWeight: 800 }}>
@@ -161,13 +277,13 @@ export class AddTeacher extends Component {
                       <input
                         style={{ marginRight: "3px" }}
                         type="radio"
-                        name="status"
+                        name="approvedstatus"
                         value="Inactive"
                       />
                       <span style={{ marginRight: "3px" }}>Inactive</span>
                     </div>
                   </FormGroup>
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Button.Ripple
@@ -175,7 +291,7 @@ export class AddTeacher extends Component {
                   type="submit"
                   className="ml-2 mb-1"
                 >
-                  Add Customer
+                  Add
                 </Button.Ripple>
               </Row>
             </Form>

@@ -65,13 +65,13 @@ class Notification extends React.Component {
 
       {
         headerName: "Title",
-        field: "Title",
+        field: "noti_title",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
-              <span>{params.data.fullname}</span>
+              <span>{params.data.noti_title}</span>
             </div>
           );
         },
@@ -79,94 +79,58 @@ class Notification extends React.Component {
 
       {
         headerName: "User Type",
-        field: "Type",
+        field: "usertype",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
-              <span>{params.data.email}</span>
+              <span>{params.data.usertype}</span>
             </div>
           );
         },
       },
+
       {
-        headerName: "Description",
-        field: "description",
+        headerName: "User Type",
+        field: "usertype",
         filter: true,
         width: 150,
+        cellRendererFramework: (params) => {
+          if (params.data.staffid?.email !== null) {
+            return (
+              <div className="ml-2 mr-4">
+                <span>{params.data.staffid?.email}</span>
+              </div>
+            );
+          } else if (params.data.userid?.email !== null) {
+            return (
+              <div className="ml-2 mr-4">
+                <span>{params.data.userid?.email}</span>
+              </div>
+            );
+          }
+        },
       },
-      //   {
-      //     headerName: "Date Of Birth",
-      //     field: "dob",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="ml-2 mr-4">
-      //           <span>{params.data.dob}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "Institute",
-      //     field: "institute",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="ml-2 mr-4">
-      //           <span>{params.data.institute}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "City",
-      //     field: "city",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="ml-2 mr-4">
-      //           <span>{params.data.city}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "State",
-      //     field: "state",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="ml-2 mr-4">
-      //           <span>{params.data.state}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "Mobile No.",
-      //     field: "mobile",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="ml-2 mr-4">
-      //           <span>{params.data.mobile}</span>
-      //         </div>
-      //       );
-      //     },
-      //   },
+      {
+        headerName: "Description",
+        field: "desc",
+        filter: true,
+        width: 250,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.desc}</span>
+            </div>
+          );
+        },
+      },
 
       {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
               <Edit
@@ -196,13 +160,11 @@ class Notification extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1/api/admin/allstaff")
-      .then(response => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/allNotification").then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
 
   //   async runthisfunction(id) {
@@ -213,7 +175,7 @@ class Notification extends React.Component {
   //         console.log(response);
   //       });
   //   }
-  onGridReady = params => {
+  onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -223,11 +185,11 @@ class Notification extends React.Component {
     });
   };
 
-  updateSearchQuery = val => {
+  updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = val => {
+  filterSize = (val) => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -313,7 +275,9 @@ class Notification extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={e => this.updateSearchQuery(e.target.value)}
+                          onChange={(e) =>
+                            this.updateSearchQuery(e.target.value)
+                          }
                           value={this.state.value}
                         />
                       </div>
@@ -328,7 +292,7 @@ class Notification extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {context => (
+                    {(context) => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

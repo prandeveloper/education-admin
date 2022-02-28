@@ -117,6 +117,19 @@ class TeacherList extends React.Component {
         },
       },
       {
+        headerName: "Gender",
+        field: "gender",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.gender}</span>
+            </div>
+          );
+        },
+      },
+      {
         headerName: "Institute",
         field: "institute",
         filter: true,
@@ -151,19 +164,6 @@ class TeacherList extends React.Component {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.state}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Mobile No.",
-        field: "mobile",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="ml-2 mr-4">
-              <span>{params.data.mobile}</span>
             </div>
           );
         },
@@ -212,14 +212,12 @@ class TeacherList extends React.Component {
       });
   }
 
-  //   async runthisfunction(id) {
-  //     console.log(id);
-  //     await axiosConfig
-  //       .get(`http://35.154.86.59/api/user/delcustomer/${id}`)
-  //       .then((response) => {
-  //         console.log(response);
-  //       });
-  //   }
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig.get(`/deletestaff/${id}`).then((response) => {
+      console.log(response);
+    });
+  }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
