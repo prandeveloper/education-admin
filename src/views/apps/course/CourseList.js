@@ -43,6 +43,25 @@ class CourseList extends React.Component {
         // headerCheckboxSelection: true,
       },
       {
+        headerName: "Image",
+        field: "course_image",
+        filter: false,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle  mr-4"
+                src={params.data.course_image}
+                alt=" brand"
+                height="40"
+                width="40"
+              />
+            </div>
+          );
+        },
+      },
+      {
         headerName: "Course Title",
         field: "course_title",
         filter: true,
@@ -57,13 +76,13 @@ class CourseList extends React.Component {
       },
       {
         headerName: "Teacher Name",
-        field: "teacher_name",
+        field: "teacher?.fullname",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
-              <span>{params.data.teacher_name}</span>
+              <span>{params.data.teacher?.fullname}</span>
             </div>
           );
         },
@@ -82,40 +101,66 @@ class CourseList extends React.Component {
         },
       },
       {
-        headerName: "PDF",
-        field: "pdf",
-        filter: false,
-        width: 120,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {params.data.pdf.map((i) => (
-                <img
-                  className=" rounded-circle border-black m-0"
-                  src={i}
-                  alt="user avatar"
-                  height="40"
-                  width="40"
-                />
-              ))}
-            </div>
-          );
-        },
-      },
-
-      {
-        headerName: "Video Link",
-        field: "video_link",
+        headerName: "Category",
+        field: "category",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
-            <div className=" mr-4">
-              <span>{params.data.video_link}</span>
+            <div className=" mr-2">
+              <span>{params.data.category}</span>
             </div>
           );
         },
       },
+      {
+        headerName: "Popularity",
+        field: "popularity",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return (
+            <div className=" mr-2">
+              <span>{params.data.popularity}</span>
+            </div>
+          );
+        },
+      },
+      // {
+      //   headerName: "PDF",
+      //   field: "pdf",
+      //   filter: false,
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         {params.data.pdf?.pdf_image?.map((i) => (
+      //           <img
+      //             className=" rounded-circle border-black m-0"
+      //             src={i}
+      //             alt="user avatar"
+      //             height="40"
+      //             width="40"
+      //           />
+      //         ))}
+      //       </div>
+      //     );
+      //   },
+      // },
+
+      // {
+      //   headerName: "Video Link",
+      //   field: "video_link",
+      //   filter: true,
+      //   width: 150,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className=" mr-4">
+      //         <span>{params.data.video_link}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
 
       //   {
       //     headerName: "Status",
