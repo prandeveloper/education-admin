@@ -23,11 +23,17 @@ const home = lazy(() => import("./views/pages/landingPage/Home"));
 // const sellerDashboard = lazy(()=> import("./views/dashboard/seller/SellerDeshboard"));
 //  Expert Education Tabs
 const studentList = lazy(() => import("./views/apps/student/StudentList"));
-const teacherList = lazy(() => import("./views/apps/teacher/TeacherList"));
+
 const addNotification = lazy(() =>
   import("./views/apps/notifications/AddNotification")
 );
+const teacherList = lazy(() => import("./views/apps/teacher/TeacherList"));
+const approvedTeacher = lazy(() =>
+  import("./views/apps/teacher/ApprovedTeacher")
+);
 const addTeacher = lazy(() => import("./views/apps/teacher/AddTeacher"));
+const editTeacher = lazy(() => import("./views/apps/teacher/EditTeacher"));
+const viewTeacher = lazy(() => import("./views/apps/teacher/ViewTeacher"));
 const courseList = lazy(() => import("./views/apps/course/CourseList"));
 const addCourse = lazy(() => import("./views/apps/course/AddCourse"));
 const categoryList = lazy(() => import("./views/apps/category/CategoryList"));
@@ -512,10 +518,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       return (
         <ContextLayout.Consumer>
-          {context => {
+          {(context) => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -535,7 +541,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     // user: state.auth.login.userRole,
   };
@@ -558,12 +564,25 @@ class AppRouter extends React.Component {
           {/* <AppRoute exact path="/seller-dashboard" component={sellerDashboard} /> */}
           {/* Teacher App Tabs */}
           <AppRoute path="/app/student/studentList" component={studentList} />
-          <AppRoute path="/app/teacher/teacherList" component={teacherList} />
+
           <AppRoute
             path="/app/notification/addNotification"
             component={addNotification}
           />
+          <AppRoute path="/app/teacher/teacherList" component={teacherList} />
+          <AppRoute
+            path="/app/teacher/approvedTeacher"
+            component={approvedTeacher}
+          />
           <AppRoute path="/app/teacher/addTeacher" component={addTeacher} />
+          <AppRoute
+            path="/app/teacher/editTeacher/:id"
+            component={editTeacher}
+          />
+          <AppRoute
+            path="/app/teacher/viewTeacher/:id"
+            component={viewTeacher}
+          />
           <AppRoute path="/app/course/addCourse" component={addCourse} />
           <AppRoute path="/app/course/courseList" component={courseList} />
           <AppRoute

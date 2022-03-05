@@ -14,12 +14,12 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
+import { Edit, Trash2, ChevronDown } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 
-class TeacherList extends React.Component {
+class ApprovedTeacher extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -103,17 +103,6 @@ class TeacherList extends React.Component {
           );
         },
       },
-      // {
-      //   headerName: "Approved",
-      //   field: "approvedstatus",
-      //   editable: false,
-      //   width: 100,
-      //   cellRenderer: (params) => {
-      //     return `<input type='checkbox' ${
-      //       params.data.approvedstatus ? "checked" : ""
-      //     } />`;
-      //   },
-      // },
       {
         headerName: "Approved",
         field: "approvedstatus",
@@ -131,7 +120,6 @@ class TeacherList extends React.Component {
           ) : null;
         },
       },
-
       {
         headerName: "Date Of Birth",
         field: "dob",
@@ -205,20 +193,14 @@ class TeacherList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Eye
-                className="mr-50"
-                size="20px"
-                color="blue"
-                onClick={() =>
-                  history.push(`/app/teacher/viewTeacher/${params.data._id}`)
-                }
-              />
               <Edit
                 className="mr-50"
                 size="20px"
                 color="blue"
                 onClick={() =>
-                  history.push(`/app/teacher/editTeacher/${params.data._id}`)
+                  history.push(
+                    `/app/contactUs/customer/editCustomer/${params.data._id}`
+                  )
                 }
               />
               <Trash2
@@ -238,13 +220,11 @@ class TeacherList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1/api/admin/allstaff")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/approved_staff").then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
 
   async runthisfunction(id) {
@@ -287,7 +267,7 @@ class TeacherList extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Teacher List
+                  Approved Teacher
                 </h1>
               </Col>
               <Col>
@@ -395,4 +375,4 @@ class TeacherList extends React.Component {
     );
   }
 }
-export default TeacherList;
+export default ApprovedTeacher;

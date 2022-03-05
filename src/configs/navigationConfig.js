@@ -67,6 +67,15 @@ const navigationConfig = [
         // collapsed: true,
       },
       {
+        id: "approvedTeacher",
+        title: "Approved Teacher",
+        type: "item",
+        icon: <Icon.Circle size={12} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/teacher/approvedTeacher",
+        // collapsed: true,
+      },
+      {
         id: "addTeacher",
         title: "Add Teacher",
         type: "item",

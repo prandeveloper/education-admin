@@ -15,7 +15,7 @@ import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
 
-export class AddTeacher extends Component {
+export class EditTeacher extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +35,32 @@ export class AddTeacher extends Component {
       selectedName: "",
     };
   }
+
+  componentDidMount() {
+    let { id } = this.props.match.params;
+    axiosConfig
+      .get(`/viewonestaff/${id}`)
+      .then((response) => {
+        console.log(response.data.data);
+        this.setState({
+          fullname: response.data.data.fullname,
+          email: response.data.data.email,
+          mobile: response.data.data.mobile,
+          password: response.data.data.password,
+          cnfmPassword: response.data.data.cnfmPassword,
+          image: response.data.data.image,
+          gender: response.data.data.gender,
+          dob: response.data.data.dob,
+          state: response.data.data.state,
+          city: response.data.data.city,
+          institute: response.data.data.institute,
+          institute: response.data.data.institute,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   onChangeHandler = (event) => {
     this.setState({ selectedFile: event.target.files[0] });
     this.setState({ selectedName: event.target.files[0].name });
@@ -44,7 +70,6 @@ export class AddTeacher extends Component {
   changeHandler1 = (e) => {
     this.setState({ approvedstatus: e.target.value });
   };
-
   changeHandler3 = (e) => {
     this.setState({ gender: e.target.value });
   };
@@ -80,8 +105,9 @@ export class AddTeacher extends Component {
     for (var key of data.keys()) {
       console.log(key);
     }
+    let { id } = this.props.match.params;
     axiosConfig
-      .post("http://13.127.52.128/v1/api/admin/addstaff", data)
+      .post(`http://13.127.52.128/v1/api/admin/setting/${id}`, data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
@@ -99,7 +125,7 @@ export class AddTeacher extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add New Teacher
+                Edit Teacher
               </h1>
             </Col>
             <Col>
@@ -308,4 +334,4 @@ export class AddTeacher extends Component {
   }
 }
 
-export default AddTeacher;
+export default EditTeacher;
