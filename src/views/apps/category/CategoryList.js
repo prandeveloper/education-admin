@@ -43,28 +43,28 @@ class CategoryList extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
+      // {
+      //   headerName: "Image",
+      //   field: "product_img",
+      //   filter: true,
+      //   width: 120,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <img
+      //           className="rounded-circle mr-50"
+      //           src={params.data.product_img}
+      //           alt="user avatar"
+      //           height="40"
+      //           width="40"
+      //         />
+      //       </div>
+      //     );
+      //   },
+      // },
       {
-        headerName: "Image",
-        field: "product_img",
-        filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <img
-                className="rounded-circle mr-50"
-                src={params.data.product_img}
-                alt="user avatar"
-                height="40"
-                width="40"
-              />
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Category Title",
-        field: "name",
+        headerName: "Category Name",
+        field: "catName",
         //filter: true,
         filter: "agSetColumnFilter",
         width: 250,
@@ -72,43 +72,43 @@ class CategoryList extends React.Component {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <div className="ml-2">
-                <span>{params.data.name}</span>
+                <span>{params.data.catName}</span>
               </div>
             </div>
           );
         },
       },
-      {
-        headerName: "Description",
-        field: "desc",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.desc}</span>
-            </div>
-          );
-        },
-      },
+      // {
+      //   headerName: "Description",
+      //   field: "desc",
+      //   filter: true,
+      //   width: 200,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="d-flex align-items-center cursor-pointer">
+      //         <span>{params.data.desc}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
 
-      {
-        headerName: "Status",
-        field: "status",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return params.value === "Active" ? (
-            <div className="badge badge-pill badge-success">
-              {params.data.status}
-            </div>
-          ) : params.value === "Inactive" ? (
-            <div className="badge badge-pill badge-danger">
-              {params.data.status}
-            </div>
-          ) : null;
-        },
-      },
+      // {
+      //   headerName: "Status",
+      //   field: "status",
+      //   filter: true,
+      //   width: 150,
+      //   cellRendererFramework: (params) => {
+      //     return params.value === "Active" ? (
+      //       <div className="badge badge-pill badge-success">
+      //         {params.data.status}
+      //       </div>
+      //     ) : params.value === "Inactive" ? (
+      //       <div className="badge badge-pill badge-danger">
+      //         {params.data.status}
+      //       </div>
+      //     ) : null;
+      //   },
+      // },
       {
         headerName: "Actions",
         field: "transactions",
@@ -116,7 +116,7 @@ class CategoryList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Eye
+              {/* <Eye
                 className="mr-50"
                 size={20}
                 color="green"
@@ -131,7 +131,7 @@ class CategoryList extends React.Component {
                 onClick={() =>
                   history.push(`/app/category/editCategory/${params.data._id}`)
                 }
-              />
+              /> */}
               <Trash2
                 size={20}
                 color="red"
@@ -148,19 +148,23 @@ class CategoryList extends React.Component {
     ],
   };
 
-  // async componentDidMount() {
-  //   await axiosConfig.get("/getproductCategory").then((response) => {
-  //     let rowData = response.data.data;
-  //     this.setState({ rowData });
-  //   });
-  // }
+  async componentDidMount() {
+    await axiosConfig
+      .get("http://13.127.52.128/v1//api/admin/allCat")
+      .then((response) => {
+        let rowData = response.data.data;
+        this.setState({ rowData });
+      });
+  }
 
-  // async runthisfunction(id) {
-  //   console.log(id);
-  //   await axiosConfig.get(`/del_productcategory/${id}`).then((response) => {
-  //     console.log(response);
-  //   });
-  // }
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig
+      .get(`http://13.127.52.128/v1//api/admin/deleteCat/${id}`)
+      .then((response) => {
+        console.log(response);
+      });
+  }
 
   onGridReady = (params) => {
     this.gridApi = params.api;

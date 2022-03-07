@@ -17,55 +17,35 @@ export class AddCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      sortorder: "",
-      desc: "",
-      product_img: "",
-      status: "",
-      selectedFile: null,
-      selectedName: "",
+      catName: "",
     };
   }
 
-  onChangeHandler = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
-    console.log(event.target.files[0]);
-  };
+  // onChangeHandler = (event) => {
+  //   this.setState({ selectedFile: event.target.files[0] });
+  //   this.setState({ selectedName: event.target.files[0].name });
+  //   console.log(event.target.files[0]);
+  // };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
+  // changeHandler1 = (e) => {
+  //   this.setState({ status: e.target.value });
+  // };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  // submitHandler = (e) => {
-  //   e.preventDefault();
-  //   const data = new FormData();
-  //   data.append("name", this.state.name);
-  //   data.append("desc", this.state.desc);
-  //   data.append("sortorder", this.state.sortorder);
-  //   data.append("status", this.state.status);
-  //   if (this.state.selectedFile !== null) {
-  //     data.append(
-  //       "product_img",
-  //       this.state.selectedFile,
-  //       this.state.selectedName
-  //     );
-  //   }
-  //   //   for (var value of data.values()) {
-  //   //     console.log(value);
-  //   //  }
-  //   axiosConfig
-  //     .post("/addproductcategory", data)
-  //     .then((response) => {
-  //       console.log(response);
-  //       this.props.history.push("/app/category/categoryList");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  submitHandler = (e) => {
+    e.preventDefault();
+
+    axiosConfig
+      .post("http://13.127.52.128/v1//api/admin/addCat", this.state)
+      .then((response) => {
+        console.log(response);
+        this.props.history.push("/app/category/categoryList");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   render() {
     return (
       <div>
@@ -93,59 +73,11 @@ export class AddCategory extends Component {
                   <Input
                     type="text"
                     placeholder="Enter Category"
-                    name="name"
-                    value={this.state.name}
+                    name="catName"
+                    value={this.state.catName}
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="6" md="6" className="mb-1">
-                  <Label>Description</Label>
-                  <Input
-                    type="textarea"
-                    name="desc"
-                    value={this.state.desc}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-
-                {/* <Col lg="6" md="6">
-                  <Label>Sort Order</Label>
-                  <Input
-                    type="number"
-                    placeholder="Sort Order"
-                    name="sortorder"
-                    value={this.state.sortorder}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-
-                <Col lg="6" md="6">
-                  <Label>Image</Label>
-                  <CustomInput type="file" onChange={this.onChangeHandler} />
-                </Col>
-                {/* <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
-                  <Label className="mb-1">Status</Label>
-                  <div
-                    className="form-label-group"
-                    onChange={(e) => this.changeHandler1(e)}
-                  >
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Active"
-                    />
-                    <span style={{ marginRight: "20px" }}>Active</span>
-
-                    <input
-                      style={{ marginRight: "3px" }}
-                      type="radio"
-                      name="status"
-                      value="Inactive"
-                    />
-                    <span style={{ marginRight: "3px" }}>Inactive</span>
-                  </div>
-                </Col> */}
               </Row>
               <Row>
                 <Button.Ripple
