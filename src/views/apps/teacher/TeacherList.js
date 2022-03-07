@@ -205,14 +205,14 @@ class TeacherList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Eye
+              {/* <Eye
                 className="mr-50"
                 size="20px"
                 color="blue"
                 onClick={() =>
                   history.push(`/app/teacher/viewTeacher/${params.data._id}`)
                 }
-              />
+              /> */}
               <Edit
                 className="mr-50"
                 size="20px"
