@@ -36,14 +36,14 @@ class Login extends React.Component {
     e.preventDefault();
 
     axios
-      .post("http://35.154.86.59/api/admin/sellerlogin", this.state)
+      .post("http:///13.127.52.128/api/api/user/adminlogin", this.state)
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
         history.push("/analyticsDashboard");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
   render() {
@@ -60,7 +60,10 @@ class Login extends React.Component {
             <Col lg="8" md="12" className="p-1">
               <Card className="rounded-0 mb-0 px-2 login-tabs-container">
                 <CardHeader className="pb-1">
-                  <img src={glogo} class="img-fluid" alt="..." />
+                  <h1 className="" style={{}}>
+                    Education
+                  </h1>
+                  {/* <img src={glogo} class="img-fluid" alt="..." /> */}
                   {/* <img src={glogo} alt="glogo" /> */}
                   <br />
                   <CardTitle>
@@ -95,7 +98,7 @@ class Login extends React.Component {
                   </FormGroup>
 
                   <div className="d-flex justify-content-between">
-                    <Button.Ripple
+                    {/* <Button.Ripple
                       color="primary"
                       outline
                       onClick={() => {
@@ -103,7 +106,7 @@ class Login extends React.Component {
                       }}
                     >
                       Register
-                    </Button.Ripple>
+                    </Button.Ripple> */}
                     <Button.Ripple color="primary" type="submit">
                       Login
                     </Button.Ripple>
