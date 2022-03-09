@@ -81,7 +81,7 @@ export class AddTeacher extends Component {
       console.log(key);
     }
     axiosConfig
-      .post("http://13.127.52.128/v1/api/admin/addstaff", data)
+      .post("/addstaff", data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");

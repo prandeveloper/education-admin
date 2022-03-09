@@ -11,6 +11,11 @@ import {
   CustomInput,
   FormGroup,
 } from "reactstrap";
+import { EditorState, convertToRaw } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import "../../../assets/scss/plugins/extensions/editor.scss";
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
@@ -25,8 +30,21 @@ export class AddCourse extends Component {
       mobile_no: "",
       sortorder: "",
       status: "",
+      description: "",
+      editorState: EditorState.createEmpty(),
     };
   }
+
+  // Text Editor
+
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    });
+    console.log(this.state.editorState);
+    //console.log(this.state.long_desc);
+  };
 
   changeHandler1 = (e) => {
     this.setState({ status: e.target.value });
@@ -67,6 +85,7 @@ export class AddCourse extends Component {
         console.log(error);
         swal("Error!", "Error Received", "error");
       });
+    this.state.editorState.getCurrentContent().getPlainText();
   };
   render() {
     return (
@@ -144,6 +163,52 @@ export class AddCourse extends Component {
                 </Col>
                 <Col lg="6" md="6">
                   <FormGroup>
+                    <Label>Long Description</Label>
+                    <Editor
+                      required
+                      toolbarClassName="demo-toolbar-absolute"
+                      wrapperClassName="demo-wrapper"
+                      editorClassName="demo-editor"
+                      editorState={this.state.editorState}
+                      onEditorStateChange={this.onEditorStateChange}
+                      toolbar={{
+                        options: [
+                          "inline",
+                          "blockType",
+                          "fontSize",
+                          "fontFamily",
+                        ],
+                        inline: {
+                          options: [
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strikethrough",
+                            "monospace",
+                          ],
+                          bold: { className: "bordered-option-classname" },
+                          italic: { className: "bordered-option-classname" },
+                          underline: { className: "bordered-option-classname" },
+                          strikethrough: {
+                            className: "bordered-option-classname",
+                          },
+                          code: { className: "bordered-option-classname" },
+                        },
+                        blockType: {
+                          className: "bordered-option-classname",
+                        },
+                        fontSize: {
+                          className: "bordered-option-classname",
+                        },
+                        fontFamily: {
+                          className: "bordered-option-classname",
+                        },
+                      }}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
                     <Label>Image Upload</Label>
                     <CustomInput
                       type="file"
@@ -154,58 +219,6 @@ export class AddCourse extends Component {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>PDF Upload</Label>
-                    <CustomInput
-                      type="file"
-                      placeholder="Customer Email"
-                      name="customer_email"
-                      value={this.state.customer_email}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>Video Upload</Label>
-                    <CustomInput
-                      type="file"
-                      placeholder="Customer Email"
-                      name="customer_email"
-                      value={this.state.customer_email}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                {/* <Col lg="6" md="6" sm="6" className="mb-1 ">
-                  <FormGroup>
-                    <Label className="mb-1">Status</Label>
-                    <div
-                      className="form-label-group"
-                      onChange={(e) => this.changeHandler1(e)}
-                    >
-                      <input
-                        style={{ marginRight: "3px", fontWeight: 800 }}
-                        type="radio"
-                        name="status"
-                        value="Active"
-                      />
-                      <span style={{ marginRight: "20px", fontWeight: 800 }}>
-                        Active
-                      </span>
-
-                      <input
-                        style={{ marginRight: "3px" }}
-                        type="radio"
-                        name="status"
-                        value="Inactive"
-                      />
-                      <span style={{ marginRight: "3px" }}>Inactive</span>
-                    </div>
-                  </FormGroup>
-                </Col> */}
               </Row>
               <Row>
                 <Button.Ripple

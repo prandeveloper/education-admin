@@ -107,7 +107,7 @@ export class EditTeacher extends Component {
     }
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`http://13.127.52.128/v1/api/admin/setting/${id}`, data)
+      .post(`/setting/${id}`, data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");

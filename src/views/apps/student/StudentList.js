@@ -168,22 +168,18 @@ class StudentList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1/api/admin/allusers")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/allusers").then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig
-      .get(`http://13.127.52.128/v1/api/admin/deleteuser/${id}`)
-      .then((response) => {
-        console.log(response);
-      });
+    await axiosConfig.get(`/deleteuser/${id}`).then((response) => {
+      console.log(response);
+    });
   }
   onGridReady = (params) => {
     this.gridApi = params.api;

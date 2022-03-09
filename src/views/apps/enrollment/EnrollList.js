@@ -167,13 +167,11 @@ class EnrollList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1/api/admin/enrollusers")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/enrollusers").then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
 
   async runthisfunction(id) {

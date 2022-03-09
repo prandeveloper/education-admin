@@ -213,13 +213,11 @@ class CourseList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1/api/admin/allcourse")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/allcourse").then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
 
   //   async runthisfunction(id) {

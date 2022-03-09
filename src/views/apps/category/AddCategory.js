@@ -37,7 +37,7 @@ export class AddCategory extends Component {
     e.preventDefault();
 
     axiosConfig
-      .post("http://13.127.52.128/v1//api/admin/addCat", this.state)
+      .post("/addCat", this.state)
       .then((response) => {
         console.log(response);
         this.props.history.push("/app/category/categoryList");

@@ -149,21 +149,17 @@ class CategoryList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig
-      .get("http://13.127.52.128/v1//api/admin/allCat")
-      .then((response) => {
-        let rowData = response.data.data;
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/allCat").then((response) => {
+      let rowData = response.data.data;
+      this.setState({ rowData });
+    });
   }
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig
-      .get(`http://13.127.52.128/v1//api/admin/deleteCat/${id}`)
-      .then((response) => {
-        console.log(response);
-      });
+    await axiosConfig.get(`/deleteCat/${id}`).then((response) => {
+      console.log(response);
+    });
   }
 
   onGridReady = (params) => {
