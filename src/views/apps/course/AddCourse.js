@@ -24,17 +24,29 @@ export class AddCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: "",
-      last_name: "",
-      customer_email: "",
-      mobile_no: "",
-      sortorder: "",
+      course_title: "",
+      desc: "",
+      teacher: "",
+      long_desc: "",
+      category: "",
       status: "",
       description: "",
       editorState: EditorState.createEmpty(),
+      teacher: [],
     };
   }
-
+  async componentDidMount() {
+    //teacherList
+    axiosConfig
+      .get("/approved_staff")
+      .then((response) => {
+        console.log(response);
+        this.setState({ teacher: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   // Text Editor
 
   onEditorStateChange = (editorState) => {
@@ -114,9 +126,9 @@ export class AddCourse extends Component {
                     <Label>Course Title</Label>
                     <Input
                       type="text"
-                      placeholder="First Name"
-                      name="first_name"
-                      value={this.state.first_name}
+                      placeholder="Course Name"
+                      name="course_title"
+                      value={this.state.course_title}
                       onChange={this.changeHandler}
                     />
                   </FormGroup>
@@ -131,9 +143,9 @@ export class AddCourse extends Component {
                       value={this.state.last_name}
                       onChange={this.changeHandler}
                     >
-                      <option>Teacher 1</option>
-                      <option>Teacher 1</option>
-                      <option>Teacher 1</option>
+                      {this.state.teacher.map((tech) => (
+                        <option key={tech._id}>{tech.fullname}</option>
+                      ))}
                     </CustomInput>
                   </FormGroup>
                 </Col>

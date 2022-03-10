@@ -27,6 +27,7 @@ class Login extends React.Component {
       password: "",
     };
   }
+
   handlechange = (e) => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
@@ -40,7 +41,7 @@ class Login extends React.Component {
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
-        history.push("/analyticsDashboard");
+        history.push("/");
       })
       .catch((error) => {
         console.log(error.response);
