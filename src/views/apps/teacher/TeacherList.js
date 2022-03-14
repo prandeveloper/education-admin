@@ -54,7 +54,7 @@ class TeacherList extends React.Component {
               <img
                 className="rounded-circle  mr-4"
                 src={params.data.image}
-                alt=" brand"
+                alt="img"
                 height="40"
                 width="40"
               />

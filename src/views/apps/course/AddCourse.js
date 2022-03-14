@@ -33,6 +33,7 @@ export class AddCourse extends Component {
       description: "",
       editorState: EditorState.createEmpty(),
       teacher: [],
+      categ: [],
     };
   }
   async componentDidMount() {
@@ -42,6 +43,16 @@ export class AddCourse extends Component {
       .then((response) => {
         console.log(response);
         this.setState({ teacher: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    //Category
+    axiosConfig
+      .get("/allCat")
+      .then((response) => {
+        console.log(response);
+        this.setState({ categ: response.data.data });
       })
       .catch((error) => {
         console.log(error);
@@ -138,12 +149,12 @@ export class AddCourse extends Component {
                     <Label>Teacher Name</Label>
                     <CustomInput
                       type="select"
-                      placeholder="Last Name"
+                      placeholder="Full Name"
                       name="last_name"
                       value={this.state.last_name}
                       onChange={this.changeHandler}
                     >
-                      {this.state.teacher.map((tech) => (
+                      {this.state.teacher?.map((tech) => (
                         <option key={tech._id}>{tech.fullname}</option>
                       ))}
                     </CustomInput>
@@ -152,13 +163,18 @@ export class AddCourse extends Component {
                 <Col lg="6" md="6">
                   <FormGroup>
                     <Label>Category</Label>
-                    <Input
-                      type="email"
-                      placeholder="Customer Email"
-                      name="customer_email"
-                      value={this.state.customer_email}
+                    <CustomInput
+                      type="select"
+                      placeholder="Category"
+                      name="category"
+                      value={this.state.category}
                       onChange={this.changeHandler}
-                    />
+                    >
+                      <option></option>
+                      {this.state.categ.map((cat) => (
+                        <option key={cat._id}>{cat.fullname}</option>
+                      ))}
+                    </CustomInput>
                   </FormGroup>
                 </Col>
                 <Col lg="6" md="6">
