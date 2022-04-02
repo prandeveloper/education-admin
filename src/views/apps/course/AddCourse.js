@@ -26,13 +26,14 @@ export class AddCourse extends Component {
     this.state = {
       course_title: "",
       desc: "",
-      teacher: "",
       long_desc: "",
-      category: "",
-      status: "",
-      description: "",
+      teacher: "",
+      category_id: "",
+      course_image: "",
       editorState: EditorState.createEmpty(),
-      teacher: [],
+      selectedFile: null,
+      selectedName: "",
+      teacherL: [],
       categ: [],
     };
   }
@@ -42,7 +43,7 @@ export class AddCourse extends Component {
       .get("/approved_staff")
       .then((response) => {
         console.log(response);
-        this.setState({ teacher: response.data.data });
+        this.setState({ teacherL: response.data.data });
       })
       .catch((error) => {
         console.log(error);
@@ -63,49 +64,51 @@ export class AddCourse extends Component {
   onEditorStateChange = (editorState) => {
     this.setState({
       editorState,
-      desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+      long_desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
-    console.log(this.state.editorState);
-    //console.log(this.state.long_desc);
+    //console.log(this.state.editorState);
+    console.log(this.state.long_desc);
   };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
+  onChangeHandler = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedName: event.target.files[0].name });
+    console.log(event.target.files[0]);
   };
+
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  changeHandler2 = (e) => {
-    if (e.target.value.length < 11)
-      this.setState({
-        [e.target.name]: e.target.value,
-      });
-  };
+
   submitHandler = (e) => {
     e.preventDefault();
-    // const data = new FormData();
-    // data.append("employee_name", this.state.employee_name);
-    // data.append("phone_no", this.state.phone_no);
-    // data.append("email", this.state.email);
-    // data.append("password", this.state.password);
-    // data.append("designation", this.state.designation);
-    // data.append("sortorder", this.state.sortorder);
-    // data.append("status", this.state.status);
-    // if (this.state.selectedFile !== null) {
-    //   data.append("image", this.state.selectedFile, this.state.selectedName);
-    // }
-    //   for (var value of data.values()) {
-    //     console.log(value);
-    //  }
+    const data = new FormData();
+    data.append("course_title", this.state.course_title);
+    data.append("desc", this.state.desc);
+    data.append("long_desc", this.state.long_desc);
+    data.append("teacher", this.state.teacher);
+    data.append("category_id", this.state.category_id);
+    if (this.state.selectedFile !== null) {
+      data.append(
+        "course_image",
+        this.state.selectedFile,
+        this.state.selectedName
+      );
+    }
+    for (var key of data.keys()) {
+      console.log(key);
+    }
+    for (var value of data.values()) {
+      console.log(value);
+    }
     axiosConfig
-      .post("http://35.154.86.59/api/user/customersignup", this.state)
+      .post("/addcoursebyadmin", data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/contactUs/customer/customerList");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
         swal("Error!", "Error Received", "error");
       });
     this.state.editorState.getCurrentContent().getPlainText();
@@ -149,13 +152,16 @@ export class AddCourse extends Component {
                     <Label>Teacher Name</Label>
                     <CustomInput
                       type="select"
-                      placeholder="Full Name"
-                      name="last_name"
-                      value={this.state.last_name}
+                      placeholder="Teacher"
+                      name="teacher"
+                      value={this.state.teacher}
                       onChange={this.changeHandler}
                     >
-                      {this.state.teacher?.map((tech) => (
-                        <option key={tech._id}>{tech.fullname}</option>
+                      <option>Select Teacher....</option>
+                      {this.state.teacherL?.map((tech) => (
+                        <option key={tech._id} value={tech._id}>
+                          {tech.fullname}
+                        </option>
                       ))}
                     </CustomInput>
                   </FormGroup>
@@ -166,13 +172,15 @@ export class AddCourse extends Component {
                     <CustomInput
                       type="select"
                       placeholder="Category"
-                      name="category"
-                      value={this.state.category}
+                      name="category_id"
+                      value={this.state.category_id}
                       onChange={this.changeHandler}
                     >
-                      <option></option>
+                      <option>Select Category...</option>
                       {this.state.categ.map((cat) => (
-                        <option key={cat._id}>{cat.fullname}</option>
+                        <option key={cat._id} value={cat._id}>
+                          {cat.catName}
+                        </option>
                       ))}
                     </CustomInput>
                   </FormGroup>
@@ -183,9 +191,9 @@ export class AddCourse extends Component {
                     <Input
                       type="textarea"
                       placeholder="Description"
-                      name="mobile_no"
-                      value={this.state.mobile_no}
-                      onChange={this.changeHandler2}
+                      name="desc"
+                      value={this.state.desc}
+                      onChange={this.changeHandler}
                     />
                   </FormGroup>
                 </Col>
@@ -238,13 +246,7 @@ export class AddCourse extends Component {
                 <Col lg="6" md="6">
                   <FormGroup>
                     <Label>Image Upload</Label>
-                    <CustomInput
-                      type="file"
-                      placeholder="Customer Email"
-                      name="customer_email"
-                      value={this.state.customer_email}
-                      onChange={this.changeHandler}
-                    />
+                    <CustomInput type="file" onChange={this.onChangeHandler} />
                   </FormGroup>
                 </Col>
               </Row>

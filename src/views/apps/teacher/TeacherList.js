@@ -120,11 +120,11 @@ class TeacherList extends React.Component {
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
-          return params.value === "true" ? (
+          return params.value === true ? (
             <div className="badge badge-pill badge-success">
               {params.data.approvedstatus}
             </div>
-          ) : params.value === "false" ? (
+          ) : params.value === false ? (
             <div className="badge badge-pill badge-warning">
               {params.data.approvedstatus}
             </div>

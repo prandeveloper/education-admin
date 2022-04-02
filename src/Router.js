@@ -36,6 +36,8 @@ const editTeacher = lazy(() => import("./views/apps/teacher/EditTeacher"));
 const viewTeacher = lazy(() => import("./views/apps/teacher/ViewTeacher"));
 const courseList = lazy(() => import("./views/apps/course/CourseList"));
 const addCourse = lazy(() => import("./views/apps/course/AddCourse"));
+const editCourse = lazy(() => import("./views/apps/course/EditCourse"));
+const viewCourse = lazy(() => import("./views/apps/course/ViewCourse"));
 const categoryList = lazy(() => import("./views/apps/category/CategoryList"));
 const addCategory = lazy(() => import("./views/apps/category/AddCategory"));
 const editCategory = lazy(() => import("./views/apps/category/EditCategory"));
@@ -502,6 +504,8 @@ class AppRouter extends React.Component {
           />
           <AppRoute path="/app/course/addCourse" component={addCourse} />
           <AppRoute path="/app/course/courseList" component={courseList} />
+          <AppRoute path="/app/course/editCourse" component={editCourse} />
+          <AppRoute path="/app/course/viewCourse" component={viewCourse} />
           <AppRoute
             path="/app/category/categoryList"
             component={categoryList}

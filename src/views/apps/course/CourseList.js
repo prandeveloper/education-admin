@@ -14,7 +14,7 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Edit, Trash2, ChevronDown } from "react-feather";
+import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
@@ -108,7 +108,7 @@ class CourseList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
-              <span>{params.data.category}</span>
+              <span>{params.data.category_id?.catName}</span>
             </div>
           );
         },
@@ -191,9 +191,15 @@ class CourseList extends React.Component {
                 size="20px"
                 color="blue"
                 onClick={() =>
-                  history.push(
-                    `/app/contactUs/customer/editCustomer/${params.data._id}`
-                  )
+                  history.push(`/app/course/editCourse/${params.data._id}`)
+                }
+              />
+              <Eye
+                className="mr-50"
+                size="20px"
+                color="blue"
+                onClick={() =>
+                  history.push(`/app/course/viewCourse/${params.data._id}`)
                 }
               />
               <Trash2
