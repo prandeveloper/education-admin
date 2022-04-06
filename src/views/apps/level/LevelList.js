@@ -14,12 +14,13 @@ import {
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/dist/styles/ag-grid.css";
 import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 
-class CourseList extends React.Component {
+class LevelList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -35,7 +36,7 @@ class CourseList extends React.Component {
       {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
-        field: "node.rowIndex + 1",
+        field: "sortorder",
         width: 100,
         filter: true,
         // checkboxSelection: true,
@@ -44,16 +45,16 @@ class CourseList extends React.Component {
       },
       {
         headerName: "Image",
-        field: "course_image",
-        filter: false,
+        field: "icon",
+        filter: true,
         width: 120,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <img
-                className="rounded-circle  mr-4"
-                src={params.data.course_image}
-                alt=" brand"
+                className="rounded-circle mr-50"
+                src={params.data.icon}
+                alt="user avatar"
                 height="40"
                 width="40"
               />
@@ -62,122 +63,22 @@ class CourseList extends React.Component {
         },
       },
       {
-        headerName: "Course Title",
-        field: "course_title",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className=" mr-2">
-              <span>{params.data.course_title}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Teacher Name",
-        field: "teacher?.fullname",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className=" mr-2">
-              <span>{params.data.teacher?.fullname}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Description",
-        field: "desc",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className=" mr-2">
-              <span>{params.data.desc}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Category",
-        field: "category",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className=" mr-2">
-              <span>{params.data.category_id?.catName}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Popularity",
-        field: "popularity",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className=" mr-2">
-              <span>{params.data.popularity}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Add Video/PDF",
-        field: "pdf",
-        filter: false,
-        width: 200,
+        headerName: "Level Name",
+        field: "level",
+        //filter: true,
+        filter: "agSetColumnFilter",
+        width: 250,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <Button
-                color="primary"
-                onClick={() =>
-                  history.push(`/app/course/addVideoPdf/${params.data._id}`)
-                }
-              >
-                Add Video / PDF
-              </Button>
+              <div className="ml-2">
+                <span>{params.data.level}</span>
+              </div>
             </div>
           );
         },
       },
 
-      // {
-      //   headerName: "Video Link",
-      //   field: "video_link",
-      //   filter: true,
-      //   width: 150,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className=" mr-4">
-      //         <span>{params.data.video_link}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
-
-      //   {
-      //     headerName: "Status",
-      //     field: "status",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: (params) => {
-      //       return params.value === "Active" ? (
-      //         <div className="badge badge-pill badge-success ml-2">
-      //           {/* {params.data.status} */}
-      //         </div>
-      //       ) : params.value === "Inactive" ? (
-      //         <div className="badge badge-pill badge-danger">
-      //           {/* {params.data.status} */}
-      //         </div>
-      //       ) : null;
-      //     },
-      //   },
       {
         headerName: "Actions",
         field: "transactions",
@@ -185,24 +86,24 @@ class CourseList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
+              {/* <Eye
+                className="mr-50"
+                size={20}
+                color="green"
+                onClick={() =>
+                  history.push(`/app/category/viewCategory/${params.data._id}`)
+                }
+              />
               <Edit
                 className="mr-50"
-                size="20px"
                 color="blue"
+                size={20}
                 onClick={() =>
-                  history.push(`/app/course/editCourse/${params.data._id}`)
+                  history.push(`/app/category/editCategory/${params.data._id}`)
                 }
-              />
-              <Eye
-                className="mr-50"
-                size="20px"
-                color="blue"
-                onClick={() =>
-                  history.push(`/app/course/viewCourse/${params.data._id}`)
-                }
-              />
+              /> */}
               <Trash2
-                size="20px"
+                size={20}
                 color="red"
                 onClick={() => {
                   let selectedData = this.gridApi.getSelectedRows();
@@ -218,19 +119,20 @@ class CourseList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allcourse").then((response) => {
+    await axiosConfig.get("/allLavel").then((response) => {
       let rowData = response.data.data;
-      console.log(rowData);
       this.setState({ rowData });
+      console.log(rowData);
     });
   }
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deletecourse/${id}`).then((response) => {
+    await axiosConfig.get(`/deletelavel/${id}`).then((response) => {
       console.log(response);
     });
   }
+
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -265,15 +167,15 @@ class CourseList extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Course List
+                  Level List
                 </h1>
               </Col>
               <Col>
                 <Button
                   className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/course/addCourse")}
+                  onClick={() => history.push("/app/level/addLevel")}
                 >
-                  Add New Course
+                  Add Level
                 </Button>
               </Col>
             </Row>
@@ -373,4 +275,5 @@ class CourseList extends React.Component {
     );
   }
 }
-export default CourseList;
+
+export default LevelList;

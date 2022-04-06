@@ -176,6 +176,22 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/notifications/notification",
   },
+  {
+    id: "badgeList",
+    title: "Badge",
+    type: "item",
+    icon: <Icon.Circle size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/badge/badgeList",
+  },
+  {
+    id: "levelList",
+    title: "Level",
+    type: "item",
+    icon: <Icon.Circle size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/level/levelList",
+  },
   // {
   //   id: "Store",
   //   title: "Store",
