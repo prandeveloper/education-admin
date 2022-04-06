@@ -126,27 +126,26 @@ class CourseList extends React.Component {
           );
         },
       },
-      // {
-      //   headerName: "PDF",
-      //   field: "pdf",
-      //   filter: false,
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         {params.data.pdf?.pdf_image?.map((i) => (
-      //           <img
-      //             className=" rounded-circle border-black m-0"
-      //             src={i}
-      //             alt="user avatar"
-      //             height="40"
-      //             width="40"
-      //           />
-      //         ))}
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        headerName: "Add Video/PDF",
+        field: "pdf",
+        filter: false,
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <Button
+                color="primary"
+                onClick={() =>
+                  history.push(`/app/course/addVideoPdf/${params.data._id}`)
+                }
+              >
+                Add Video / PDF
+              </Button>
+            </div>
+          );
+        },
+      },
 
       // {
       //   headerName: "Video Link",

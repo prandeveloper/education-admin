@@ -43,25 +43,25 @@ class CategoryList extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
-      // {
-      //   headerName: "Image",
-      //   field: "product_img",
-      //   filter: true,
-      //   width: 120,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div className="d-flex align-items-center cursor-pointer">
-      //         <img
-      //           className="rounded-circle mr-50"
-      //           src={params.data.product_img}
-      //           alt="user avatar"
-      //           height="40"
-      //           width="40"
-      //         />
-      //       </div>
-      //     );
-      //   },
-      // },
+      {
+        headerName: "Image",
+        field: "icon",
+        filter: true,
+        width: 120,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle mr-50"
+                src={params.data.icon}
+                alt="user avatar"
+                height="40"
+                width="40"
+              />
+            </div>
+          );
+        },
+      },
       {
         headerName: "Category Name",
         field: "catName",

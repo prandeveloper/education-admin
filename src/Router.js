@@ -38,6 +38,7 @@ const courseList = lazy(() => import("./views/apps/course/CourseList"));
 const addCourse = lazy(() => import("./views/apps/course/AddCourse"));
 const editCourse = lazy(() => import("./views/apps/course/EditCourse"));
 const viewCourse = lazy(() => import("./views/apps/course/ViewCourse"));
+const addVideoPdf = lazy(() => import("./views/apps/course/AddVideoPdf"));
 const categoryList = lazy(() => import("./views/apps/category/CategoryList"));
 const addCategory = lazy(() => import("./views/apps/category/AddCategory"));
 const editCategory = lazy(() => import("./views/apps/category/EditCategory"));
@@ -473,347 +474,502 @@ class AppRouter extends React.Component {
       // Set the directory path if you are deploying in sub-folder
       <Router history={history}>
         <Switch>
-          <AppRoute exact={true} path="/" component={analyticsDashboard} />
-          <AppRoute
-            path="/ecommerce-dashboard"
-            component={ecommerceDashboard}
-          />
-          {/* <AppRoute exact={true} path="/" component={home} fullLayout /> */}
-          {/* <AppRoute path="/pages/home" component={home} fullLayout /> */}
-          {/* <AppRoute exact path="/seller-dashboard" component={sellerDashboard} /> */}
-          {/* Teacher App Tabs */}
-          <AppRoute path="/app/student/studentList" component={studentList} />
+          <Route
+            render={() =>
+              localStorage.getItem("token") ? (
+                <>
+                  <AppRoute
+                    exact={true}
+                    path="/"
+                    component={analyticsDashboard}
+                  />
+                  <AppRoute
+                    path="/ecommerce-dashboard"
+                    component={ecommerceDashboard}
+                  />
 
-          <AppRoute
-            path="/app/notification/addNotification"
-            component={addNotification}
-          />
-          <AppRoute path="/app/teacher/teacherList" component={teacherList} />
-          <AppRoute
-            path="/app/teacher/approvedTeacher"
-            component={approvedTeacher}
-          />
-          <AppRoute path="/app/teacher/addTeacher" component={addTeacher} />
-          <AppRoute
-            path="/app/teacher/editTeacher/:id"
-            component={editTeacher}
-          />
-          <AppRoute
-            path="/app/teacher/viewTeacher/:id"
-            component={viewTeacher}
-          />
-          <AppRoute path="/app/course/addCourse" component={addCourse} />
-          <AppRoute path="/app/course/courseList" component={courseList} />
-          <AppRoute path="/app/course/editCourse" component={editCourse} />
-          <AppRoute path="/app/course/viewCourse" component={viewCourse} />
-          <AppRoute
-            path="/app/category/categoryList"
-            component={categoryList}
-          />
-          <AppRoute path="/app/category/addCategory" component={addCategory} />
-          <AppRoute
-            path="/app/category/editCategory/:id"
-            component={editCategory}
-          />
-          <AppRoute
-            path="/app/category/viewCategory/:id"
-            component={viewCategory}
-          />
-          <AppRoute
-            path="/app/transationHistory/transactionList"
-            component={transactionList}
-          />
-          <AppRoute path="/app/comment/commentsList" component={commentsList} />
-          <AppRoute path="/app/enrollment/enrollList" component={enrollList} />
-          <AppRoute path="/app/wallet/walletList" component={walletList} />
-          <AppRoute path="/app/kyc/kycList" component={kycList} />
+                  <AppRoute
+                    path="/app/student/studentList"
+                    component={studentList}
+                  />
 
-          {/* My components starts all my app components*/}
-          <AppRoute path="/app/seller/sellerList" component={sellerList} />
-          <AppRoute path="/app/seller/editSeller" component={editSeller} />
-          <AppRoute path="/app/seller/viewSeller/:id" component={viewSeller} />
-          <AppRoute path="/app/seller/addSeller" component={addSeller} />
-          <AppRoute path="/app/users/user/allUsers" component={allUsers} />
-          <AppRoute path="/app/users/user/addUsers" component={addUsers} />
-          <AppRoute
-            path="/app/users/user/viewUsers/:id"
-            component={viewUsers}
-          />
-          <AppRoute
-            path="/app/roleAndPermission/roleList"
-            component={roleList}
-          />
-          <AppRoute path="/app/roleAndPermission/addRole" component={addRole} />
-          <AppRoute
-            path="/app/roleAndPermission/viewRole"
-            component={viewRole}
-          />
-          {/* <AppRoute path="/app/roleAndPermission" component={rolePermission} /> */}
-          <AppRoute
-            path="/app/products/product/productsList"
-            component={productsList}
-          />
-          <AppRoute
-            path="/app/products/product/editProducts/:id"
-            component={editProducts}
-          />
-          <AppRoute
-            path="/app/products/product/viewProducts/:id"
-            component={viewProducts}
-          />
-          <AppRoute
-            path="/app/products/product/addProducts"
-            component={addProducts}
-          />
-          <AppRoute
-            path="/app/products/product/addMyProduct"
-            component={addMyProduct}
-          />
-          <AppRoute
-            path="/app/products/brand/brandList"
-            component={brandList}
-          />
-          <AppRoute path="/app/products/brand/addBrand" component={addBrand} />
-          <AppRoute
-            path="/app/products/brand/viewBrand/:id"
-            component={viewBrand}
-          />
-          <AppRoute
-            path="/app/products/brand/editBrand/:id"
-            component={editBrand}
-          />
-          <AppRoute path="/app/products/unit/unitList" component={unitList} />
-          <AppRoute path="/app/products/unit/addUnit" component={addUnit} />
-          <AppRoute
-            path="/app/products/unit/editUnit/:id"
-            component={editUnit}
-          />
-          <AppRoute path="/app/products/coupon/coupon" component={coupon} />
-          <AppRoute
-            path="/app/products/coupon/addCoupon"
-            component={addCoupon}
-          />
+                  <AppRoute
+                    path="/app/notification/addNotification"
+                    component={addNotification}
+                  />
+                  <AppRoute
+                    path="/app/teacher/teacherList"
+                    component={teacherList}
+                  />
+                  <AppRoute
+                    path="/app/teacher/approvedTeacher"
+                    component={approvedTeacher}
+                  />
+                  <AppRoute
+                    path="/app/teacher/addTeacher"
+                    component={addTeacher}
+                  />
+                  <AppRoute
+                    path="/app/teacher/editTeacher/:id"
+                    component={editTeacher}
+                  />
+                  <AppRoute
+                    path="/app/teacher/viewTeacher/:id"
+                    component={viewTeacher}
+                  />
+                  <AppRoute
+                    path="/app/course/addCourse"
+                    component={addCourse}
+                  />
+                  <AppRoute
+                    path="/app/course/courseList"
+                    component={courseList}
+                  />
+                  <AppRoute
+                    path="/app/course/editCourse"
+                    component={editCourse}
+                  />
+                  <AppRoute
+                    path="/app/course/viewCourse/:id"
+                    component={viewCourse}
+                  />
+                  <AppRoute
+                    path="/app/course/addVideoPdf/:id"
+                    component={addVideoPdf}
+                  />
+                  <AppRoute
+                    path="/app/category/categoryList"
+                    component={categoryList}
+                  />
+                  <AppRoute
+                    path="/app/category/addCategory"
+                    component={addCategory}
+                  />
+                  <AppRoute
+                    path="/app/category/editCategory/:id"
+                    component={editCategory}
+                  />
+                  <AppRoute
+                    path="/app/category/viewCategory/:id"
+                    component={viewCategory}
+                  />
+                  <AppRoute
+                    path="/app/transationHistory/transactionList"
+                    component={transactionList}
+                  />
+                  <AppRoute
+                    path="/app/comment/commentsList"
+                    component={commentsList}
+                  />
+                  <AppRoute
+                    path="/app/enrollment/enrollList"
+                    component={enrollList}
+                  />
+                  <AppRoute
+                    path="/app/wallet/walletList"
+                    component={walletList}
+                  />
+                  <AppRoute path="/app/kyc/kycList" component={kycList} />
 
-          <AppRoute
-            path="/app/notification/notificationList"
-            component={notificationList}
-          />
-          <AppRoute
-            path="/app/notifications/notification"
-            component={notification}
-          />
-          <AppRoute
-            path="/app/sellerPayout/pendingPayments/pendingPaymentsList"
-            component={pendingPaymentsList}
-          />
-          <AppRoute
-            path="/app/sellerPayout/pendingPayments/completedPaymentsList"
-            component={completedPaymentsList}
-          />
-          <AppRoute
-            path="/app/sellerPayout/pendingPayments/viewCompletedPaymentsList"
-            component={viewCompletedPaymentsList}
-          />
-          <AppRoute path="/app/products/unit/unitList" component={unitList} />
-          <AppRoute path="/app/products/unit/addUnit" component={addUnit} />
-          <AppRoute
-            path="/app/products/unit/editUnit/:id"
-            component={editUnit}
-          />
-          <AppRoute path="/app/products/coupon" component={coupon} />
+                  {/* My components starts all my app components*/}
+                  <AppRoute
+                    path="/app/seller/sellerList"
+                    component={sellerList}
+                  />
+                  <AppRoute
+                    path="/app/seller/editSeller"
+                    component={editSeller}
+                  />
+                  <AppRoute
+                    path="/app/seller/viewSeller/:id"
+                    component={viewSeller}
+                  />
+                  <AppRoute
+                    path="/app/seller/addSeller"
+                    component={addSeller}
+                  />
+                  <AppRoute
+                    path="/app/users/user/allUsers"
+                    component={allUsers}
+                  />
+                  <AppRoute
+                    path="/app/users/user/addUsers"
+                    component={addUsers}
+                  />
+                  <AppRoute
+                    path="/app/users/user/viewUsers/:id"
+                    component={viewUsers}
+                  />
+                  <AppRoute
+                    path="/app/roleAndPermission/roleList"
+                    component={roleList}
+                  />
+                  <AppRoute
+                    path="/app/roleAndPermission/addRole"
+                    component={addRole}
+                  />
+                  <AppRoute
+                    path="/app/roleAndPermission/viewRole"
+                    component={viewRole}
+                  />
+                  {/* <AppRoute path="/app/roleAndPermission" component={rolePermission} /> */}
+                  <AppRoute
+                    path="/app/products/product/productsList"
+                    component={productsList}
+                  />
+                  <AppRoute
+                    path="/app/products/product/editProducts/:id"
+                    component={editProducts}
+                  />
+                  <AppRoute
+                    path="/app/products/product/viewProducts/:id"
+                    component={viewProducts}
+                  />
+                  <AppRoute
+                    path="/app/products/product/addProducts"
+                    component={addProducts}
+                  />
+                  <AppRoute
+                    path="/app/products/product/addMyProduct"
+                    component={addMyProduct}
+                  />
+                  <AppRoute
+                    path="/app/products/brand/brandList"
+                    component={brandList}
+                  />
+                  <AppRoute
+                    path="/app/products/brand/addBrand"
+                    component={addBrand}
+                  />
+                  <AppRoute
+                    path="/app/products/brand/viewBrand/:id"
+                    component={viewBrand}
+                  />
+                  <AppRoute
+                    path="/app/products/brand/editBrand/:id"
+                    component={editBrand}
+                  />
+                  <AppRoute
+                    path="/app/products/unit/unitList"
+                    component={unitList}
+                  />
+                  <AppRoute
+                    path="/app/products/unit/addUnit"
+                    component={addUnit}
+                  />
+                  <AppRoute
+                    path="/app/products/unit/editUnit/:id"
+                    component={editUnit}
+                  />
+                  <AppRoute
+                    path="/app/products/coupon/coupon"
+                    component={coupon}
+                  />
+                  <AppRoute
+                    path="/app/products/coupon/addCoupon"
+                    component={addCoupon}
+                  />
 
-          <AppRoute
-            path="/app/billing/createInvoice"
-            component={createInvoice}
-          />
-          <AppRoute path="/app/billing/invoiceList" component={invoiceList} />
-          <AppRoute
-            path="/app/billing/billingInvoice/:id"
-            component={billingInvoice}
-          />
+                  <AppRoute
+                    path="/app/notification/notificationList"
+                    component={notificationList}
+                  />
+                  <AppRoute
+                    path="/app/notifications/notification"
+                    component={notification}
+                  />
+                  <AppRoute
+                    path="/app/sellerPayout/pendingPayments/pendingPaymentsList"
+                    component={pendingPaymentsList}
+                  />
+                  <AppRoute
+                    path="/app/sellerPayout/pendingPayments/completedPaymentsList"
+                    component={completedPaymentsList}
+                  />
+                  <AppRoute
+                    path="/app/sellerPayout/pendingPayments/viewCompletedPaymentsList"
+                    component={viewCompletedPaymentsList}
+                  />
+                  <AppRoute
+                    path="/app/products/unit/unitList"
+                    component={unitList}
+                  />
+                  <AppRoute
+                    path="/app/products/unit/addUnit"
+                    component={addUnit}
+                  />
+                  <AppRoute
+                    path="/app/products/unit/editUnit/:id"
+                    component={editUnit}
+                  />
+                  <AppRoute path="/app/products/coupon" component={coupon} />
 
-          <AppRoute
-            path="/app/offerAndCoupon/specialOffer/specialOfferList"
-            component={specialOfferList}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/specialOffer/addSpecialOffer"
-            component={addSpecialOffer}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/specialOffer/editOffers/:id"
-            component={editOffers}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/coupons/couponsList"
-            component={couponsList}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/coupons/addCoupons"
-            component={addCoupons}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/coupons/editCoupon/:id"
-            component={editCoupon}
-          />
-          <AppRoute
-            path="/app/subscription/addSubscription"
-            component={addSubscription}
-          />
-          <AppRoute
-            path="/app/subscription/choosePaymentOption"
-            component={choosePaymentOption}
-          />
+                  <AppRoute
+                    path="/app/billing/createInvoice"
+                    component={createInvoice}
+                  />
+                  <AppRoute
+                    path="/app/billing/invoiceList"
+                    component={invoiceList}
+                  />
+                  <AppRoute
+                    path="/app/billing/billingInvoice/:id"
+                    component={billingInvoice}
+                  />
 
-          <AppRoute
-            path="/app/stockControl/stockTransferRequest"
-            component={stockTransferRequest}
-          />
-          <AppRoute
-            path="/app/stockControl/addStockTransfer"
-            component={addStockTransfer}
-          />
-          <AppRoute
-            path="/app/stockControl/stockAdjustment"
-            component={stockAdjustment}
-          />
-          <AppRoute
-            path="/app/stockControl/addStockAdjustment"
-            component={addStockAdjustment}
-          />
+                  <AppRoute
+                    path="/app/offerAndCoupon/specialOffer/specialOfferList"
+                    component={specialOfferList}
+                  />
+                  <AppRoute
+                    path="/app/offerAndCoupon/specialOffer/addSpecialOffer"
+                    component={addSpecialOffer}
+                  />
+                  <AppRoute
+                    path="/app/offerAndCoupon/specialOffer/editOffers/:id"
+                    component={editOffers}
+                  />
+                  <AppRoute
+                    path="/app/offerAndCoupon/coupons/couponsList"
+                    component={couponsList}
+                  />
+                  <AppRoute
+                    path="/app/offerAndCoupon/coupons/addCoupons"
+                    component={addCoupons}
+                  />
+                  <AppRoute
+                    path="/app/offerAndCoupon/coupons/editCoupon/:id"
+                    component={editCoupon}
+                  />
+                  <AppRoute
+                    path="/app/subscription/addSubscription"
+                    component={addSubscription}
+                  />
+                  <AppRoute
+                    path="/app/subscription/choosePaymentOption"
+                    component={choosePaymentOption}
+                  />
 
-          <AppRoute
-            path="/app/store/stores/storesList"
-            component={storesList}
-          />
-          <AppRoute path="/app/store/stores/addstores" component={addstores} />
-          <AppRoute
-            path="/app/store/storesRequest/storesRequestList"
-            component={storesRequestList}
-          />
-          <AppRoute
-            path="/app/store/storesRequest/addStoresRequest"
-            component={addStoresRequest}
-          />
-          <AppRoute path="/app/pageLayout/pageLayout" component={pageLayout} />
-          <AppRoute path="/app/siteSetting/smsSetting" component={smsSetting} />
-          <AppRoute
-            path="/app/siteSetting/emailSetting"
-            component={emailSetting}
-          />
-          <AppRoute path="/app/siteSetting/general" component={general} />
-          <AppRoute
-            path="/app/contactUs/employee/employeeList"
-            component={employeeList}
-          />
-          <AppRoute
-            path="/app/contactUs/employee/addEmployee"
-            component={addEmployee}
-          />
-          <AppRoute
-            path="/app/contactUs/employee/editEmployee"
-            component={editEmployee}
-          />
-          <AppRoute
-            path="/app/contactUs/customer/customerList"
-            component={customerList}
-          />
-          <AppRoute
-            path="/app/contactUs/customer/addCustomer"
-            component={addCustomer}
-          />
-          <AppRoute
-            path="/app/contactUs/customer/editCustomer/:id"
-            component={editCustomer}
-          />
-          <AppRoute
-            path="/app/contactUs/supplier/supplierList"
-            component={supplierList}
-          />
-          <AppRoute
-            path="/app/contactUs/supplier/addSupplier"
-            component={addSupplier}
-          />
-          <AppRoute
-            path="/app/contactUs/supplier/editSupplier/:id"
-            component={editSupplier}
-          />
-          <AppRoute
-            path="/app/helpAndSupport/importDemo/ImportDemo"
-            component={importDemo}
-          />
-          <AppRoute
-            path="/app/warehouse/warehouseList"
-            component={warehouseList}
-          />
-          <AppRoute
-            path="/app/warehouse/addWarehouse"
-            component={addWarehouse}
-          />
-          <AppRoute
-            path="/app/warehouse/viewWarehouse/:id"
-            component={viewWarehouse}
-          />
-          <AppRoute
-            path="/app/warehouse/editWarehouse/:id"
-            component={editWarehouse}
-          />
-          <AppRoute path="/app/tax/taxList" component={taxList} />
-          <AppRoute path="/app/tax/addTax" component={addTax} />
-          <AppRoute path="/app/tax/editTax/:id" component={editTax} />
-          <AppRoute path="/app/tax/viewTax/:id" component={viewTax} />
-          <AppRoute path="/app/size/sizeList" component={sizeList} />
-          <AppRoute path="/app/size/addSize" component={addSize} />
-          <AppRoute path="/app/size/editSize/:id" component={editSize} />
-          <AppRoute path="/app/size/viewSize/:id" component={viewSize} />
-          <AppRoute path="/app/reason/reasonList" component={reasonList} />
-          <AppRoute path="/app/reason/addReason" component={addReason} />
-          {/* <AppRoute path="/app/reason/editReason/:id" component={editReason} />
+                  <AppRoute
+                    path="/app/stockControl/stockTransferRequest"
+                    component={stockTransferRequest}
+                  />
+                  <AppRoute
+                    path="/app/stockControl/addStockTransfer"
+                    component={addStockTransfer}
+                  />
+                  <AppRoute
+                    path="/app/stockControl/stockAdjustment"
+                    component={stockAdjustment}
+                  />
+                  <AppRoute
+                    path="/app/stockControl/addStockAdjustment"
+                    component={addStockAdjustment}
+                  />
+
+                  <AppRoute
+                    path="/app/store/stores/storesList"
+                    component={storesList}
+                  />
+                  <AppRoute
+                    path="/app/store/stores/addstores"
+                    component={addstores}
+                  />
+                  <AppRoute
+                    path="/app/store/storesRequest/storesRequestList"
+                    component={storesRequestList}
+                  />
+                  <AppRoute
+                    path="/app/store/storesRequest/addStoresRequest"
+                    component={addStoresRequest}
+                  />
+                  <AppRoute
+                    path="/app/pageLayout/pageLayout"
+                    component={pageLayout}
+                  />
+                  <AppRoute
+                    path="/app/siteSetting/smsSetting"
+                    component={smsSetting}
+                  />
+                  <AppRoute
+                    path="/app/siteSetting/emailSetting"
+                    component={emailSetting}
+                  />
+                  <AppRoute
+                    path="/app/siteSetting/general"
+                    component={general}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/employee/employeeList"
+                    component={employeeList}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/employee/addEmployee"
+                    component={addEmployee}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/employee/editEmployee"
+                    component={editEmployee}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/customer/customerList"
+                    component={customerList}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/customer/addCustomer"
+                    component={addCustomer}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/customer/editCustomer/:id"
+                    component={editCustomer}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/supplier/supplierList"
+                    component={supplierList}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/supplier/addSupplier"
+                    component={addSupplier}
+                  />
+                  <AppRoute
+                    path="/app/contactUs/supplier/editSupplier/:id"
+                    component={editSupplier}
+                  />
+                  <AppRoute
+                    path="/app/helpAndSupport/importDemo/ImportDemo"
+                    component={importDemo}
+                  />
+                  <AppRoute
+                    path="/app/warehouse/warehouseList"
+                    component={warehouseList}
+                  />
+                  <AppRoute
+                    path="/app/warehouse/addWarehouse"
+                    component={addWarehouse}
+                  />
+                  <AppRoute
+                    path="/app/warehouse/viewWarehouse/:id"
+                    component={viewWarehouse}
+                  />
+                  <AppRoute
+                    path="/app/warehouse/editWarehouse/:id"
+                    component={editWarehouse}
+                  />
+                  <AppRoute path="/app/tax/taxList" component={taxList} />
+                  <AppRoute path="/app/tax/addTax" component={addTax} />
+                  <AppRoute path="/app/tax/editTax/:id" component={editTax} />
+                  <AppRoute path="/app/tax/viewTax/:id" component={viewTax} />
+                  <AppRoute path="/app/size/sizeList" component={sizeList} />
+                  <AppRoute path="/app/size/addSize" component={addSize} />
+                  <AppRoute
+                    path="/app/size/editSize/:id"
+                    component={editSize}
+                  />
+                  <AppRoute
+                    path="/app/size/viewSize/:id"
+                    component={viewSize}
+                  />
+                  <AppRoute
+                    path="/app/reason/reasonList"
+                    component={reasonList}
+                  />
+                  <AppRoute
+                    path="/app/reason/addReason"
+                    component={addReason}
+                  />
+                  {/* <AppRoute path="/app/reason/editReason/:id" component={editReason} />
           <AppRoute path="/app/reason/viewReason/:id" component={viewReason} />  */}
-          <AppRoute
-            path="/app/transferType/transferTypeList"
-            component={transferTypeList}
-          />
-          <AppRoute
-            path="/app/transferType/addTransferType"
-            component={addTransferType}
-          />
-          <AppRoute
-            path="/app/transferType/editTransferType/:id"
-            component={editTransferType}
-          />
-          <AppRoute
-            path="/app/transferType/viewTransferType/:id"
-            component={viewTransferType}
-          />
+                  <AppRoute
+                    path="/app/transferType/transferTypeList"
+                    component={transferTypeList}
+                  />
+                  <AppRoute
+                    path="/app/transferType/addTransferType"
+                    component={addTransferType}
+                  />
+                  <AppRoute
+                    path="/app/transferType/editTransferType/:id"
+                    component={editTransferType}
+                  />
+                  <AppRoute
+                    path="/app/transferType/viewTransferType/:id"
+                    component={viewTransferType}
+                  />
 
-          <AppRoute path="/app/slider/sliderList" component={sliderList} />
-          <AppRoute path="/app/slider/addSlider" component={addSlider} />
+                  <AppRoute
+                    path="/app/slider/sliderList"
+                    component={sliderList}
+                  />
+                  <AppRoute
+                    path="/app/slider/addSlider"
+                    component={addSlider}
+                  />
 
-          <AppRoute path="/app/user/list" component={userList} />
-          <AppRoute path="/app/user/edit" component={userEdit} />
-          <AppRoute path="/app/user/view" component={userView} />
-          <AppRoute path="/pages/profile/userProfile" component={userProfile} />
-          <AppRoute path="/app/myStore/editStore/:id" component={editStore} />
-          <AppRoute path="/app/myStore/addMyStore" component={addMyStore} />
-          <AppRoute path="/app/myStore/viewStore/:id" component={viewStore} />
-          <AppRoute path="/app/myStore/storeList" component={storeList} />
-          <AppRoute path="/app/myStore/addStorePage" component={addStorePage} />
-          <AppRoute path="/app/profile/editProfile" component={editProfile} />
-          <AppRoute
-            path="/pages/reset-password"
-            component={resetPassword}
-            fullLayout
+                  <AppRoute path="/app/user/list" component={userList} />
+                  <AppRoute path="/app/user/edit" component={userEdit} />
+                  <AppRoute path="/app/user/view" component={userView} />
+                  <AppRoute
+                    path="/pages/profile/userProfile"
+                    component={userProfile}
+                  />
+                  <AppRoute
+                    path="/app/myStore/editStore/:id"
+                    component={editStore}
+                  />
+                  <AppRoute
+                    path="/app/myStore/addMyStore"
+                    component={addMyStore}
+                  />
+                  <AppRoute
+                    path="/app/myStore/viewStore/:id"
+                    component={viewStore}
+                  />
+                  <AppRoute
+                    path="/app/myStore/storeList"
+                    component={storeList}
+                  />
+                  <AppRoute
+                    path="/app/myStore/addStorePage"
+                    component={addStorePage}
+                  />
+                  <AppRoute
+                    path="/app/profile/editProfile"
+                    component={editProfile}
+                  />
+                  <AppRoute
+                    path="/pages/reset-password"
+                    component={resetPassword}
+                    fullLayout
+                  />
+                </>
+              ) : (
+                <>
+                  <Redirect to="/pages/login" />
+                  <AppRoute path="/pages/login" component={Login} fullLayout />
+                  <AppRoute
+                    path="/pages/forgot-password"
+                    component={forgotPassword}
+                    fullLayout
+                  />
+                  <AppRoute
+                    path="/misc/error/404"
+                    component={error404}
+                    fullLayout
+                  />
+                  <AppRoute
+                    path="/pages/register"
+                    component={register}
+                    fullLayout
+                  />
+                  <AppRoute
+                    path="/misc/error/500"
+                    component={error500}
+                    fullLayout
+                  />
+                </>
+              )
+            }
           />
-          <AppRoute path="/pages/login" component={Login} fullLayout />
-          <AppRoute
-            path="/pages/forgot-password"
-            component={forgotPassword}
-            fullLayout
-          />
-          <AppRoute path="/misc/error/404" component={error404} fullLayout />
-          <AppRoute path="/pages/register" component={register} fullLayout />
-          <AppRoute path="/misc/error/500" component={error500} fullLayout />
         </Switch>
       </Router>
     );

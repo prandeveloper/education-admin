@@ -37,7 +37,7 @@ class Login extends React.Component {
     e.preventDefault();
 
     axios
-      .post("http:///13.127.52.128/api/api/user/adminlogin", this.state)
+      .post("http://13.127.52.128/api/api/user/adminlogin", this.state)
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
@@ -50,7 +50,7 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Row className="m-0 justify-content-center">
+        <Row className="m-1 justify-content-center">
           <Col
             sm="8"
             xl="7"
@@ -59,17 +59,15 @@ class Login extends React.Component {
             className="d-flex justify-content-center"
           >
             <Col lg="8" md="12" className="p-1">
-              <Card className="rounded-0 mb-0 px-2 login-tabs-container">
-                <CardHeader className="pb-1">
-                  <h1 className="" style={{}}>
-                    Education
-                  </h1>
+              <Card className="rounded-0 mb-0 px-2 login-tabs-container p-4">
+                <CardHeader className="d-flex justify-content-center align-items-center p-5">
+                  <h1 className="text-primary font-weight-bolder">EDUCATION</h1>
                   {/* <img src={glogo} class="img-fluid" alt="..." /> */}
                   {/* <img src={glogo} alt="glogo" /> */}
                   <br />
-                  <CardTitle>
+                  {/* <CardTitle>
                     <h4 className="mb-0">Login</h4>
-                  </CardTitle>
+                  </CardTitle> */}
                 </CardHeader>
                 <h5 className="px-2 py-2 auth-title fw-bolder text-dark">
                   Welcome back, please login to your account.
