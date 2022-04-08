@@ -53,7 +53,7 @@ class BadgeList extends React.Component {
             <div className="d-flex align-items-center cursor-pointer">
               <img
                 className="rounded-circle mr-50"
-                src={params.data.icon}
+                src={params.data.lavel_Id?.icon}
                 alt="user avatar"
                 height="40"
                 width="40"
@@ -67,12 +67,44 @@ class BadgeList extends React.Component {
         field: "level",
         //filter: true,
         filter: "agSetColumnFilter",
-        width: 250,
+        width: 200,
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <div className="ml-2">
-                <span>{params.data.level}</span>
+                <span>{params.data.lavel_Id?.level}</span>
+              </div>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Student Name",
+        field: "level",
+        //filter: true,
+        filter: "agSetColumnFilter",
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <div className="ml-2">
+                <span>{params.data.student_Id?.fullname}</span>
+              </div>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Student Email",
+        field: "level",
+        //filter: true,
+        filter: "agSetColumnFilter",
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <div className="ml-2">
+                <span>{params.data.student_Id?.email}</span>
               </div>
             </div>
           );
@@ -119,7 +151,7 @@ class BadgeList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allLavel").then((response) => {
+    await axiosConfig.get("/allbatch").then((response) => {
       let rowData = response.data.data;
       this.setState({ rowData });
       console.log(rowData);
@@ -128,7 +160,7 @@ class BadgeList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deletelavel/${id}`).then((response) => {
+    await axiosConfig.get(`/deletebatch/${id}`).then((response) => {
       console.log(response);
     });
   }
@@ -167,15 +199,15 @@ class BadgeList extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Level List
+                  Badge List
                 </h1>
               </Col>
               <Col>
                 <Button
                   className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/level/addLevel")}
+                  onClick={() => history.push("/app/badge/addBadge")}
                 >
-                  Add Level
+                  Add Badge
                 </Button>
               </Col>
             </Row>

@@ -17,34 +17,51 @@ export class AddBadge extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      level: "",
-      icon: "",
-      selectedFile: null,
-      selectedName: "",
+      student_Id: "",
+      lavel_Id: "",
+      studentList: [],
+      levelList: [],
     };
   }
 
-  onChangeHandler = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
-    console.log(event.target.files[0]);
-  };
+  async componentDidMount() {
+    //Student List
+    axiosConfig
+      .get("/allusers")
+      .then((response) => {
+        console.log(response);
+        this.setState({ studentList: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    //Badge List
+    axiosConfig
+      .get("/allLavel")
+      .then((response) => {
+        console.log(response);
+        this.setState({ levelList: response.data.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //   onChangeHandler = (event) => {
+  //     this.setState({ selectedFile: event.target.files[0] });
+  //     this.setState({ selectedName: event.target.files[0].name });
+  //     console.log(event.target.files[0]);
+  //   };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   submitHandler = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("level", this.state.level);
-    if (this.state.selectedFile !== null) {
-      data.append("icon", this.state.selectedFile, this.state.selectedName);
-    }
     axiosConfig
-      .post("/addlavel", data)
+      .post("/addbatch", this.state)
       .then((response) => {
         console.log(response);
-        this.props.history.push("/app/level/levelList");
+        this.props.history.push("/app/badge/badgeList");
       })
       .catch((error) => {
         console.log(error);
@@ -57,13 +74,13 @@ export class AddBadge extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add New Level
+                Add New Badge
               </h1>
             </Col>
             <Col>
               <Button
                 className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/level/levelList")}
+                onClick={() => history.push("/app/badge/BadgeList")}
               >
                 Back
               </Button>
@@ -73,24 +90,36 @@ export class AddBadge extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="6" md="6">
-                  <Label>Level Title</Label>
-                  <Input
-                    required
-                    type="text"
-                    placeholder="Enter Category"
-                    name="level"
-                    value={this.state.level}
+                  <Label>Student List</Label>
+                  <CustomInput
+                    type="select"
+                    name="student_Id"
+                    value={this.state.student_Id}
                     onChange={this.changeHandler}
-                  />
+                  >
+                    <option>Select Student .....</option>
+                    {this.state.studentList.map((studentL) => (
+                      <option key={studentL._id} value={studentL._id}>
+                        {studentL.fullname}
+                      </option>
+                    ))}
+                  </CustomInput>
                 </Col>
                 <Col lg="6" md="6">
-                  <Label>Image</Label>
-
+                  <Label>Select Level</Label>
                   <CustomInput
-                    required
-                    type="file"
-                    onChange={this.onChangeHandler}
-                  />
+                    type="select"
+                    name="lavel_Id"
+                    value={this.state.lavel_Id}
+                    onChange={this.changeHandler}
+                  >
+                    <option>Select Level .....</option>
+                    {this.state.levelList.map((levelL) => (
+                      <option key={levelL._id} value={levelL._id}>
+                        {levelL.level}
+                      </option>
+                    ))}
+                  </CustomInput>
                 </Col>
               </Row>
               <Row>
@@ -99,7 +128,7 @@ export class AddBadge extends Component {
                   type="submit"
                   className="mr-1 mb-1"
                 >
-                  Add Level
+                  Add Badge
                 </Button.Ripple>
               </Row>
             </Form>

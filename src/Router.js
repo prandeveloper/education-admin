@@ -20,10 +20,8 @@ const ecommerceDashboard = lazy(() =>
   import("./views/dashboard/ecommerce/EcommerceDashboard")
 );
 const home = lazy(() => import("./views/pages/landingPage/Home"));
-// const sellerDashboard = lazy(()=> import("./views/dashboard/seller/SellerDeshboard"));
 //  Expert Education Tabs
 const studentList = lazy(() => import("./views/apps/student/StudentList"));
-
 const addNotification = lazy(() =>
   import("./views/apps/notifications/AddNotification")
 );
