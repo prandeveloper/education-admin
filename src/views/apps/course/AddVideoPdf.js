@@ -123,18 +123,9 @@ class AddVideoPdf extends React.Component {
       );
     }
     axiosConfig
-      .post("/addvideobyadmin", data)
+      .post("/addvideo", data)
       .then((response) => {
         console.log(response);
-        Swal.fire({
-          title: "Video Added Successfully",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
       })
       .catch((error) => {
         console.log(error.reponse);
@@ -161,7 +152,7 @@ class AddVideoPdf extends React.Component {
       );
     }
     axiosConfig
-      .post("/addpdfbyadmin", data)
+      .post("/addpdf", data)
       .then((response) => {
         console.log(response);
       })
