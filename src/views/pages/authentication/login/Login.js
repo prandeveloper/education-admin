@@ -40,7 +40,7 @@ class Login extends React.Component {
       .post("http://13.127.52.128/api/api/user/adminlogin", this.state)
       .then((response) => {
         console.log(response);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("ad-token", response.data.token);
         history.push("/");
       })
       .catch((error) => {

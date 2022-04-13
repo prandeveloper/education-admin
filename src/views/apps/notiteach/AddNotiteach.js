@@ -15,24 +15,24 @@ import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
 
-export class AddNotification extends Component {
+export class AddNotiteach extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userid: "",
+      staffid: "",
       noti_title: "",
       desc: "",
-      studentL: [],
+      teacherL: [],
     };
   }
 
   componentDidMount() {
     //STUDENT LIST
     axiosConfig
-      .get("/allusers")
+      .get("/approved_staff")
       .then((response) => {
         console.log(response.data.data);
-        this.setState({ studentL: response.data.data });
+        this.setState({ teacherL: response.data.data });
       })
       .catch((error) => {
         console.log(error);
@@ -45,11 +45,11 @@ export class AddNotification extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     axiosConfig
-      .post("/addUserNotification", this.state)
+      .post("/addSaffNotification", this.state)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/notifications/notification");
+        this.props.history.push("/app/notiteach/notiteachList");
       })
       .catch((error) => {
         console.log(error);
@@ -63,13 +63,13 @@ export class AddNotification extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add Student Notification
+                Add Teacher Notification
               </h1>
             </Col>
             <Col>
               <Button
                 className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/notifications/notification")}
+                onClick={() => history.push("/app/notiteach/notiteachList")}
               >
                 Back
               </Button>
@@ -92,18 +92,18 @@ export class AddNotification extends Component {
                 </Col>
                 <Col lg="6" md="6">
                   <FormGroup>
-                    <Label>Select Student</Label>
+                    <Label>Select Teacher</Label>
                     <CustomInput
                       type="select"
-                      placeholder="Last Name"
-                      name="userid"
-                      value={this.state.userid}
+                      placeholder=""
+                      name="staffid"
+                      value={this.state.staffid}
                       onChange={this.changeHandler}
                     >
-                      <option>Choose Student ......</option>
-                      {this.state.studentL?.map((stud) => (
-                        <option key={stud._id} value={stud._id}>
-                          {stud.fullname}
+                      <option>Choose teacher ......</option>
+                      {this.state.teacherL?.map((teach) => (
+                        <option key={teach._id} value={teach._id}>
+                          {teach.fullname}
                         </option>
                       ))}
                     </CustomInput>
@@ -140,4 +140,4 @@ export class AddNotification extends Component {
   }
 }
 
-export default AddNotification;
+export default AddNotiteach;

@@ -19,7 +19,7 @@ import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 
-class Notification extends React.Component {
+class NotiteachList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -78,14 +78,14 @@ class Notification extends React.Component {
       },
 
       {
-        headerName: "Student",
-        field: "userid?.fullname",
+        headerName: "Teacher",
+        field: "staffid?.fullname",
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
-              <span>{params.data.userid?.fullname}</span>
+              <span>{params.data.staffid?.fullname}</span>
             </div>
           );
         },
@@ -139,7 +139,7 @@ class Notification extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/all_NotificationUser").then((response) => {
+    await axiosConfig.get("/all_NotificationStaff").then((response) => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -188,15 +188,13 @@ class Notification extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Notification
+                  Teacher Notification
                 </h1>
               </Col>
               <Col>
                 <Button
                   className=" btn btn-danger float-right"
-                  onClick={() =>
-                    history.push("/app/notifications/addNotification")
-                  }
+                  onClick={() => history.push("/app/notiteach/addNotiteach")}
                 >
                   Add New
                 </Button>
@@ -298,4 +296,4 @@ class Notification extends React.Component {
     );
   }
 }
-export default Notification;
+export default NotiteachList;

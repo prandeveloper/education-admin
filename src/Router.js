@@ -22,9 +22,7 @@ const ecommerceDashboard = lazy(() =>
 const home = lazy(() => import("./views/pages/landingPage/Home"));
 //  Expert Education Tabs
 const studentList = lazy(() => import("./views/apps/student/StudentList"));
-const addNotification = lazy(() =>
-  import("./views/apps/notifications/AddNotification")
-);
+
 const teacherList = lazy(() => import("./views/apps/teacher/TeacherList"));
 const approvedTeacher = lazy(() =>
   import("./views/apps/teacher/ApprovedTeacher")
@@ -89,13 +87,16 @@ const addUnit = lazy(() => import("./views/apps/products/unit/AddUnit"));
 const editUnit = lazy(() => import("./views/apps/products/unit/EditUnit"));
 const coupon = lazy(() => import("./views/apps/products/coupon/Coupon"));
 const addCoupon = lazy(() => import("./views/apps/products/coupon/AddCoupon"));
-
-const notificationList = lazy(() =>
-  import("./views/apps/notification/NotificationList")
+const addNotification = lazy(() =>
+  import("./views/apps/notifications/AddNotification")
 );
 const notification = lazy(() =>
   import("./views/apps/notifications/Notification")
 );
+const notiteachList = lazy(() =>
+  import("./views/apps/notiteach/NotiteachList")
+);
+const addNotiteach = lazy(() => import("./views/apps/notiteach/AddNotiteach"));
 const pendingPaymentsList = lazy(() =>
   import("./views/apps/sellerPayout/pendingPayments/PendingPaymentsList")
 );
@@ -478,7 +479,7 @@ class AppRouter extends React.Component {
         <Switch>
           <Route
             render={() =>
-              localStorage.getItem("token") ? (
+              localStorage.getItem("ad-token") ? (
                 <>
                   <AppRoute
                     exact={true}
@@ -495,10 +496,6 @@ class AppRouter extends React.Component {
                     component={studentList}
                   />
 
-                  <AppRoute
-                    path="/app/notification/addNotification"
-                    component={addNotification}
-                  />
                   <AppRoute
                     path="/app/teacher/teacherList"
                     component={teacherList}
@@ -677,12 +674,20 @@ class AppRouter extends React.Component {
                   />
 
                   <AppRoute
-                    path="/app/notification/notificationList"
-                    component={notificationList}
+                    path="/app/notifications/addNotification"
+                    component={addNotification}
                   />
                   <AppRoute
                     path="/app/notifications/notification"
                     component={notification}
+                  />
+                  <AppRoute
+                    path="/app/notiteach/notiteachList"
+                    component={notiteachList}
+                  />
+                  <AppRoute
+                    path="/app/notiteach/addNotiteach"
+                    component={addNotiteach}
                   />
                   <AppRoute
                     path="/app/sellerPayout/pendingPayments/pendingPaymentsList"

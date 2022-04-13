@@ -170,11 +170,19 @@ const navigationConfig = [
   },
   {
     id: "notification",
-    title: "Notification",
+    title: " Student Notification",
     type: "item",
     icon: <Icon.Circle size={12} />,
     permissions: ["admin", "editor"],
     navLink: "/app/notifications/notification",
+  },
+  {
+    id: "notiteachList",
+    title: " Teacher Notification",
+    type: "item",
+    icon: <Icon.Circle size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/notiteach/notiteachList",
   },
   {
     id: "badgeList",
