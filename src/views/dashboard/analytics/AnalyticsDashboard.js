@@ -53,53 +53,65 @@ class AnalyticsDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {},
-      users: {},
-      staff: {},
-      brand: {},
+      teacher: {},
+      approv: {},
+      student: {},
+      enrolled: {},
+      course: {},
     };
   }
 
   componentDidMount() {
     axiosConfig
-      .get("/total_product")
+      .get("/countteacher")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
-        this.setState({ product: response.data });
+        this.setState({ teacher: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
 
     axiosConfig
-      .get("/total_users")
+      .get("/countteacherAprove")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
-        this.setState({ users: response.data });
+        this.setState({ approv: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
 
     axiosConfig
-      .get("/total_staff")
+      .get("/countUser")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
-        this.setState({ staff: response.data });
+        this.setState({ student: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
 
     axiosConfig
-      .get("/total_brand")
+      .get("/countUserEnroll")
       .then((response) => {
         console.log(response.data);
         //console.log(response.data.data);
-        this.setState({ brand: response.data });
+        this.setState({ enrolled: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axiosConfig
+      .get("/councours")
+      .then((response) => {
+        console.log(response.data);
+        //console.log(response.data.data);
+        this.setState({ course: response.data });
       })
       .catch((error) => {
         console.log(error);
@@ -121,40 +133,56 @@ class AnalyticsDashboard extends React.Component {
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {/* {this.state.product.data} */} 100
+                {this.state.student.data}
+              </CardText>
+            </Card>
+          </Col>
+          <Col lg="3" md="12">
+            <Card
+              className="bg-primary"
+              body
+              inverse
+              style={{ borderColor: "white" }}
+            >
+              <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
+                Enrolled Student
+              </CardTitle>
+
+              <CardText tag="h3" style={{ color: "white" }}>
+                {this.state.enrolled.data}
               </CardText>
             </Card>
           </Col>
           <Col lg="3" md="12">
             <Card className="bg-success" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Total Teachers
+                Total Teacher
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {/* {this.state.users.totalUser} */}50
+                {this.state.teacher.data}
               </CardText>
             </Card>
           </Col>
           <Col lg="3" md="12">
             <Card className="bg-danger" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Total Courses
+                Approved Teacher
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {/* {this.state.staff.totalStaff}*/} 40
+                {this.state.approv.data}
               </CardText>
             </Card>
           </Col>
           <Col lg="3" md="12">
             <Card className="bg-warning" body inverse>
               <CardTitle className="mb-1" tag="h4" style={{ color: "white" }}>
-                Wallet Balance
+                Total Course
               </CardTitle>
 
               <CardText tag="h3" style={{ color: "white" }}>
-                {/* {this.state.brand.totalBrand} */} 1500
+                {this.state.course.data}
               </CardText>
             </Card>
           </Col>

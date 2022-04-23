@@ -123,7 +123,7 @@ class AddVideoPdf extends React.Component {
       );
     }
     axiosConfig
-      .post("/addvideo", data)
+      .post(`/addvideo`, data)
       .then((response) => {
         console.log(response);
       })

@@ -20,12 +20,12 @@ export class UserProfile extends Component {
     super(props);
 
     this.state = {
-      name: "",
+      adminname: "",
       email: "",
       mobile: "",
       password: "",
-      cnfrm_password: "",
-      image: "",
+      cnfmPassword: "",
+      adminimg: "",
       selectedFile: null,
       selectedName: "",
     };
@@ -33,20 +33,20 @@ export class UserProfile extends Component {
 
   componentDidMount() {
     axiosConfig
-      .get(`/getoneseller`, {
+      .get(`/viewoneAdmin`, {
         headers: {
-          "auth-adtoken": localStorage.getItem("auth-adtoken"),
+          "ad-token": localStorage.getItem("ad-token"),
         },
       })
       .then((response) => {
         console.log(response);
         this.setState({
-          name: response.data.data.name,
+          adminname: response.data.data.adminname,
           email: response.data.data.email,
           mobile: response.data.data.mobile,
           password: response.data.data.password,
-          cnfrm_password: response.data.data.cnfrm_password,
-          image: response.data.data.image,
+          cnfmPassword: response.data.data.cnfmPassword,
+          adminimg: response.data.data.adminimg,
         });
       })
       .catch((error) => {
@@ -67,13 +67,17 @@ export class UserProfile extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("name", this.state.name);
+    data.append("adminname", this.state.adminname);
     data.append("email", this.state.email);
     data.append("password", this.state.password);
-    data.append("cnfrm_password", this.state.cnfrm_password);
+    data.append("cnfmPassword", this.state.cnfmPassword);
     data.append("mobile", this.state.mobile);
     if (this.state.selectedFile !== null) {
-      data.append("image", this.state.selectedFile, this.state.selectedName);
+      data.append(
+        "imadminimgage",
+        this.state.selectedFile,
+        this.state.selectedName
+      );
     }
     for (var value of data.values()) {
       console.log(value);
@@ -82,9 +86,9 @@ export class UserProfile extends Component {
       console.log(value);
     }
     axiosConfig
-      .post("/editseller", data, {
+      .post(`/editAdmin`, data, {
         headers: {
-          "auth-adtoken": localStorage.getItem("auth-adtoken"),
+          "ad-token": localStorage.getItem("ad-token"),
         },
       })
       .then((response) => {
@@ -111,7 +115,7 @@ export class UserProfile extends Component {
               <Row className="mb-2">
                 <Col lg="4" md="6">
                   <img
-                    src={this.state.image || img}
+                    src={this.state.adminimg || img}
                     className="rounded mb-3"
                     height="240"
                     width="240"
@@ -129,8 +133,8 @@ export class UserProfile extends Component {
                       <Input
                         type="text"
                         placeholder="Name"
-                        name="name"
-                        value={this.state.name}
+                        name="adminname"
+                        value={this.state.adminname}
                         onChange={this.changeHandler}
                       />
                     </FormGroup>
@@ -166,8 +170,8 @@ export class UserProfile extends Component {
                       <Input
                         type="password"
                         placeholder="Confirm Password"
-                        name="cnfrm_password"
-                        value={this.state.cnfrm_password}
+                        name="cnfmPassword"
+                        value={this.state.cnfmPassword}
                         onChange={this.changeHandler}
                       />
                     </FormGroup>

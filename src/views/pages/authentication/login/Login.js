@@ -37,7 +37,7 @@ class Login extends React.Component {
     e.preventDefault();
 
     axios
-      .post("http://13.127.52.128/api/api/user/adminlogin", this.state)
+      .post("http://65.0.80.5:5000/api/admin/adminlogin", this.state)
       .then((response) => {
         console.log(response);
         localStorage.setItem("ad-token", response.data.token);
