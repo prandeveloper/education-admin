@@ -60,7 +60,7 @@ const UserDropdown = (props) => {
         <span
           className="align-middle"
           onClick={(e) => {
-            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("ad-token");
             window.location.push = "/pages/login";
             return false;
           }}

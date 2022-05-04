@@ -18,6 +18,7 @@ import { Check } from "react-feather";
 import glogo from "../../../../assets/img/pages/glogo.png";
 import { history } from "../../../../history";
 import axios from "axios";
+import swal from "sweetalert";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,16 @@ class Login extends React.Component {
       email: "",
       password: "",
     };
+  }
+
+  componentDidMount() {
+    {
+      localStorage.getItem("ad-token") != null &&
+      localStorage.getItem("ad-token") != "" &&
+      localStorage.getItem("ad-token") != undefined
+        ? this.props.history.push("/")
+        : this.props.history.push("/pages/login");
+    }
   }
 
   handlechange = (e) => {
@@ -44,7 +55,18 @@ class Login extends React.Component {
         history.push("/");
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.response.data);
+        if (
+          error.response.data.status !== "true" &&
+          error.response.data.status != "true"
+        ) {
+          swal(
+            "Wrong UserName or Password",
+            "Enter Correct Email / Number or Password",
+            "error"
+          );
+          this.props.history.push("/pages/login");
+        }
       });
   };
   render() {

@@ -7,8 +7,6 @@ const navigationConfig = [
     title: "Dashboard",
     type: "collapse",
     icon: <Icon.Home size={20} />,
-    badge: "warning",
-    badgeText: "2",
     children: [
       {
         id: "analyticsDash",

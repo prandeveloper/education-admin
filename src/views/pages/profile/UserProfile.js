@@ -18,7 +18,6 @@ import img from "../../../assets/img/portrait/small/avatar-s-11.jpg";
 export class UserProfile extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       adminname: "",
       email: "",
@@ -73,14 +72,10 @@ export class UserProfile extends Component {
     data.append("cnfmPassword", this.state.cnfmPassword);
     data.append("mobile", this.state.mobile);
     if (this.state.selectedFile !== null) {
-      data.append(
-        "imadminimgage",
-        this.state.selectedFile,
-        this.state.selectedName
-      );
+      data.append("adminimg", this.state.selectedFile, this.state.selectedName);
     }
-    for (var value of data.values()) {
-      console.log(value);
+    for (var key of data.keys()) {
+      console.log(key);
     }
     for (var value of data.values()) {
       console.log(value);
@@ -92,7 +87,7 @@ export class UserProfile extends Component {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         window.location.reload();
       })
       .catch((error) => {

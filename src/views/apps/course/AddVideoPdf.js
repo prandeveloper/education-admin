@@ -123,7 +123,11 @@ class AddVideoPdf extends React.Component {
       );
     }
     axiosConfig
-      .post(`/addvideo`, data)
+      .post(`/addvideo`, data, {
+        headers: {
+          "ad-token": localStorage.getItem("ad-token"),
+        },
+      })
       .then((response) => {
         console.log(response);
       })
@@ -152,7 +156,11 @@ class AddVideoPdf extends React.Component {
       );
     }
     axiosConfig
-      .post("/addpdf", data)
+      .post("/addpdf", data, {
+        headers: {
+          "ad-token": localStorage.getItem("ad-token"),
+        },
+      })
       .then((response) => {
         console.log(response);
       })

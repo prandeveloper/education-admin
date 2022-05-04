@@ -28,6 +28,7 @@ export class AddCourse extends Component {
       desc: "",
       long_desc: "",
       teacher: "",
+      course_type: "",
       category_id: "",
       course_image: "",
       editorState: EditorState.createEmpty(),
@@ -163,6 +164,21 @@ export class AddCourse extends Component {
                           {tech.fullname}
                         </option>
                       ))}
+                    </CustomInput>
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Course Type</Label>
+                    <CustomInput
+                      type="select"
+                      name="course_type"
+                      value={this.state.course_type}
+                      onChange={this.changeHandler}
+                    >
+                      <option>Select Course Type...</option>
+                      <option>PAID</option>
+                      <option>FREE</option>
                     </CustomInput>
                   </FormGroup>
                 </Col>
