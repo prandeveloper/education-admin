@@ -261,7 +261,7 @@ export class AddCourse extends Component {
                 </Col>
                 <Col lg="6" md="6">
                   <FormGroup>
-                    <Label>Image Upload</Label>
+                    <Label>Course Image</Label>
                     <CustomInput type="file" onChange={this.onChangeHandler} />
                   </FormGroup>
                 </Col>

@@ -52,10 +52,6 @@ const levelList = lazy(() => import("./views/apps/level/LevelList"));
 const addLevel = lazy(() => import("./views/apps/level/AddLevel"));
 // My Component starts here
 
-const sellerList = lazy(() => import("./views/apps/seller/SellerList"));
-const editSeller = lazy(() => import("./views/apps/seller/EditSeller"));
-const viewSeller = lazy(() => import("./views/apps/seller/ViewSeller"));
-const addSeller = lazy(() => import("./views/apps/seller/AddSeller"));
 const allUsers = lazy(() => import("./views/apps/users/user/AllUsers"));
 const addUsers = lazy(() => import("./views/apps/users/user/AddUsers"));
 const viewUsers = lazy(() => import("./views/apps/users/user/ViewUsers"));
@@ -63,30 +59,6 @@ const roleList = lazy(() => import("./views/apps/roleAndPermission/RoleList"));
 const addRole = lazy(() => import("./views/apps/roleAndPermission/AddRole"));
 const viewRole = lazy(() => import("./views/apps/roleAndPermission/ViewRole"));
 
-const productsList = lazy(() =>
-  import("./views/apps/products/product/ProductsList")
-);
-const editProducts = lazy(() =>
-  import("./views/apps/products/product/EditProducts")
-);
-const viewProducts = lazy(() =>
-  import("./views/apps/products/product/ViewProducts")
-);
-const addProducts = lazy(() =>
-  import("./views/apps/products/product/AddProducts")
-);
-const addMyProduct = lazy(() =>
-  import("./views/apps/products/product/AddMyProduct")
-);
-const brandList = lazy(() => import("./views/apps/products/brand/BrandList"));
-const addBrand = lazy(() => import("./views/apps/products/brand/AddBrand"));
-const viewBrand = lazy(() => import("./views/apps/products/brand/ViewBrand"));
-const editBrand = lazy(() => import("./views/apps/products/brand/EditBrand"));
-const unitList = lazy(() => import("./views/apps/products/unit/UnitList"));
-const addUnit = lazy(() => import("./views/apps/products/unit/AddUnit"));
-const editUnit = lazy(() => import("./views/apps/products/unit/EditUnit"));
-const coupon = lazy(() => import("./views/apps/products/coupon/Coupon"));
-const addCoupon = lazy(() => import("./views/apps/products/coupon/AddCoupon"));
 const addNotification = lazy(() =>
   import("./views/apps/notifications/AddNotification")
 );
@@ -107,31 +79,6 @@ const viewCompletedPaymentsList = lazy(() =>
   import("./views/apps/sellerPayout/pendingPayments/ViewCompletedPayments")
 );
 
-const createInvoice = lazy(() => import("./views/apps/billing/CreateInvoice"));
-const invoiceList = lazy(() => import("./views/apps/billing/InvoiceList"));
-const billingInvoice = lazy(() =>
-  import("./views/apps/billing/BillingInvoice")
-);
-
-const specialOfferList = lazy(() =>
-  import("./views/apps/offerAndCoupon/specialOffer/SpecialOfferList")
-);
-const addSpecialOffer = lazy(() =>
-  import("./views/apps/offerAndCoupon/specialOffer/AddSpecialOffer")
-);
-const editOffers = lazy(() =>
-  import("./views/apps/offerAndCoupon/specialOffer/EditOffers")
-);
-const couponsList = lazy(() =>
-  import("./views/apps/offerAndCoupon/coupons/couponsList")
-);
-const addCoupons = lazy(() =>
-  import("./views/apps/offerAndCoupon/coupons/AddCoupons")
-);
-const editCoupon = lazy(() =>
-  import("./views/apps/offerAndCoupon/coupons/EditCoupon")
-);
-
 const addSubscription = lazy(() =>
   import("./views/apps/subscription/AddSubscription")
 );
@@ -140,28 +87,6 @@ const choosePaymentOption = lazy(() =>
 );
 
 const pageLayout = lazy(() => import("./views/apps/pageLayout/PageLayout"));
-
-const stockAdjustment = lazy(() =>
-  import("./views/apps/stockControl/StockAdjustment")
-);
-const addStockAdjustment = lazy(() =>
-  import("./views/apps/stockControl/AddStockAdjustment")
-);
-const stockTransferRequest = lazy(() =>
-  import("./views/apps/stockControl/StockTransferRequest")
-);
-const addStockTransfer = lazy(() =>
-  import("./views/apps/stockControl/AddStockTransfer")
-);
-
-const storesList = lazy(() => import("./views/apps/store/stores/StoresList"));
-const addstores = lazy(() => import("./views/apps/store/stores/AddStores"));
-const storesRequestList = lazy(() =>
-  import("./views/apps/store/storesRequest/StoresRequestList")
-);
-const addStoresRequest = lazy(() =>
-  import("./views/apps/store/storesRequest/AddStoresRequest")
-);
 
 const warehouseList = lazy(() =>
   import("./views/apps/warehouse/WarehouseList")
@@ -172,35 +97,6 @@ const viewWarehouse = lazy(() =>
 );
 const editWarehouse = lazy(() =>
   import("./views/apps/warehouse/EditWarehouse")
-);
-
-const employeeList = lazy(() =>
-  import("./views/apps/contactUs/employee/EmployeeList")
-);
-const addEmployee = lazy(() =>
-  import("./views/apps/contactUs/employee/AddEmployee")
-);
-
-const editEmployee = lazy(() =>
-  import("./views/apps/contactUs/employee/EditEmployee")
-);
-const customerList = lazy(() =>
-  import("./views/apps/contactUs/customer/CustomerList")
-);
-const addCustomer = lazy(() =>
-  import("./views/apps/contactUs/customer/AddCustomer")
-);
-const editCustomer = lazy(() =>
-  import("./views/apps/contactUs/customer/EditCustomer")
-);
-const supplierList = lazy(() =>
-  import("./views/apps/contactUs/supplier/SupplierList")
-);
-const addSupplier = lazy(() =>
-  import("./views/apps/contactUs/supplier/AddSupplier")
-);
-const editSupplier = lazy(() =>
-  import("./views/apps/contactUs/supplier/EditSupplier")
 );
 
 const importDemo = lazy(() =>
@@ -221,21 +117,6 @@ const emailSetting = lazy(() =>
 );
 const general = lazy(() => import("./views/apps/siteSetting/General"));
 const userProfile = lazy(() => import("./views/pages/profile/UserProfile"));
-const editStore = lazy(() => import("./views/apps/myStore/EditStore"));
-const addMyStore = lazy(() => import("./views/apps/myStore/AddMyStore"));
-const viewStore = lazy(() => import("./views/apps/myStore/ViewStore"));
-const storeList = lazy(() => import("./views/apps/myStore/StoreList"));
-const addStorePage = lazy(() => import("./views/apps/myStore/AddStorePage"));
-
-const taxList = lazy(() => import("./views/apps/tax/TaxList"));
-const addTax = lazy(() => import("./views/apps/tax/AddTax"));
-const editTax = lazy(() => import("./views/apps/tax/EditTax"));
-const viewTax = lazy(() => import("./views/apps/tax/ViewTax"));
-
-const sizeList = lazy(() => import("./views/apps/size/SizeList"));
-const addSize = lazy(() => import("./views/apps/size/AddSize"));
-const editSize = lazy(() => import("./views/apps/size/EditSize"));
-const viewSize = lazy(() => import("./views/apps/size/ViewSize"));
 
 const reasonList = lazy(() => import("./views/apps/reason/ReasonList"));
 const addReason = lazy(() => import("./views/apps/reason/AddReason"));
@@ -525,7 +406,7 @@ class AppRouter extends React.Component {
                     component={courseList}
                   />
                   <AppRoute
-                    path="/app/course/editCourse"
+                    path="/app/course/editCourse/:id"
                     component={editCourse}
                   />
                   <AppRoute
@@ -575,22 +456,7 @@ class AppRouter extends React.Component {
                   <AppRoute path="/app/level/addLevel" component={addLevel} />
 
                   {/* My components starts all my app components*/}
-                  <AppRoute
-                    path="/app/seller/sellerList"
-                    component={sellerList}
-                  />
-                  <AppRoute
-                    path="/app/seller/editSeller"
-                    component={editSeller}
-                  />
-                  <AppRoute
-                    path="/app/seller/viewSeller/:id"
-                    component={viewSeller}
-                  />
-                  <AppRoute
-                    path="/app/seller/addSeller"
-                    component={addSeller}
-                  />
+
                   <AppRoute
                     path="/app/users/user/allUsers"
                     component={allUsers}
@@ -616,62 +482,6 @@ class AppRouter extends React.Component {
                     component={viewRole}
                   />
                   {/* <AppRoute path="/app/roleAndPermission" component={rolePermission} /> */}
-                  <AppRoute
-                    path="/app/products/product/productsList"
-                    component={productsList}
-                  />
-                  <AppRoute
-                    path="/app/products/product/editProducts/:id"
-                    component={editProducts}
-                  />
-                  <AppRoute
-                    path="/app/products/product/viewProducts/:id"
-                    component={viewProducts}
-                  />
-                  <AppRoute
-                    path="/app/products/product/addProducts"
-                    component={addProducts}
-                  />
-                  <AppRoute
-                    path="/app/products/product/addMyProduct"
-                    component={addMyProduct}
-                  />
-                  <AppRoute
-                    path="/app/products/brand/brandList"
-                    component={brandList}
-                  />
-                  <AppRoute
-                    path="/app/products/brand/addBrand"
-                    component={addBrand}
-                  />
-                  <AppRoute
-                    path="/app/products/brand/viewBrand/:id"
-                    component={viewBrand}
-                  />
-                  <AppRoute
-                    path="/app/products/brand/editBrand/:id"
-                    component={editBrand}
-                  />
-                  <AppRoute
-                    path="/app/products/unit/unitList"
-                    component={unitList}
-                  />
-                  <AppRoute
-                    path="/app/products/unit/addUnit"
-                    component={addUnit}
-                  />
-                  <AppRoute
-                    path="/app/products/unit/editUnit/:id"
-                    component={editUnit}
-                  />
-                  <AppRoute
-                    path="/app/products/coupon/coupon"
-                    component={coupon}
-                  />
-                  <AppRoute
-                    path="/app/products/coupon/addCoupon"
-                    component={addCoupon}
-                  />
 
                   <AppRoute
                     path="/app/notifications/addNotification"
@@ -701,57 +511,7 @@ class AppRouter extends React.Component {
                     path="/app/sellerPayout/pendingPayments/viewCompletedPaymentsList"
                     component={viewCompletedPaymentsList}
                   />
-                  <AppRoute
-                    path="/app/products/unit/unitList"
-                    component={unitList}
-                  />
-                  <AppRoute
-                    path="/app/products/unit/addUnit"
-                    component={addUnit}
-                  />
-                  <AppRoute
-                    path="/app/products/unit/editUnit/:id"
-                    component={editUnit}
-                  />
-                  <AppRoute path="/app/products/coupon" component={coupon} />
 
-                  <AppRoute
-                    path="/app/billing/createInvoice"
-                    component={createInvoice}
-                  />
-                  <AppRoute
-                    path="/app/billing/invoiceList"
-                    component={invoiceList}
-                  />
-                  <AppRoute
-                    path="/app/billing/billingInvoice/:id"
-                    component={billingInvoice}
-                  />
-
-                  <AppRoute
-                    path="/app/offerAndCoupon/specialOffer/specialOfferList"
-                    component={specialOfferList}
-                  />
-                  <AppRoute
-                    path="/app/offerAndCoupon/specialOffer/addSpecialOffer"
-                    component={addSpecialOffer}
-                  />
-                  <AppRoute
-                    path="/app/offerAndCoupon/specialOffer/editOffers/:id"
-                    component={editOffers}
-                  />
-                  <AppRoute
-                    path="/app/offerAndCoupon/coupons/couponsList"
-                    component={couponsList}
-                  />
-                  <AppRoute
-                    path="/app/offerAndCoupon/coupons/addCoupons"
-                    component={addCoupons}
-                  />
-                  <AppRoute
-                    path="/app/offerAndCoupon/coupons/editCoupon/:id"
-                    component={editCoupon}
-                  />
                   <AppRoute
                     path="/app/subscription/addSubscription"
                     component={addSubscription}
@@ -761,39 +521,6 @@ class AppRouter extends React.Component {
                     component={choosePaymentOption}
                   />
 
-                  <AppRoute
-                    path="/app/stockControl/stockTransferRequest"
-                    component={stockTransferRequest}
-                  />
-                  <AppRoute
-                    path="/app/stockControl/addStockTransfer"
-                    component={addStockTransfer}
-                  />
-                  <AppRoute
-                    path="/app/stockControl/stockAdjustment"
-                    component={stockAdjustment}
-                  />
-                  <AppRoute
-                    path="/app/stockControl/addStockAdjustment"
-                    component={addStockAdjustment}
-                  />
-
-                  <AppRoute
-                    path="/app/store/stores/storesList"
-                    component={storesList}
-                  />
-                  <AppRoute
-                    path="/app/store/stores/addstores"
-                    component={addstores}
-                  />
-                  <AppRoute
-                    path="/app/store/storesRequest/storesRequestList"
-                    component={storesRequestList}
-                  />
-                  <AppRoute
-                    path="/app/store/storesRequest/addStoresRequest"
-                    component={addStoresRequest}
-                  />
                   <AppRoute
                     path="/app/pageLayout/pageLayout"
                     component={pageLayout}
@@ -810,42 +537,7 @@ class AppRouter extends React.Component {
                     path="/app/siteSetting/general"
                     component={general}
                   />
-                  <AppRoute
-                    path="/app/contactUs/employee/employeeList"
-                    component={employeeList}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/employee/addEmployee"
-                    component={addEmployee}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/employee/editEmployee"
-                    component={editEmployee}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/customer/customerList"
-                    component={customerList}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/customer/addCustomer"
-                    component={addCustomer}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/customer/editCustomer/:id"
-                    component={editCustomer}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/supplier/supplierList"
-                    component={supplierList}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/supplier/addSupplier"
-                    component={addSupplier}
-                  />
-                  <AppRoute
-                    path="/app/contactUs/supplier/editSupplier/:id"
-                    component={editSupplier}
-                  />
+
                   <AppRoute
                     path="/app/helpAndSupport/importDemo/ImportDemo"
                     component={importDemo}
@@ -866,20 +558,7 @@ class AppRouter extends React.Component {
                     path="/app/warehouse/editWarehouse/:id"
                     component={editWarehouse}
                   />
-                  <AppRoute path="/app/tax/taxList" component={taxList} />
-                  <AppRoute path="/app/tax/addTax" component={addTax} />
-                  <AppRoute path="/app/tax/editTax/:id" component={editTax} />
-                  <AppRoute path="/app/tax/viewTax/:id" component={viewTax} />
-                  <AppRoute path="/app/size/sizeList" component={sizeList} />
-                  <AppRoute path="/app/size/addSize" component={addSize} />
-                  <AppRoute
-                    path="/app/size/editSize/:id"
-                    component={editSize}
-                  />
-                  <AppRoute
-                    path="/app/size/viewSize/:id"
-                    component={viewSize}
-                  />
+
                   <AppRoute
                     path="/app/reason/reasonList"
                     component={reasonList}
@@ -923,26 +602,7 @@ class AppRouter extends React.Component {
                     path="/pages/profile/userProfile"
                     component={userProfile}
                   />
-                  <AppRoute
-                    path="/app/myStore/editStore/:id"
-                    component={editStore}
-                  />
-                  <AppRoute
-                    path="/app/myStore/addMyStore"
-                    component={addMyStore}
-                  />
-                  <AppRoute
-                    path="/app/myStore/viewStore/:id"
-                    component={viewStore}
-                  />
-                  <AppRoute
-                    path="/app/myStore/storeList"
-                    component={storeList}
-                  />
-                  <AppRoute
-                    path="/app/myStore/addStorePage"
-                    component={addStorePage}
-                  />
+
                   <AppRoute
                     path="/app/profile/editProfile"
                     component={editProfile}
