@@ -1,5 +1,13 @@
 import React from "react";
-import { Card, CardBody, Row, Col, Button } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  Row,
+  Col,
+  Button,
+  Table,
+  CardHeader,
+} from "reactstrap";
 import { history } from "../../../history";
 import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../axiosConfig";
@@ -81,6 +89,73 @@ class ViewCourse extends React.Component {
                 <hr />
               </Col>
             </Row>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader tag="h3">Video List</CardHeader>
+          <CardBody>
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Video Title</th>
+                  <th>Video Image</th>
+                  <th>Video URL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.data?.videolist?.map((video) => (
+                  <tr key={video._id}>
+                    <th scope="row">1</th>
+                    <td>{video.videoTitle}</td>
+                    <td>
+                      <img src={video.video_image} width="70" />
+                    </td>
+                    <td>
+                      <video
+                        width="120"
+                        height="100"
+                        controls
+                        source
+                        src={video.video_file}
+                        type="video/mp4"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardHeader tag="h3">PDF List</CardHeader>
+          <CardBody>
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>PDF Title</th>
+                  <th>PDF Image</th>
+                  <th>PDF URL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.data?.pdflist?.map((pdf) => (
+                  <tr key={pdf._id}>
+                    <th scope="row">1</th>
+                    <td>{pdf.pdf_title}</td>
+                    <td>
+                      <img src={pdf.pdf_image} width="70" />
+                    </td>
+                    <td>
+                      <a href={pdf.pdf_file} download>
+                        Download file
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </CardBody>
         </Card>
       </React.Fragment>

@@ -31,8 +31,11 @@ export class AddCourse extends Component {
       course_type: "",
       category_id: "",
       course_image: "",
+      posterimg: "",
       editorState: EditorState.createEmpty(),
       selectedFile: null,
+      selectedName: "",
+      selectedFile1: null,
       selectedName: "",
       teacherL: [],
       categ: [],
@@ -76,6 +79,11 @@ export class AddCourse extends Component {
     this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
+  onChangeHandler1 = (event) => {
+    this.setState({ selectedFile1: event.target.files[0] });
+    this.setState({ selectedName1: event.target.files[0].name });
+    console.log(event.target.files[0]);
+  };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -94,6 +102,13 @@ export class AddCourse extends Component {
         "course_image",
         this.state.selectedFile,
         this.state.selectedName
+      );
+    }
+    if (this.state.selectedFile1 !== null) {
+      data.append(
+        "posterimg",
+        this.state.selectedFile1,
+        this.state.selectedName1
       );
     }
     for (var key of data.keys()) {
@@ -263,6 +278,12 @@ export class AddCourse extends Component {
                   <FormGroup>
                     <Label>Course Image</Label>
                     <CustomInput type="file" onChange={this.onChangeHandler} />
+                  </FormGroup>
+                </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Poster Image</Label>
+                    <CustomInput type="file" onChange={this.onChangeHandler1} />
                   </FormGroup>
                 </Col>
               </Row>

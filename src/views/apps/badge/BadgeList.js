@@ -151,18 +151,22 @@ class BadgeList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allbatch").then((response) => {
-      let rowData = response.data.data;
-      this.setState({ rowData });
-      console.log(rowData);
-    });
+    await axiosConfig
+      .get("http://65.0.80.5:5000/api/user/allbatch")
+      .then((response) => {
+        let rowData = response.data.data;
+        this.setState({ rowData });
+        console.log(rowData);
+      });
   }
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deletebatch/${id}`).then((response) => {
-      console.log(response);
-    });
+    await axiosConfig
+      .get(`http://65.0.80.5:5000/api/user/deletebatch/${id}`)
+      .then((response) => {
+        console.log(response);
+      });
   }
 
   onGridReady = (params) => {

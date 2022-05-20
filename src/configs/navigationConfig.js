@@ -47,6 +47,22 @@ const navigationConfig = [
         navLink: "/app/student/studentList",
         // collapsed: true,
       },
+      {
+        id: "enrollList",
+        title: "Student Enroll",
+        type: "item",
+        icon: <Icon.Youtube size={20} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/enrollment/enrollList",
+      },
+      {
+        id: "kycList",
+        title: "KYC",
+        type: "item",
+        icon: <Icon.Youtube size={20} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/kyc/kycList",
+      },
     ],
   },
   {
@@ -55,6 +71,15 @@ const navigationConfig = [
     type: "collapse",
     icon: <Icon.UserCheck size={20} />,
     children: [
+      {
+        id: "addTeacher",
+        title: "Add Teacher",
+        type: "item",
+        icon: <Icon.Circle size={12} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/teacher/addTeacher",
+        // collapsed: true,
+      },
       {
         id: "teacherList",
         title: "Teacher List",
@@ -73,15 +98,6 @@ const navigationConfig = [
         navLink: "/app/teacher/approvedTeacher",
         // collapsed: true,
       },
-      {
-        id: "addTeacher",
-        title: "Add Teacher",
-        type: "item",
-        icon: <Icon.Circle size={12} />,
-        permissions: ["admin", "editor"],
-        navLink: "/app/teacher/addTeacher",
-        // collapsed: true,
-      },
     ],
   },
   {
@@ -91,21 +107,21 @@ const navigationConfig = [
     icon: <Icon.Book size={20} />,
     children: [
       {
-        id: "courseList",
-        title: "Course List",
-        type: "item",
-        icon: <Icon.Circle size={12} />,
-        permissions: ["admin", "editor"],
-        navLink: "/app/course/courseList",
-        // collapsed: true,
-      },
-      {
         id: "addCourse",
         title: "Add Course",
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin", "editor"],
         navLink: "/app/course/addCourse",
+        // collapsed: true,
+      },
+      {
+        id: "courseList",
+        title: "Course List",
+        type: "item",
+        icon: <Icon.Circle size={12} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/course/courseList",
         // collapsed: true,
       },
     ],
@@ -142,14 +158,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/transationHistory/transactionList",
   },
-  {
-    id: "enrollList",
-    title: "Student Enroll",
-    type: "item",
-    icon: <Icon.Youtube size={20} />,
-    permissions: ["admin", "editor"],
-    navLink: "/app/enrollment/enrollList",
-  },
+
   {
     id: "walletList",
     title: "Wallet",
@@ -158,14 +167,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/wallet/walletList",
   },
-  {
-    id: "kycList",
-    title: "KYC",
-    type: "item",
-    icon: <Icon.Youtube size={20} />,
-    permissions: ["admin", "editor"],
-    navLink: "/app/kyc/kycList",
-  },
+
   {
     id: "notification",
     title: " Student Notification",
@@ -198,169 +200,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/level/levelList",
   },
-  // {
-  //   id: "Store",
-  //   title: "Store",
-  //   type: "collapse",
-  //   icon: <Icon.ShoppingCart size={20} />,
-  //   children: [
-  //     {
-  //       id: "addMyStore",
-  //       title: "Add Store",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/myStore/addStorePage",
-  //       // collapsed: true,
-  //     },
-  //     {
-  //       id: "storeList",
-  //       title: "Store List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/myStore/storeList",
-  //       // collapsed: true,
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: "contact",
-  //   title: "Contacts",
-  //   type: "collapse",
-  //   icon: <Icon.PhoneCall size={20} />,
-  //   children: [
-  //     {
-  //       id: "addEmployee",
-  //       title: "Add Employee",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/contactUs/employee/addEmployee",
-  //     },
-  //     {
-  //       id: "employeeList",
-  //       title: "Employee List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/contactUs/employee/employeeList",
-  //     },
-  //     {
-  //       id: "addCustomer",
-  //       title: "Add Customer",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/contactUs/customer/addCustomer",
-  //     },
-  //     {
-  //       id: "customerList",
-  //       title: "Customer List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/contactUs/customer/customerList",
-  //     },
-  //     {
-  //       id: "Add supplier",
-  //       title: "Add Supplier",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/contactUs/supplier/addSupplier",
-  //     },
-  //     {
-  //       id: "supplierList",
-  //       title: "Supplier List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/contactUs/supplier/supplierList",
-  //     },
-  //   ],
-  // },
 
-  // {
-  //   id: "Inventory",
-  //   title: "Inventory",
-  //   type: "collapse",
-  //   icon: <Icon.ShoppingBag size={20} />,
-  //   children: [
-  //     {
-  //       id: "Products",
-  //       title: "Products",
-  //       type: "collapse",
-  //       icon: <Icon.Circle size={20} />,
-  //       children: [
-  //         {
-  //           id: "productsList",
-  //           title: "Product List",
-  //           type: "item",
-  //           icon: <Icon.Circle size={12} />,
-  //           permissions: ["admin", "editor"],
-  //           navLink: "/app/products/product/productsList",
-  //         },
-  //         {
-  //           id: "AddMyProduct",
-  //           title: "Add Product",
-  //           type: "item",
-  //           icon: <Icon.Circle size={12} />,
-  //           permissions: ["admin", "editor"],
-  //           navLink: "/app/products/product/AddMyProduct",
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: "stockControl",
-  //   title: "Stock Control",
-  //   type: "collapse",
-  //   icon: <Icon.Layers size={20} />,
-  //   children: [
-  //     {
-  //       id: "stockTransferRequest",
-  //       title: "stock Transfer Request",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/stockControl/stockTransferRequest",
-  //     },
-  //     {
-  //       id: "stockAdjustment",
-  //       title: "stock Adjustment",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/stockControl/stockAdjustment",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: "offersandcoupons",
-  //   title: "Offers/Coupons",
-  //   type: "collapse",
-  //   icon: <Icon.Gift size={20} />,
-  //   children: [
-  //     {
-  //       id: "specialOfferList",
-  //       title: "Offers",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/offerAndCoupon/specialOffer/specialOfferList",
-  //     },
-  //     {
-  //       id: "couponsList",
-  //       title: "Coupons",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/offerAndCoupon/coupons/couponsList",
-  //     },
-  //   ],
-  // },
   // {
   //   id: "addSubscription",
   //   title: "Subscriptions",
@@ -368,30 +208,6 @@ const navigationConfig = [
   //   icon: <Icon.Youtube size={20} />,
   //   permissions: ["admin", "editor"],
   //   navLink: "/app/subscription/addSubscription",
-  // },
-  // {
-  //   id: "billing",
-  //   title: "Billing",
-  //   type: "collapse",
-  //   icon: <Icon.Flag size={20} />,
-  //   children: [
-  //     {
-  //       id: "createInvoice",
-  //       title: "Create Invoice",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/billing/createInvoice",
-  //     },
-  //     {
-  //       id: "invoiceList",
-  //       title: "Invoice List",
-  //       type: "item",
-  //       icon: <Icon.Circle size={12} />,
-  //       permissions: ["admin", "editor"],
-  //       navLink: "/app/billing/invoiceList",
-  //     },
-  //   ],
   // },
 
   // {
@@ -1053,30 +869,7 @@ const navigationConfig = [
 //       },
 //     ]
 //   },
-//   {
-//     id: "sellerPayout",
-//     title: "Seller Payouts",
-//     type: "collapse",
-//     icon: <Icon.DollarSign size={20} />,
-//     children: [
-//       {
-//         id: "pendingPaymentsList",
-//         title: "Pending Payments List",
-//         type: "item",
-//         icon: <Icon.Circle size={12} />,
-//         permissions: ["admin", "editor"],
-//         navLink: "/app/sellerPayout/pendingPayments/pendingPaymentsList",
-//       },
-//       {
-//         id: "completedPaymentsList",
-//         title: "completed Payments List",
-//         type: "item",
-//         icon: <Icon.Circle size={12} />,
-//         permissions: ["admin", "editor"],
-//         navLink: "/app/sellerPayout/pendingPayments/completedPaymentsList",
-//       },
-//     ]
-//   },
+
 //   {
 //     id: "helpAndSupport",
 //     title: "Help And Support",
@@ -1126,95 +919,7 @@ const navigationConfig = [
 //   },
 
 export default navigationConfig;
-// {
-//   type: "groupHeader",
-//   groupTitle: "Inventory",
-// },
-// {
-//   id: "product",
-//   title: "Product",
-//   type: "collapse",
-//   icon: <Icon.Box size={20} />,
-//   children: [
-//     {
-//       id: "productList",
-//       title: "Product",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/product/productList",
-//     },
-//   ]
-// },
-// {
-//   id: "stockControl",
-//   title: "Stock Control",
-//   type: "collapse",
-//   icon: <Icon.Box size={20} />,
-//   children: [
-//     {
-//       id: "stockTransferRequest",
-//       title: "stock Transfer Request",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/stockControl/stockTransferRequest",
-//     },
-//     {
-//       id: "stockAdjustment",
-//       title: "stock Adjustment",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/stockControl/stockAdjustment",
-//     },
-//   ],
-// },
 
-// {
-//   type: "groupHeader",
-//   groupTitle: "Reports",
-// },
-// {
-//   id: "sales",
-//   title: "Sales",
-//   type: "collapse",
-//   icon: <Icon.Box size={20} />,
-//   children: [
-//     {
-//       id: "salesByCustomer",
-//       title: "By Customer",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/sales/SalesByCustomer",
-//     },
-//     {
-//       id: "salesByItem",
-//       title: "By Item",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/sales/SalesByItem",
-//     },
-//     {
-//       id: "salesReturnHistory",
-//       title: "Return History",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/sales/SalesReturnHistory",
-//     },
-//     {
-//       id: "invoicedIncome",
-//       title: "invoiced Income",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/sales/InvoicedIncome",
-//     },
-//   ]
-// },
 // {
 //     id: "access-control",
 //     title: "Access Control",
@@ -1223,31 +928,6 @@ export default navigationConfig;
 //     permissions: ["admin", "editor"],
 //     navLink: "/extensions/access-control",
 //   },
-
-// {
-//   id: "byProduct",
-//   title: "By Product",
-//   type: "collapse",
-//   icon: <Icon.User size={20} />,
-//   children: [
-//     {
-//       id: "historyByProductCat",
-//       title: " By Product Category",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/byProduct/HistoryByProductCat",
-//     },
-//     {
-//       id: "historyByProductTyp",
-//       title: "By Product Type",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/byProduct/HistoryByProductTyp",
-//     },
-//   ]
-// },
 
 // {
 //   id: "tables",
@@ -1291,72 +971,6 @@ export default navigationConfig;
 // },
 
 // {
-//   id: "store",
-//   title: "Store",
-//   type: "collapse",
-//   icon: <Icon.ShoppingCart size={20} />,
-//   children: [
-//     {
-//       id: "brandList",
-//       title: "Brand",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/products/brand/brandList",
-//     },
-//     {
-//       id: "productsList",
-//       title: "Products",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/products/productsList",
-//     },
-//     // {
-//     //   id: "sideBar",
-//     //   title: "Products",
-//     //   type: "item",
-//     //   icon: <Icon.Circle size={12} />,
-//     //   permissions: ["admin", "editor"],
-//     //   navLink: "/app/products/sideBar",
-//     // },
-//   ],
-// },
-
-// {
-//   id: "inventory",
-//   title: "Inventory",
-//   type: "collapse",
-//   icon: <Icon.PhoneCall size={20} />,
-//   children: [
-//     {
-//       id: "product",
-//       title: "Product",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/inventory/product/productList",
-//     },
-//     {
-//       id: "stockControl",
-//       title: "Stock Control",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/inventory/stock/customerList",
-//     },
-//     {
-//       id: "supplierList",
-//       title: "Supplier List",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/contactUs/supplier/supplierList",
-//     },
-//   ]
-// },
-
-// {
 //   id: "importDemo",
 //   title: "Import Demo",
 //   type: "item",
@@ -1364,126 +978,7 @@ export default navigationConfig;
 //   permissions: ["admin", "editor"],
 //   navLink: "/app/helpAndSupport/importDemo/ImportDemo",
 // },
-// {
-//   id: "pendingPayment",
-//   title:"Pending Payment",
-//   type: "item",
-//   icon: <Icon.Download size={20} />,
-//   // icon: <Icon.Circle size={12} />,
-//   //permissions: ["admin", "editor"],
-//   navLink: "/app/pendingPayment/pendingPayment",
-// },
 
-// {
-//   id: "pageLayouts",
-//   title: "Page Layouts",
-//   type: "item",
-//   // icon: <Icon.Circle size={12} />
-//   icon: <Icon.Layout size={20} />,
-//  // permissions: ["admin", "editor"],
-//   navLink: "/app/pageLayout/PageLayout",
-// },
-
-// {
-//   id: "reports",
-//   title: "Reports",
-//   type: "collapse",
-//   icon: <Icon.Flag size={20} />,
-//   children: [
-//     {
-//       id: "sales",
-//       title: "Sales",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/report/Sales",
-//     },
-//     {
-//       id: "salesByCustomer",
-//       title: "Sales By Customer",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/report/SalesReport",
-//     },
-
-//     {
-//       id: "salesReport",
-//       title: "Sales Report",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/report/SalesReport",
-//     },
-//     {
-//       id: "stockReport",
-//       title: "Stock Report",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/report/StockReport",
-//     },
-//     {
-//       id: "mostViewProductReport",
-//       title: "Most View Products Report",
-//       type: "item",
-//       icon: <Icon.Circle size={12} />,
-//       permissions: ["admin", "editor"],
-//       navLink: "/app/report/MostViewProductReport",
-//     },
-//   ],
-// },
-
-// {
-//   id: "helpAndSupport",
-//   title: "Help And Support",
-//   type: "item",
-//   // icon: <Icon.Circle size={12} />,
-//   icon: <Icon.User size={20} />,
-//   permissions: ["admin", "editor"],
-//   navLink: "/app/helpAndSupport/HelpAndSupport",
-// },
-// {
-//   id: "childCategory",
-//   title: "Child Category",
-//   type: "item",
-//   icon: <Icon.Circle size={12} />,
-//   permissions: ["admin", "editor"],
-//   navLink: "/app/category/childCategory",
-// },
-
-// {
-//   id: "offersandcoupons",
-//   title: "Offers And Coupons",
-//   type: "item",
-//   icon: <Icon.Circle size={12} />,
-//   permissions: ["admin", "editor"],
-//   navLink: "/app/offerAndCoupon/OfferAndCoupon",
-// },
-// {
-//   id: "unitList",
-//   title: "Unit",
-//   type: "item",
-//   icon: <Icon.Circle size={12} />,
-//   permissions: ["admin", "editor"],
-//   navLink: "/app/products/unit/unitList",
-// },
-// {
-//   id: "varientList  ",
-//   title: "Variant",
-//   type: "item",
-//   icon: <Icon.Circle size={12} />,
-//   permissions: ["admin", "editor"],
-//   navLink: "/app/products/varient/varientList",
-// },
-// {
-//   id: "coupon",
-//   title: "Coupon",
-//   type: "item",
-//   icon: <Icon.Circle size={12} />,
-//   permissions: ["admin", "editor"],
-//   navLink: "/app/products/coupon",
-// },
 // {
 //   id: "email",
 //   title: "Email",

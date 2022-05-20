@@ -58,13 +58,13 @@ export class AddBadge extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     axiosConfig
-      .post("/addbatch", this.state)
+      .post("http://65.0.80.5:5000/api/user/addbatchn", this.state)
       .then((response) => {
         console.log(response);
         this.props.history.push("/app/badge/badgeList");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
   render() {
