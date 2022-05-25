@@ -158,7 +158,14 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     navLink: "/app/transationHistory/transactionList",
   },
-
+  {
+    id: "walletRequest",
+    title: "Wallet Request",
+    type: "item",
+    icon: <Icon.Youtube size={20} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/walletRequest/walletRequest",
+  },
   {
     id: "walletList",
     title: "Wallet",

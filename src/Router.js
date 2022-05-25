@@ -45,6 +45,9 @@ const transactionList = lazy(() =>
 const commentsList = lazy(() => import("./views/apps/comment/CommentsList"));
 const enrollList = lazy(() => import("./views/apps/enrollment/EnrollList"));
 const walletList = lazy(() => import("./views/apps/wallet/WalletList"));
+const walletRequest = lazy(() =>
+  import("./views/apps/walletRequest/WalletRequest")
+);
 const kycList = lazy(() => import("./views/apps/kyc/KycList"));
 const badgeList = lazy(() => import("./views/apps/badge/BadgeList"));
 const addBadge = lazy(() => import("./views/apps/badge/AddBadge"));
@@ -448,6 +451,10 @@ class AppRouter extends React.Component {
                   <AppRoute
                     path="/app/wallet/walletList"
                     component={walletList}
+                  />
+                  <AppRoute
+                    path="/app/walletRequest/walletRequest"
+                    component={walletRequest}
                   />
                   <AppRoute path="/app/kyc/kycList" component={kycList} />
                   <AppRoute path="/app/badge/badgeList" component={badgeList} />
