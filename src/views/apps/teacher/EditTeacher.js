@@ -111,10 +111,10 @@ export class EditTeacher extends Component {
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        this.props.history.push("/app/teacher/teacherList");
+        //this.props.history.push("/app/teacher/teacherList");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
         swal("Error!", "Error Received", "error");
       });
   };

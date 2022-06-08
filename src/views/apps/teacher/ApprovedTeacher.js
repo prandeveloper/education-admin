@@ -199,7 +199,7 @@ class ApprovedTeacher extends React.Component {
                 color="blue"
                 onClick={() =>
                   history.push(
-                    `/app/contactUs/customer/editCustomer/${params.data._id}`
+                    history.push(`/app/teacher/editTeacher/${params.data._id}`)
                   )
                 }
               />
