@@ -22,7 +22,19 @@ const ecommerceDashboard = lazy(() =>
 const home = lazy(() => import("./views/pages/landingPage/Home"));
 //  Expert Education Tabs
 const studentList = lazy(() => import("./views/apps/student/StudentList"));
+const WithDrowList = lazy(() =>
+  import("./views/apps/WithDrowList/WithdrowList")
+);
+const ReferralCodeList = lazy(() =>
+  import("./views/apps/referralCode/ReferralCodeList")
+);
 
+const FirstPhase = lazy(() =>
+  import("./views/apps/affilateProgram/FirstPhase")
+);
+const SecondPhase = lazy(() =>
+  import("./views/apps/affilateProgram/SecondPhase")
+);
 const teacherList = lazy(() => import("./views/apps/teacher/TeacherList"));
 const approvedTeacher = lazy(() =>
   import("./views/apps/teacher/ApprovedTeacher")
@@ -89,6 +101,9 @@ const choosePaymentOption = lazy(() =>
   import("./views/apps/subscription/ChoosePaymentOption")
 );
 
+const subscriptionList = lazy(() =>
+  import("./views/apps/subscription/SubscriptionList")
+);
 const pageLayout = lazy(() => import("./views/apps/pageLayout/PageLayout"));
 
 const warehouseList = lazy(() =>
@@ -325,10 +340,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => {
+    render={props => {
       return (
         <ContextLayout.Consumer>
-          {(context) => {
+          {context => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -348,7 +363,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // user: state.auth.login.userRole,
   };
@@ -374,12 +389,10 @@ class AppRouter extends React.Component {
                     path="/ecommerce-dashboard"
                     component={ecommerceDashboard}
                   />
-
                   <AppRoute
                     path="/app/student/studentList"
                     component={studentList}
                   />
-
                   <AppRoute
                     path="/app/teacher/teacherList"
                     component={teacherList}
@@ -461,9 +474,7 @@ class AppRouter extends React.Component {
                   <AppRoute path="/app/badge/addBadge" component={addBadge} />
                   <AppRoute path="/app/level/levelList" component={levelList} />
                   <AppRoute path="/app/level/addLevel" component={addLevel} />
-
                   {/* My components starts all my app components*/}
-
                   <AppRoute
                     path="/app/users/user/allUsers"
                     component={allUsers}
@@ -489,7 +500,6 @@ class AppRouter extends React.Component {
                     component={viewRole}
                   />
                   {/* <AppRoute path="/app/roleAndPermission" component={rolePermission} /> */}
-
                   <AppRoute
                     path="/app/notifications/addNotification"
                     component={addNotification}
@@ -502,6 +512,26 @@ class AppRouter extends React.Component {
                     path="/app/notiteach/notiteachList"
                     component={notiteachList}
                   />
+                  <AppRoute
+                    path="/app/WithDrowList/WithdrowList"
+                    component={WithDrowList}
+                  />
+                  <AppRoute
+                    path="/app/referralCode/ReferralCodeList"
+                    component={ReferralCodeList}
+                  />
+                  //////////////////////// Affilated Program starts
+                  ///////////////////////////
+                  <AppRoute
+                    path="/app/affilateProgram/FirstPhase"
+                    component={FirstPhase}
+                  />
+                  <AppRoute
+                    path="/app/affilateProgram/SecondPhase"
+                    component={SecondPhase}
+                  />
+                  ////////////////////// Affilated Program end
+                  ///////////////////////
                   <AppRoute
                     path="/app/notiteach/addNotiteach"
                     component={addNotiteach}
@@ -518,7 +548,6 @@ class AppRouter extends React.Component {
                     path="/app/sellerPayout/pendingPayments/viewCompletedPaymentsList"
                     component={viewCompletedPaymentsList}
                   />
-
                   <AppRoute
                     path="/app/subscription/addSubscription"
                     component={addSubscription}
@@ -527,7 +556,10 @@ class AppRouter extends React.Component {
                     path="/app/subscription/choosePaymentOption"
                     component={choosePaymentOption}
                   />
-
+                  <AppRoute
+                    path="/app/subscription/subscriptionList"
+                    component={subscriptionList}
+                  />
                   <AppRoute
                     path="/app/pageLayout/pageLayout"
                     component={pageLayout}
@@ -544,7 +576,6 @@ class AppRouter extends React.Component {
                     path="/app/siteSetting/general"
                     component={general}
                   />
-
                   <AppRoute
                     path="/app/helpAndSupport/importDemo/ImportDemo"
                     component={importDemo}
@@ -565,7 +596,6 @@ class AppRouter extends React.Component {
                     path="/app/warehouse/editWarehouse/:id"
                     component={editWarehouse}
                   />
-
                   <AppRoute
                     path="/app/reason/reasonList"
                     component={reasonList}
@@ -592,7 +622,6 @@ class AppRouter extends React.Component {
                     path="/app/transferType/viewTransferType/:id"
                     component={viewTransferType}
                   />
-
                   <AppRoute
                     path="/app/slider/sliderList"
                     component={sliderList}
@@ -601,7 +630,6 @@ class AppRouter extends React.Component {
                     path="/app/slider/addSlider"
                     component={addSlider}
                   />
-
                   <AppRoute path="/app/user/list" component={userList} />
                   <AppRoute path="/app/user/edit" component={userEdit} />
                   <AppRoute path="/app/user/view" component={userView} />
@@ -609,7 +637,6 @@ class AppRouter extends React.Component {
                     path="/pages/profile/userProfile"
                     component={userProfile}
                   />
-
                   <AppRoute
                     path="/app/profile/editProfile"
                     component={editProfile}

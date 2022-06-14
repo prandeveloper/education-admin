@@ -151,6 +151,47 @@ const navigationConfig = [
     ],
   },
   {
+    id: "affilateProgram",
+    title: "Affilate Program",
+    type: "collapse",
+    icon: <Icon.ShoppingBag size={20} />,
+    children: [
+      {
+        id: "firstPhase",
+        title: "First Phase",
+        type: "item",
+        icon: <Icon.Circle size={12} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/affilateProgram/FirstPhase",
+      },
+
+      {
+        id: "secondPhase",
+        title: "Second Phase",
+        type: "item",
+        icon: <Icon.Circle size={12} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/affilateProgram/SecondPhase",
+      },
+    ],
+  },
+  {
+    id: "subscription",
+    title: "Subscription",
+    type: "collapse",
+    icon: <Icon.ShoppingBag size={20} />,
+    children: [
+      {
+        id: "subscriptionList",
+        title: "Subscription List",
+        type: "item",
+        icon: <Icon.Circle size={12} />,
+        permissions: ["admin", "editor"],
+        navLink: "/app/subscription/subscriptionList",
+      },
+    ],
+  },
+  {
     id: "transactionList",
     title: "Transaction",
     type: "item",
@@ -173,6 +214,24 @@ const navigationConfig = [
     icon: <Icon.Youtube size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/app/wallet/walletList",
+  },
+
+  {
+    id: "withdrowlist",
+    title: "Withdrow List",
+    type: "item",
+    icon: <Icon.Circle size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/WithDrowList/WithdrowList",
+  },
+
+  {
+    id: "referralCodeList",
+    title: "Referral Code List",
+    type: "item",
+    icon: <Icon.Circle size={12} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/referralCode/ReferralCodeList",
   },
 
   {
