@@ -102,13 +102,13 @@ class Withdrowlist extends React.Component {
         },
       },
       {
-        headerName: "USD Amount",
+        headerName: "USDT Amount",
         field: "usd",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
-            <div className=" mr-2">
+            <div className=" d-flex align-items-center">
               <span>{params.data.usd}</span>
             </div>
           );

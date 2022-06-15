@@ -36,7 +36,7 @@ class StudentList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 80,
+        width: 100,
         filter: true,
         // checkboxSelection: true,
         // headerCheckboxSelectionFilteredOnly: true,
@@ -47,8 +47,8 @@ class StudentList extends React.Component {
         headerName: "Image",
         field: "userimg",
         filter: false,
-        width: 80,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <img
@@ -68,9 +68,9 @@ class StudentList extends React.Component {
         field: "fullname",
         filter: true,
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
-            <div className="ml-1 mr-4">
+            <div className="ml-1 mr-4 align-items-center">
               <span>{params.data.fullname}</span>
             </div>
           );
@@ -82,7 +82,7 @@ class StudentList extends React.Component {
         field: "email",
         filter: true,
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-1 mr-4">
               <span>{params.data.email}</span>
@@ -95,7 +95,7 @@ class StudentList extends React.Component {
         field: "mobile",
         filter: true,
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-1 mr-4">
               <span>{params.data.mobile}</span>
@@ -138,7 +138,7 @@ class StudentList extends React.Component {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
               {/* <Edit
@@ -168,7 +168,7 @@ class StudentList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allusers").then((response) => {
+    await axiosConfig.get("/allusers").then(response => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -177,11 +177,11 @@ class StudentList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deleteuser/${id}`).then((response) => {
+    await axiosConfig.get(`/deleteuser/${id}`).then(response => {
       console.log(response);
     });
   }
-  onGridReady = (params) => {
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -191,11 +191,11 @@ class StudentList extends React.Component {
     });
   };
 
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -281,9 +281,7 @@ class StudentList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={(e) =>
-                            this.updateSearchQuery(e.target.value)
-                          }
+                          onChange={e => this.updateSearchQuery(e.target.value)}
                           value={this.state.value}
                         />
                       </div>
@@ -298,7 +296,7 @@ class StudentList extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {(context) => (
+                    {context => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

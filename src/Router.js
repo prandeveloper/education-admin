@@ -29,12 +29,10 @@ const ReferralCodeList = lazy(() =>
   import("./views/apps/referralCode/ReferralCodeList")
 );
 
-const FirstPhase = lazy(() =>
-  import("./views/apps/affilateProgram/FirstPhase")
+const AffilateProgramList = lazy(() =>
+  import("./views/apps/affilateProgram/AffilateProgramList")
 );
-const SecondPhase = lazy(() =>
-  import("./views/apps/affilateProgram/SecondPhase")
-);
+
 const teacherList = lazy(() => import("./views/apps/teacher/TeacherList"));
 const approvedTeacher = lazy(() =>
   import("./views/apps/teacher/ApprovedTeacher")
@@ -523,12 +521,8 @@ class AppRouter extends React.Component {
                   //////////////////////// Affilated Program starts
                   ///////////////////////////
                   <AppRoute
-                    path="/app/affilateProgram/FirstPhase"
-                    component={FirstPhase}
-                  />
-                  <AppRoute
-                    path="/app/affilateProgram/SecondPhase"
-                    component={SecondPhase}
+                    path="/app/affilateProgram/affilateProgramList"
+                    component={AffilateProgramList}
                   />
                   ////////////////////// Affilated Program end
                   ///////////////////////

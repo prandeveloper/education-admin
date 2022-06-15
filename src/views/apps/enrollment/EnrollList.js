@@ -43,14 +43,14 @@ class EnrollList extends React.Component {
         // headerCheckboxSelection: true,
       },
       {
-        headerName: "Student Id",
-        field: "customerId",
+        headerName: "Student Name",
+        field: "student_Id.fullname",
         filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
+        width: 170,
+        cellRendererFramework: params => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customerId}</span> */}
+            <div className=" mr-4">
+              <span>{params.data.student_Id?.fullname}</span>
             </div>
           );
         },
@@ -60,57 +60,81 @@ class EnrollList extends React.Component {
         field: "image",
         filter: false,
         width: 120,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              {/* <img
+              <img
                 className="rounded-circle  mr-4"
-                src={params.data.image}
+                src={params.data.student_Id?.userimg}
                 alt=" brand"
                 height="40"
                 width="40"
-              /> */}
+              />
             </div>
           );
         },
       },
-
-      {
-        headerName: "Name",
-        field: "first_name",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.first_name}</span> */}
-            </div>
-          );
-        },
-      },
-
       {
         headerName: "Email",
-        field: "customer_email",
+        field: "student_Id.email",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customer_email}</span> */}
+            <div className="mr-4">
+              <span>{params.data.student_Id?.email}</span>
             </div>
           );
         },
       },
       {
         headerName: "Mobile No.",
-        field: "mobile_no",
+        field: "student_Id.mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+              <span>{params.data.student_Id?.mobile}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Teacher Name",
+        field: "teacher.fullname",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.course_Id?.teacher?.fullname}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Course Plan",
+        field: "plan_Id.plantitle",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.plan_Id?.plantitle}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Course",
+        field: "course_Id.course_title",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="ml-2 mr-4">
+              <span>{params.data.course_Id?.course_title}</span>
             </div>
           );
         },
@@ -137,7 +161,7 @@ class EnrollList extends React.Component {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
               <Edit
@@ -167,7 +191,7 @@ class EnrollList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/enrollusers").then((response) => {
+    await axiosConfig.get("/allenrollStudent").then(response => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -176,13 +200,11 @@ class EnrollList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig
-      .get(`http://35.154.86.59/api/user/delcustomer/${id}`)
-      .then((response) => {
-        console.log(response);
-      });
+    await axiosConfig.get(`/allenrollStudent/${id}`).then(response => {
+      console.log(response);
+    });
   }
-  onGridReady = (params) => {
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -192,11 +214,11 @@ class EnrollList extends React.Component {
     });
   };
 
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -218,14 +240,6 @@ class EnrollList extends React.Component {
                 <h1 col-sm-6 className="float-left">
                   Enroll Student List
                 </h1>
-              </Col>
-              <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/course/addCourse")}
-                >
-                  Add New Course
-                </Button>
               </Col>
             </Row>
             <CardBody>
@@ -280,9 +294,7 @@ class EnrollList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={(e) =>
-                            this.updateSearchQuery(e.target.value)
-                          }
+                          onChange={e => this.updateSearchQuery(e.target.value)}
                           value={this.state.value}
                         />
                       </div>
@@ -297,7 +309,7 @@ class EnrollList extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {(context) => (
+                    {context => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

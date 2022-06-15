@@ -37,7 +37,7 @@ class WalletRequest extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 80,
+        width: 100,
         filter: true,
         // checkboxSelection: true,
         // headerCheckboxSelectionFilteredOnly: true,
@@ -47,7 +47,7 @@ class WalletRequest extends React.Component {
         headerName: "Student Name",
         field: "userId.fullname",
         filter: true,
-        width: 120,
+        width: 150,
         cellRendererFramework: params => {
           return (
             <div className="ml-1 mr-2">

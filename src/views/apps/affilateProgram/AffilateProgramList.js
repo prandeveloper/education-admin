@@ -11,15 +11,16 @@ import {
   DropdownToggle,
   Button,
 } from "reactstrap";
-import axiosConfig from "../../../axiosConfig";
+import moment from "moment";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import axios from "axios";
 
-class FirstPhase extends React.Component {
+class AffilateProgramList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -44,14 +45,14 @@ class FirstPhase extends React.Component {
       },
 
       {
-        headerName: "Name",
-        field: "userId.fullname",
+        headerName: "Refer from",
+        field: "refer_from_id.fullname",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
             <div className=" mr-2">
-              {/* <span>{params.data.userId?.fullname}</span> */}
+              <span>{params.data.refer_from_id?.fullname}</span>
             </div>
           );
         },
@@ -59,108 +60,101 @@ class FirstPhase extends React.Component {
 
       {
         headerName: "Email",
-        field: "userId?.email",
+        field: "refer_from_id?.email",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
             <div className=" mr-2">
-              {/* <span>{params.data.userId?.email}</span> */}
+              <span>{params.data.refer_from_id?.email}</span>
             </div>
           );
         },
       },
       {
         headerName: "Mobile No.",
-        field: "userId?.mobile",
+        field: "refer_from_id?.mobile",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
             <div className=" mr-2">
-              {/* <span>{params.data.userId?.mobile}</span> */}
+              <span>{params.data.refer_from_id?.mobile}</span>
             </div>
           );
         },
       },
+
       {
-        headerName: "Ref. Code",
-        field: "usd",
-        filter: true,
-        width: 150,
-        cellRendererFramework: params => {
-          return (
-            <div className=" mr-2">{/* <span>{params.data.usd}</span> */}</div>
-          );
-        },
-      },
-      {
-        headerName: "Name (Affilated to)",
-        field: "inr",
-        filter: true,
-        width: 150,
-        cellRendererFramework: params => {
-          return (
-            <div className=" mr-2">{/* <span>{params.data.inr}</span> */}</div>
-          );
-        },
-      },
-      {
-        headerName: "Email (Affilated to)",
-        field: "upi_Id",
+        headerName: "Refer to",
+        field: "refer_to_id.fullname",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
             <div className=" mr-2">
-              {/* <span>{params.data.upi_Id}</span> */}
+              <span>{params.data.refer_to_id?.fullname}</span>
             </div>
           );
         },
       },
+
       {
-        headerName: "Menbership Plan",
-        field: "crpto_id",
+        headerName: "Email",
+        field: "refer_to_id?.email",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
             <div className=" mr-2">
-              {/* <span>{params.data.crpto_id}</span> */}
+              <span>{params.data.refer_to_id?.email}</span>
             </div>
           );
         },
       },
       {
-        headerName: "User Commission",
-        field: "crpto_id",
+        headerName: "Mobile No.",
+        field: "refer_to_id?.mobile",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
             <div className=" mr-2">
-              {/* <span>{params.data.crpto_id}</span> */}
+              <span>{params.data.refer_to_id?.mobile}</span>
             </div>
           );
         },
       },
-      //   {
-      //     headerName: "Status",
-      //     field: "status",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return params.value === "Pending" ? (
-      //         <div className="badge badge-pill badge-warning ml-2">
-      //           {params.data.status}
-      //         </div>
-      //       ) : params.value === "Confirm" ? (
-      //         <div className="badge badge-pill badge-success ml-2">
-      //           {params.data.status}
-      //         </div>
-      //       ) : null;
-      //     },
-      //   },
+      {
+        headerName: "Refered Amount",
+        field: "refer_amount",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="ml-2 mr-2 align-items-center d-flex">
+              <span>{params.data.refer_amount}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Date",
+        field: "refer_amount",
+        filter: true,
+        width: 200,
+        cellRendererFramework: params => {
+          return (
+            <div className="mr-2 align-items-center d-flex">
+              <span>
+                {moment(params.data.createdAt).format(
+                  "MMMM Do YYYY, h:mm:ss a"
+                )}
+              </span>
+            </div>
+          );
+        },
+      },
       //   {
       //     headerName: "Actions",
       //     field: "transactions",
@@ -229,19 +223,21 @@ class FirstPhase extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/withdrawal_list").then(response => {
-      let rowData = response.data.data;
-      console.log(rowData);
-      this.setState({ rowData });
-    });
+    await axios
+      .get("http://65.0.80.5:5000/api/user/allrefer_earn")
+      .then(response => {
+        let rowData = response.data.data;
+        console.log(rowData);
+        this.setState({ rowData });
+      });
   }
 
-  async runthisfunction(id) {
-    console.log(id);
-    await axiosConfig.get(`/dltwithdrwal/${id}`).then(response => {
-      console.log(response);
-    });
-  }
+  // async runthisfunction(id) {
+  //   console.log(id);
+  //   await axiosConfig.get(`/dltwithdrwal/${id}`).then(response => {
+  //     console.log(response);
+  //   });
+  // }
   onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -276,7 +272,7 @@ class FirstPhase extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  First Phase List
+                  Affilate Program List
                 </h1>
               </Col>
             </Row>
@@ -374,4 +370,4 @@ class FirstPhase extends React.Component {
     );
   }
 }
-export default FirstPhase;
+export default AffilateProgramList;

@@ -48,7 +48,7 @@ class TeacherList extends React.Component {
         field: "image",
         filter: false,
         width: 120,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <img
@@ -68,7 +68,7 @@ class TeacherList extends React.Component {
         field: "fullname",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.fullname}</span>
@@ -82,7 +82,7 @@ class TeacherList extends React.Component {
         field: "email",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.email}</span>
@@ -95,7 +95,7 @@ class TeacherList extends React.Component {
         field: "mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.mobile}</span>
@@ -114,30 +114,58 @@ class TeacherList extends React.Component {
       //     } />`;
       //   },
       // },
+
       {
         headerName: "Approved",
         field: "approvedstatus",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
-          return params.value === true ? (
-            <div className="badge badge-pill badge-success">
+        cellRendererFramework: params => {
+          return params.value === "Approved" ? (
+            <div className="badge badge-pill badge-success ml-2">
               {params.data.approvedstatus}
             </div>
-          ) : params.value === false ? (
-            <div className="badge badge-pill badge-warning">
+          ) : params.value === "Pending" ? (
+            <div className="badge badge-pill badge-warning ml-2">
               {params.data.approvedstatus}
             </div>
           ) : null;
         },
       },
-
+      {
+        headerName: "Actions",
+        field: "transactions",
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="actions cursor-pointer">
+              <Button
+                color="primary"
+                bsSize="small"
+                className="buuton"
+                onClick={() =>
+                  axiosConfig
+                    .get(`/cnfm_approved_teacher/${params.data._id}`)
+                    .then(response => {
+                      console.log(response.data);
+                    })
+                    .catch(error => {
+                      console.log(error);
+                    })
+                }
+              >
+                Conform
+              </Button>
+            </div>
+          );
+        },
+      },
       {
         headerName: "Date Of Birth",
         field: "dob",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.dob}</span>
@@ -150,7 +178,7 @@ class TeacherList extends React.Component {
         field: "gender",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.gender}</span>
@@ -163,7 +191,7 @@ class TeacherList extends React.Component {
         field: "institute",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.institute}</span>
@@ -176,7 +204,7 @@ class TeacherList extends React.Component {
         field: "city",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.city}</span>
@@ -189,7 +217,7 @@ class TeacherList extends React.Component {
         field: "state",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.state}</span>
@@ -202,7 +230,7 @@ class TeacherList extends React.Component {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
               {/* <Eye
@@ -238,7 +266,7 @@ class TeacherList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allstaff").then((response) => {
+    await axiosConfig.get("/allstaff").then(response => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -247,11 +275,11 @@ class TeacherList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deletestaff/${id}`).then((response) => {
+    await axiosConfig.get(`/deletestaff/${id}`).then(response => {
       console.log(response);
     });
   }
-  onGridReady = (params) => {
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -261,11 +289,11 @@ class TeacherList extends React.Component {
     });
   };
 
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -349,9 +377,7 @@ class TeacherList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={(e) =>
-                            this.updateSearchQuery(e.target.value)
-                          }
+                          onChange={e => this.updateSearchQuery(e.target.value)}
                           value={this.state.value}
                         />
                       </div>
@@ -366,7 +392,7 @@ class TeacherList extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {(context) => (
+                    {context => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"
