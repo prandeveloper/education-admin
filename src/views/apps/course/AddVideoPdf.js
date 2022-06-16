@@ -219,7 +219,7 @@ class AddVideoPdf extends React.Component {
                 <h6>{this.state.data?.popularity}</h6>
                 <hr />
                 <h4>Category </h4>
-                <h6>{this.state.data?.category_id?.catName}</h6>
+                <h6>{this.state.data?.category_id}</h6>
                 <hr />
               </Col>
             </Row>
@@ -241,9 +241,9 @@ class AddVideoPdf extends React.Component {
                         onChange={this.changeHandler}
                       >
                         <option>Select Course .....</option>
-                        {this.state.courseList?.map((courseL) => (
+                        {this.state.courseList.map((courseL) => (
                           <option key={courseL._id} value={courseL._id}>
-                            {courseL?.course_title}
+                            {courseL.course_title}
                           </option>
                         ))}
                       </CustomInput>

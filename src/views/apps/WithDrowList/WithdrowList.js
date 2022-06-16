@@ -18,6 +18,7 @@ import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import swal from "sweetalert";
 
 class Withdrowlist extends React.Component {
   state = {
@@ -186,6 +187,8 @@ class Withdrowlist extends React.Component {
                     .get(`/cnfrm_withdrawal/${params.data._id}`)
                     .then(response => {
                       console.log(response.data);
+                      swal("Success!", "Submitted SuccessFull!", "success");
+                      this.props.history.push("/");
                     })
                     .catch(error => {
                       console.log(error);

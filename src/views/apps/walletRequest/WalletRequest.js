@@ -18,7 +18,7 @@ import { Edit, Trash2, ChevronDown, CloudLightning } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
-import { error } from "jquery";
+import swal from "sweetalert";
 
 class WalletRequest extends React.Component {
   state = {
@@ -144,6 +144,8 @@ class WalletRequest extends React.Component {
                     .get(`/admin_cnfm_amt/${params.data._id}`)
                     .then(response => {
                       console.log(response.data);
+                      swal("Success!", "Submitted SuccessFull!", "success");
+                      this.props.history.push("/");
                     })
                     .catch(error => {
                       console.log(error);
