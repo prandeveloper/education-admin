@@ -15,7 +15,7 @@ import { history } from "../../../history";
 import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../axiosConfig";
 import Swal from "sweetalert2";
-
+import Loader from "./Loader";
 class AddVideoPdf extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +38,7 @@ class AddVideoPdf extends React.Component {
       selectedName3: "",
       courseList: [],
       teacherList: [],
+      loading: false,
     };
   }
 
@@ -83,6 +84,9 @@ class AddVideoPdf extends React.Component {
     this.setState({ selectedFile1: event.target.files[0] });
     this.setState({ selectedName1: event.target.files[0].name });
     console.log(event.target.files[0]);
+    if (event.target.files[0]) {
+      this.setState({ loading: true });
+    }
   };
   onChangeHandler2 = (event) => {
     this.setState({ selectedFile2: event.target.files[0] });
@@ -102,7 +106,7 @@ class AddVideoPdf extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = (e) => {
+  submitHandler = async (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append("videoTitle", this.state.videoTitle);
@@ -122,18 +126,23 @@ class AddVideoPdf extends React.Component {
         this.state.selectedName1
       );
     }
-    axiosConfig
-      .post(`/addvideo`, data, {
+    try {
+      const response = await axiosConfig.post(`/addvideo`, data, {
         headers: {
           "ad-token": localStorage.getItem("ad-token"),
         },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error.reponse);
       });
+      console.log(response);
+      console.log(response.data.message);
+      // this.setState({ loading: true });
+
+      if (response.data.message == "success") {
+        this.setState({ loading: false });
+        Swal("Success!", "Submitted SuccessFull!", "success");
+      }
+    } catch (error) {
+      console.log(error.reponse);
+    }
   };
   submitHandler1 = (e) => {
     e.preventDefault();
@@ -298,6 +307,7 @@ class AddVideoPdf extends React.Component {
                     </FormGroup>
                   </Col>
                 </Row>
+                <Col>{this.state.loading && <Loader />}</Col>
               </Col>
               <Col
                 lg="12"
@@ -306,7 +316,6 @@ class AddVideoPdf extends React.Component {
                 className="d-flex justify-content-center align-items-center"
               >
                 <Button type="submit" color="primary">
-                  {" "}
                   Submit
                 </Button>
               </Col>
