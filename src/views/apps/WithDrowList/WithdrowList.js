@@ -67,7 +67,7 @@ class Withdrowlist extends React.Component {
         field: "userId.fullname",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.userId?.fullname}</span>
@@ -81,7 +81,7 @@ class Withdrowlist extends React.Component {
         field: "userId?.email",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.userId?.email}</span>
@@ -94,7 +94,7 @@ class Withdrowlist extends React.Component {
         field: "userId?.mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.userId?.mobile}</span>
@@ -107,7 +107,7 @@ class Withdrowlist extends React.Component {
         field: "usd",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" d-flex align-items-center">
               <span>{params.data.usd}</span>
@@ -120,7 +120,7 @@ class Withdrowlist extends React.Component {
         field: "inr",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.inr}</span>
@@ -133,7 +133,7 @@ class Withdrowlist extends React.Component {
         field: "upi_Id",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.upi_Id}</span>
@@ -146,7 +146,7 @@ class Withdrowlist extends React.Component {
         field: "crpto_id",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.crpto_id}</span>
@@ -159,7 +159,7 @@ class Withdrowlist extends React.Component {
         field: "status",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return params.value === "Pending" ? (
             <div className="badge badge-pill badge-warning ml-2">
               {params.data.status}
@@ -175,27 +175,27 @@ class Withdrowlist extends React.Component {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
-            <div className="actions cursor-pointer">
+            <div className="actions cursor-pointer p-15">
               <Button
                 color="primary"
                 bsSize="small"
-                className="buuton"
+                className="WihtdrowButton"
                 onClick={() =>
                   axiosConfig
                     .get(`/cnfrm_withdrawal/${params.data._id}`)
-                    .then(response => {
+                    .then((response) => {
                       console.log(response.data);
                       swal("Success!", "Submitted SuccessFull!", "success");
                       this.props.history.push("/");
                     })
-                    .catch(error => {
+                    .catch((error) => {
                       console.log(error);
                     })
                 }
               >
-                Conform
+                Click to Conform
               </Button>
             </div>
           );
@@ -205,7 +205,7 @@ class Withdrowlist extends React.Component {
         headerName: "Actions",
         field: "transactions",
         width: 100,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
               {/* <Edit
@@ -241,7 +241,7 @@ class Withdrowlist extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/withdrawal_list").then(response => {
+    await axiosConfig.get("/withdrawal_list").then((response) => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -250,11 +250,11 @@ class Withdrowlist extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/dltwithdrwal/${id}`).then(response => {
+    await axiosConfig.get(`/dltwithdrwal/${id}`).then((response) => {
       console.log(response);
     });
   }
-  onGridReady = params => {
+  onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -264,11 +264,11 @@ class Withdrowlist extends React.Component {
     });
   };
 
-  updateSearchQuery = val => {
+  updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = val => {
+  filterSize = (val) => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -288,7 +288,7 @@ class Withdrowlist extends React.Component {
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  Whthdrow List
+                  Withdrow Request
                 </h1>
               </Col>
               {/* <Col>
@@ -352,7 +352,9 @@ class Withdrowlist extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={e => this.updateSearchQuery(e.target.value)}
+                          onChange={(e) =>
+                            this.updateSearchQuery(e.target.value)
+                          }
                           value={this.state.value}
                         />
                       </div>
@@ -367,7 +369,7 @@ class Withdrowlist extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {context => (
+                    {(context) => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

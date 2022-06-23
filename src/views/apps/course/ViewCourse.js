@@ -11,6 +11,8 @@ import {
 import { history } from "../../../history";
 import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../axiosConfig";
+import { Trash2 } from "react-feather";
+import swal from "sweetalert";
 
 class ViewCourse extends React.Component {
   constructor(props) {
@@ -24,11 +26,11 @@ class ViewCourse extends React.Component {
     let { id } = this.props.match.params;
     axiosConfig
       .get(`/viewonecoursep/${id}`)
-      .then(response => {
+      .then((response) => {
         console.log(response.data.data);
         this.setState({ data: response.data.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -101,10 +103,11 @@ class ViewCourse extends React.Component {
                   <th>Video Title</th>
                   <th>Video Image</th>
                   <th>Video URL</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.data?.videolist?.map(video => (
+                {this.state.data?.videolist?.map((video) => (
                   <tr key={video._id}>
                     <th scope="row">1</th>
                     <td>{video.videoTitle}</td>
@@ -120,6 +123,33 @@ class ViewCourse extends React.Component {
                         src={video.video_file}
                         type="video/mp4"
                       />
+                    </td>
+
+                    <td>
+                      <button
+                        className="btn-danger float-center"
+                        onClick={() =>
+                          axiosConfig
+                            .get(`/deletevideo/${video._id}`)
+                            .then((response) => {
+                              console.log(response.data);
+                              if (response.data.message === "deleted") {
+                                swal(
+                                  "Success!",
+                                  "Deleted SuccessFull!",
+                                  "success"
+                                );
+
+                                window.location.reload();
+                              }
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            })
+                        }
+                      >
+                        <Trash2 size="20px" />
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -140,7 +170,7 @@ class ViewCourse extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.data?.pdflist?.map(pdf => (
+                {this.state.data?.pdflist?.map((pdf) => (
                   <tr key={pdf._id}>
                     <th scope="row">1</th>
                     <td>{pdf.pdf_title}</td>
@@ -151,6 +181,32 @@ class ViewCourse extends React.Component {
                       <a href={pdf.pdf_file} download>
                         Download file
                       </a>
+                    </td>
+                    <td>
+                      <button
+                        className="btn-danger float-center"
+                        onClick={() =>
+                          axiosConfig
+                            .get(`/deletepdf/${pdf._id}`)
+                            .then((response) => {
+                              console.log(response.data);
+                              if (response.data.message === "deleted") {
+                                swal(
+                                  "Success!",
+                                  "Deleted SuccessFull!",
+                                  "success"
+                                );
+
+                                window.location.reload();
+                              }
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            })
+                        }
+                      >
+                        <Trash2 size="20px" />
+                      </button>
                     </td>
                   </tr>
                 ))}
