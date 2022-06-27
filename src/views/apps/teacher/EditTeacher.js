@@ -323,7 +323,7 @@ export class EditTeacher extends Component {
                   type="submit"
                   className="ml-2 mb-1"
                 >
-                  Add
+                  Update
                 </Button.Ripple>
               </Row>
             </Form>

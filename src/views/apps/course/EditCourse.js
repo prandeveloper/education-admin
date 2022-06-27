@@ -119,7 +119,7 @@ export class EditCourse extends Component {
     for (var value of data.values()) {
       console.log(value);
     }
-    let { id } = this.props.ma.params;
+    let { id } = this.props.match.params;
     axiosConfig
       .post(`/updatecourse/${id}`, data)
       .then((response) => {
@@ -127,7 +127,7 @@ export class EditCourse extends Component {
         swal("Success!", "Submitted SuccessFull!", "success");
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error.message);
         swal("Error!", "Error Received", "error");
       });
     this.state.editorState.getCurrentContent().getPlainText();
