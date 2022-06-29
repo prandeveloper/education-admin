@@ -19,6 +19,7 @@ import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import axios from "axios";
+import ModalForm from "./Model";
 
 class AffilateProgramList extends React.Component {
   state = {
@@ -37,7 +38,7 @@ class AffilateProgramList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 100,
+        width: 90,
         filter: true,
         // checkboxSelection: true,
         // headerCheckboxSelectionFilteredOnly: true,
@@ -49,7 +50,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_from_id.fullname",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.refer_from_id?.fullname}</span>
@@ -63,7 +64,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_from_id?.email",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.refer_from_id?.email}</span>
@@ -76,7 +77,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_from_id?.mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.refer_from_id?.mobile}</span>
@@ -90,7 +91,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_to_id.fullname",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.refer_to_id?.fullname}</span>
@@ -104,7 +105,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_to_id?.email",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.refer_to_id?.email}</span>
@@ -117,7 +118,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_to_id?.mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className=" mr-2">
               <span>{params.data.refer_to_id?.mobile}</span>
@@ -125,15 +126,58 @@ class AffilateProgramList extends React.Component {
           );
         },
       },
+      // {
+      //   headerName: "Refered Amount",
+      //   field: "refer_amount",
+      //   filter: true,
+      //   width: 150,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="ml-2 mr-2 align-items-center d-flex">
+      //         <span>{params.data.refer_amount}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
+
       {
-        headerName: "Refered Amount",
-        field: "refer_amount",
+        headerName: "Referral Code",
+        field: "verify_code",
         filter: true,
-        width: 150,
-        cellRendererFramework: params => {
+        width: 160,
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-2 align-items-center d-flex">
-              <span>{params.data.refer_amount}</span>
+              <span>{params.data.verify_code}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Status",
+        field: "refer_redeem_status",
+        filter: true,
+        width: 150,
+        cellRendererFramework: (params) => {
+          return params.value === "Pending" ? (
+            <div className="badge badge-pill badge-warning ml-2">
+              {params.data.refer_redeem_status}
+            </div>
+          ) : params.value === "Confirm" ? (
+            <div className="badge badge-pill badge-success ml-2">
+              {params.data.refer_redeem_status}
+            </div>
+          ) : null;
+        },
+      },
+      {
+        headerName: "Actions",
+        field: "transactions",
+        width: 200,
+        cellRendererFramework: (params) => {
+          return (
+            <div className="actions cursor-pointer">
+              <ModalForm />
             </div>
           );
         },
@@ -143,7 +187,7 @@ class AffilateProgramList extends React.Component {
         field: "refer_amount",
         filter: true,
         width: 200,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="mr-2 align-items-center d-flex">
               <span>
@@ -155,50 +199,16 @@ class AffilateProgramList extends React.Component {
           );
         },
       },
-      //   {
-      //     headerName: "Actions",
-      //     field: "transactions",
-      //     width: 150,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="actions cursor-pointer">
-      //           <Button
-      //             color="primary"
-      //             bsSize="small"
-      //             className="buuton"
-      //             onClick={() =>
-      //               axiosConfig
-      //                 .get(`/cnfrm_withdrawal/${params.data._id}`)
-      //                 .then(response => {
-      //                   console.log(response.data);
-      //                 })
-      //                 .catch(error => {
-      //                   console.log(error);
-      //                 })
-      //             }
-      //           >
-      //             Conform
-      //           </Button>
-      //         </div>
-      //       );
-      //     },
-      //   },
-      //   {
-      //     headerName: "Actions",
-      //     field: "transactions",
-      //     width: 100,
-      //     cellRendererFramework: params => {
-      //       return (
-      //         <div className="actions cursor-pointer">
-      //           {/* <Edit
-      //             className="mr-50"
-      //             size="20px"
-      //             color="blue"
-      //             onClick={() =>
-      //               history.push(`/app/course/editCourse/${params.data._id}`)
-      //             }
-      //           /> */}
-      //           {/* <Eye
+
+      // {
+      //   headerName: "Actions",
+      //   field: "transactions",
+      //   width: 150,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div className="actions cursor-pointer">
+
+      //         {/* <Eye
       //             className="mr-50"
       //             size="20px"
       //             color="blue"
@@ -206,26 +216,26 @@ class AffilateProgramList extends React.Component {
       //               history.push(`/app/course/viewCourse/${params.data._id}`)
       //             }
       //           /> */}
-      //           <Trash2
-      //             size="20px"
-      //             color="red"
-      //             onClick={() => {
-      //               let selectedData = this.gridApi.getSelectedRows();
-      //               this.runthisfunction(params.data._id);
-      //               this.gridApi.updateRowData({ remove: selectedData });
-      //             }}
-      //           />
-      //         </div>
-      //       );
-      //     },
+      //         <Trash2
+      //           size="20px"
+      //           color="red"
+      //           onClick={() => {
+      //             let selectedData = this.gridApi.getSelectedRows();
+      //             this.runthisfunction(params.data._id);
+      //             this.gridApi.updateRowData({ remove: selectedData });
+      //           }}
+      //         />
+      //       </div>
+      //     );
       //   },
+      // },
     ],
   };
 
   async componentDidMount() {
     await axios
-      .get("http://65.0.80.5:5000/api/user/allrefer_earn")
-      .then(response => {
+      .get("http://65.0.80.5:5000/api/admin/allrefer_earn")
+      .then((response) => {
         let rowData = response.data.data;
         console.log(rowData);
         this.setState({ rowData });
@@ -238,7 +248,7 @@ class AffilateProgramList extends React.Component {
   //     console.log(response);
   //   });
   // }
-  onGridReady = params => {
+  onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -248,11 +258,11 @@ class AffilateProgramList extends React.Component {
     });
   };
 
-  updateSearchQuery = val => {
+  updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = val => {
+  filterSize = (val) => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -328,7 +338,9 @@ class AffilateProgramList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={e => this.updateSearchQuery(e.target.value)}
+                          onChange={(e) =>
+                            this.updateSearchQuery(e.target.value)
+                          }
                           value={this.state.value}
                         />
                       </div>
@@ -343,7 +355,7 @@ class AffilateProgramList extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {context => (
+                    {(context) => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

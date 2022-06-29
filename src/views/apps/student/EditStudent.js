@@ -14,8 +14,7 @@ import {
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
-
-export class EditTeacher extends Component {
+export class EditStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,13 +23,8 @@ export class EditTeacher extends Component {
       mobile: "",
       password: "",
       cnfmPassword: "",
-      image: "",
-      gender: "",
-      dob: "",
-      state: "",
-      city: "",
-      institute: "",
-      approvedstatus: "",
+      userimg: "",
+      user_status: "",
       selectedFile: null,
       selectedName: "",
     };
@@ -39,7 +33,7 @@ export class EditTeacher extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/viewonestaff/${id}`)
+      .get(`/viewoneuser/${id}`)
       .then((response) => {
         console.log(response.data.data);
         this.setState({
@@ -48,13 +42,7 @@ export class EditTeacher extends Component {
           mobile: response.data.data.mobile,
           password: response.data.data.password,
           cnfmPassword: response.data.data.cnfmPassword,
-          image: response.data.data.image,
-          gender: response.data.data.gender,
-          dob: response.data.data.dob,
-          state: response.data.data.state,
-          city: response.data.data.city,
-          institute: response.data.data.institute,
-          institute: response.data.data.institute,
+          userimg: response.data.data.userimg,
         });
       })
       .catch((error) => {
@@ -68,10 +56,7 @@ export class EditTeacher extends Component {
   };
 
   changeHandler1 = (e) => {
-    this.setState({ approvedstatus: e.target.value });
-  };
-  changeHandler3 = (e) => {
-    this.setState({ gender: e.target.value });
+    this.setState({ user_status: e.target.value });
   };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -90,14 +75,9 @@ export class EditTeacher extends Component {
     data.append("mobile", this.state.mobile);
     data.append("password", this.state.password);
     data.append("cnfmPassword", this.state.cnfmPassword);
-    data.append("gender", this.state.gender);
-    data.append("dob", this.state.dob.toString());
-    data.append("state", this.state.state);
-    data.append("city", this.state.city);
-    data.append("institute", this.state.institute);
-    data.append("approvedstatus", this.state.approvedstatus);
+    data.append("user_status", this.state.user_status);
     if (this.state.selectedFile !== null) {
-      data.append("image", this.state.selectedFile, this.state.selectedName);
+      data.append("userimg", this.state.selectedFile, this.state.selectedName);
     }
     for (var value of data.values()) {
       console.log(value);
@@ -107,11 +87,11 @@ export class EditTeacher extends Component {
     }
     let { id } = this.props.match.params;
     axiosConfig
-      .post(`/setting/${id}`, data)
+      .post(`/edituser/${id}`, data)
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        //this.props.history.push("/app/teacher/teacherList");
+        // this.props.history.push("/app/student/studentList");
       })
       .catch((error) => {
         console.log(error.response);
@@ -125,13 +105,13 @@ export class EditTeacher extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Edit Teacher
+                Edit Student
               </h1>
             </Col>
             <Col>
               <Button
                 className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/teacher/teacherList")}
+                onClick={() => history.push("/app/student/studentList")}
               >
                 Back
               </Button>
@@ -211,86 +191,6 @@ export class EditTeacher extends Component {
 
                 <Col lg="6" md="6" sm="6" className="mb-1 ">
                   <FormGroup>
-                    <Label className="mb-1">Gender</Label>
-                    <div
-                      className="form-label-group"
-                      onChange={(e) => this.changeHandler3(e)}
-                    >
-                      <input
-                        style={{ marginRight: "3px", fontWeight: 800 }}
-                        type="radio"
-                        name="gender"
-                        value="Male"
-                      />
-                      <span style={{ marginRight: "20px", fontWeight: 800 }}>
-                        Male
-                      </span>
-
-                      <input
-                        style={{ marginRight: "3px" }}
-                        type="radio"
-                        name="gender"
-                        value="Female"
-                      />
-                      <span style={{ marginRight: "3px" }}>Female</span>
-                    </div>
-                  </FormGroup>
-                </Col>
-
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>Birth Date</Label>
-                    <Input
-                      type="date"
-                      placeholder="Birth Date"
-                      name="dob"
-                      value={this.state.dob}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>City</Label>
-                    <Input
-                      type="text"
-                      placeholder="City"
-                      name="city"
-                      value={this.state.city}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>State</Label>
-                    <Input
-                      type="text"
-                      placeholder="State"
-                      name="state"
-                      value={this.state.state}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>Institute</Label>
-                    <Input
-                      type="text"
-                      placeholder="Institute"
-                      name="institute"
-                      value={this.state.institute}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col lg="6" md="6" sm="6" className="mb-1 ">
-                  <FormGroup>
                     <Label className="mb-1">Approved Status</Label>
                     <div
                       className="form-label-group"
@@ -299,7 +199,7 @@ export class EditTeacher extends Component {
                       <input
                         style={{ marginRight: "3px", fontWeight: 800 }}
                         type="radio"
-                        name="approvedstatus"
+                        name="user_status"
                         value="true"
                       />
                       <span style={{ marginRight: "20px", fontWeight: 800 }}>
@@ -309,7 +209,7 @@ export class EditTeacher extends Component {
                       <input
                         style={{ marginRight: "3px" }}
                         type="radio"
-                        name="approvedstatus"
+                        name="user_status"
                         value="false"
                       />
                       <span style={{ marginRight: "3px" }}>False</span>
@@ -334,4 +234,4 @@ export class EditTeacher extends Component {
   }
 }
 
-export default EditTeacher;
+export default EditStudent;

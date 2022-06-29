@@ -22,6 +22,7 @@ const ecommerceDashboard = lazy(() =>
 const home = lazy(() => import("./views/pages/landingPage/Home"));
 //  Expert Education Tabs
 const studentList = lazy(() => import("./views/apps/student/StudentList"));
+const editStudent = lazy(() => import("./views/apps/student/EditStudent"));
 const WithDrowList = lazy(() =>
   import("./views/apps/WithDrowList/WithdrowList")
 );
@@ -338,10 +339,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       return (
         <ContextLayout.Consumer>
-          {context => {
+          {(context) => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -361,7 +362,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     // user: state.auth.login.userRole,
   };
@@ -390,6 +391,10 @@ class AppRouter extends React.Component {
                   <AppRoute
                     path="/app/student/studentList"
                     component={studentList}
+                  />
+                  <AppRoute
+                    path="/app/student/editStudent/:id"
+                    component={editStudent}
                   />
                   <AppRoute
                     path="/app/teacher/teacherList"

@@ -198,7 +198,7 @@ const navigationConfig = [
       },
       {
         id: "withdrowlist",
-        title: "Withdrow List",
+        title: "Withdrow Request",
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin", "editor"],
