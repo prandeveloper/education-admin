@@ -15,7 +15,6 @@ class ModalForm extends React.Component {
     super(props);
     this.state = {
       commission_Amount: " ",
-      activeTab: "1",
       modal: false,
     };
   }

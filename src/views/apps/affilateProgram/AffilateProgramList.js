@@ -154,22 +154,19 @@ class AffilateProgramList extends React.Component {
         },
       },
       {
-        headerName: "Status",
-        field: "refer_redeem_status",
+        headerName: "Subscription Plan",
+        field: "membership.plan_Id.plantitle",
         filter: true,
-        width: 150,
+        width: 180,
         cellRendererFramework: (params) => {
-          return params.value === "Pending" ? (
-            <div className="badge badge-pill badge-warning ml-2">
-              {params.data.refer_redeem_status}
+          return (
+            <div className="ml-2 mr-2 align-items-center d-flex">
+              <span>{params.data.membership.plan_Id?.plantitle}</span>
             </div>
-          ) : params.value === "Confirm" ? (
-            <div className="badge badge-pill badge-success ml-2">
-              {params.data.refer_redeem_status}
-            </div>
-          ) : null;
+          );
         },
       },
+
       {
         headerName: "Actions",
         field: "transactions",
