@@ -42,28 +42,28 @@ export class EditCourse extends Component {
     //teacherList
     axiosConfig
       .get("/approved_staff")
-      .then((response) => {
+      .then(response => {
         console.log(response);
         this.setState({ teacherL: response.data.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
     //Category
     axiosConfig
       .get("/allCat")
-      .then((response) => {
+      .then(response => {
         console.log(response);
         this.setState({ categ: response.data.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
     //ViewOneCourse
     let { id } = this.props.match.params;
     axiosConfig
       .get(`/viewonecoursep/${id}`)
-      .then((response) => {
+      .then(response => {
         console.log(response.data.data);
         this.setState({
           course_title: response.data.data.course_title,
@@ -73,32 +73,31 @@ export class EditCourse extends Component {
           course_image: response.data.data.course_image,
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
   // Text Editor
 
-  onEditorStateChange = (editorState) => {
+  onEditorStateChange = editorState => {
     this.setState({
       editorState,
       long_desc: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
-    //console.log(this.state.editorState);
     console.log(this.state.long_desc);
   };
 
-  onChangeHandler = (event) => {
+  onChangeHandler = event => {
     this.setState({ selectedFile: event.target.files[0] });
     this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
 
-  changeHandler = (e) => {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = (e) => {
+  submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
     data.append("course_title", this.state.course_title);
@@ -122,11 +121,11 @@ export class EditCourse extends Component {
     let { id } = this.props.match.params;
     axiosConfig
       .post(`/updatecourse/${id}`, data)
-      .then((response) => {
+      .then(response => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.message);
         swal("Error!", "Error Received", "error");
       });
@@ -177,7 +176,7 @@ export class EditCourse extends Component {
                       onChange={this.changeHandler}
                     >
                       <option>Select Teacher....</option>
-                      {this.state.teacherL?.map((tech) => (
+                      {this.state.teacherL?.map(tech => (
                         <option key={tech._id} value={tech._id}>
                           {tech.fullname}
                         </option>
@@ -211,7 +210,7 @@ export class EditCourse extends Component {
                       onChange={this.changeHandler}
                     >
                       <option>Select Category...</option>
-                      {this.state.categ.map((cat) => (
+                      {this.state.categ.map(cat => (
                         <option key={cat._id} value={cat._id}>
                           {cat.catName}
                         </option>
