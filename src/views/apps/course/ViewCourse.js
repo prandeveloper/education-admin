@@ -13,6 +13,7 @@ import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../axiosConfig";
 import { Trash2 } from "react-feather";
 import swal from "sweetalert";
+import { Route } from "react-router-dom";
 
 class ViewCourse extends React.Component {
   constructor(props) {
@@ -46,12 +47,16 @@ class ViewCourse extends React.Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/course/courseList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/course/courseList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody className="pb-0">
@@ -126,30 +131,34 @@ class ViewCourse extends React.Component {
                     </td>
 
                     <td>
-                      <button
-                        className="btn-danger float-center"
-                        onClick={() =>
-                          axiosConfig
-                            .get(`/deletevideo/${video._id}`)
-                            .then((response) => {
-                              console.log(response.data);
-                              if (response.data.message === "deleted") {
-                                swal(
-                                  "Success!",
-                                  "Deleted SuccessFull!",
-                                  "success"
-                                );
+                      <Route
+                        render={({ history }) => (
+                          <button
+                            className="btn-danger float-center"
+                            onClick={() =>
+                              axiosConfig
+                                .get(`/deletevideo/${video._id}`)
+                                .then((response) => {
+                                  console.log(response.data);
+                                  if (response.data.message === "deleted") {
+                                    swal(
+                                      "Success!",
+                                      "Deleted SuccessFull!",
+                                      "success"
+                                    );
 
-                                window.location.reload();
-                              }
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            })
-                        }
-                      >
-                        <Trash2 size="20px" />
-                      </button>
+                                    window.location.reload();
+                                  }
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                })
+                            }
+                          >
+                            <Trash2 size="20px" />
+                          </button>
+                        )}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -183,30 +192,34 @@ class ViewCourse extends React.Component {
                       </a>
                     </td>
                     <td>
-                      <button
-                        className="btn-danger float-center"
-                        onClick={() =>
-                          axiosConfig
-                            .get(`/deletepdf/${pdf._id}`)
-                            .then((response) => {
-                              console.log(response.data);
-                              if (response.data.message === "deleted") {
-                                swal(
-                                  "Success!",
-                                  "Deleted SuccessFull!",
-                                  "success"
-                                );
+                      <Route
+                        render={({ history }) => (
+                          <button
+                            className="btn-danger float-center"
+                            onClick={() =>
+                              axiosConfig
+                                .get(`/deletepdf/${pdf._id}`)
+                                .then((response) => {
+                                  console.log(response.data);
+                                  if (response.data.message === "deleted") {
+                                    swal(
+                                      "Success!",
+                                      "Deleted SuccessFull!",
+                                      "success"
+                                    );
 
-                                window.location.reload();
-                              }
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            })
-                        }
-                      >
-                        <Trash2 size="20px" />
-                      </button>
+                                    window.location.reload();
+                                  }
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                })
+                            }
+                          >
+                            <Trash2 size="20px" />
+                          </button>
+                        )}
+                      />
                     </td>
                   </tr>
                 ))}

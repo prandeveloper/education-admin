@@ -11,6 +11,7 @@ import {
   DropdownToggle,
   Button,
 } from "reactstrap";
+import { Route } from "react-router-dom";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -112,7 +113,7 @@ class Notification extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Edit
+              {/* <Edit
                 className="mr-50"
                 size="20px"
                 color="blue"
@@ -121,7 +122,7 @@ class Notification extends React.Component {
                     `/app/contactUs/customer/editCustomer/${params.data._id}`
                   )
                 }
-              />
+              /> */}
               <Trash2
                 size="20px"
                 color="red"
@@ -192,14 +193,18 @@ class Notification extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() =>
-                    history.push("/app/notifications/addNotification")
-                  }
-                >
-                  Add New
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() =>
+                        history.push("/app/notifications/addNotification")
+                      }
+                    >
+                      Add New
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
             <CardBody>
@@ -261,12 +266,16 @@ class Notification extends React.Component {
                         />
                       </div>
                       <div className="export-btn">
-                        <Button.Ripple
-                          color="primary"
-                          onClick={() => this.gridApi.exportDataAsCsv()}
-                        >
-                          Export as CSV
-                        </Button.Ripple>
+                        <Route
+                          render={({ history }) => (
+                            <Button.Ripple
+                              color="primary"
+                              onClick={() => this.gridApi.exportDataAsCsv()}
+                            >
+                              Export as CSV
+                            </Button.Ripple>
+                          )}
+                        />
                       </div>
                     </div>
                   </div>

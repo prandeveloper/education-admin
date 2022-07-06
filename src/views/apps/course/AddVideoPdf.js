@@ -16,6 +16,8 @@ import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../axiosConfig";
 import Swal from "sweetalert2";
 import Loader from "./Loader";
+import { Route } from "react-router-dom";
+
 class AddVideoPdf extends React.Component {
   constructor(props) {
     super(props);
@@ -189,12 +191,16 @@ class AddVideoPdf extends React.Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/course/courseList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/course/courseList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody className="pb-0">
@@ -315,9 +321,13 @@ class AddVideoPdf extends React.Component {
                 sm="12"
                 className="d-flex justify-content-center align-items-center"
               >
-                <Button type="submit" color="primary">
-                  Submit
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button type="submit" color="primary">
+                      Submit
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
           </Form>
@@ -402,9 +412,13 @@ class AddVideoPdf extends React.Component {
                 sm="12"
                 className="d-flex justify-content-center align-items-center"
               >
-                <Button type="submit" color="primary">
-                  Submit
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button type="submit" color="primary">
+                      Submit
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
           </Form>

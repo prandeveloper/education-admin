@@ -61,7 +61,7 @@ const UserDropdown = (props) => {
           className="align-middle"
           onClick={(e) => {
             window.localStorage.removeItem("ad-token");
-            window.location.push = "/pages/login";
+            window.location.push = "#";
             return false;
           }}
         >

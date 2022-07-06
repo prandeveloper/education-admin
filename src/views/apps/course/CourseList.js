@@ -18,6 +18,7 @@ import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import { Route } from "react-router-dom";
 
 class CourseList extends React.Component {
   state = {
@@ -134,14 +135,18 @@ class CourseList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <Button
-                color="primary"
-                onClick={() =>
-                  history.push(`/app/course/addVideoPdf/${params.data._id}`)
-                }
-              >
-                Add Video / PDF
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    color="primary"
+                    onClick={() =>
+                      history.push(`/app/course/addVideoPdf/${params.data._id}`)
+                    }
+                  >
+                    Add Video / PDF
+                  </Button>
+                )}
+              />
             </div>
           );
         },
@@ -185,21 +190,29 @@ class CourseList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Edit
-                className="mr-50"
-                size="20px"
-                color="blue"
-                onClick={() =>
-                  history.push(`/app/course/editCourse/${params.data._id}`)
-                }
+              <Route
+                render={({ history }) => (
+                  <Edit
+                    className="mr-50"
+                    size="20px"
+                    color="blue"
+                    onClick={() =>
+                      history.push(`/app/course/editCourse/${params.data._id}`)
+                    }
+                  />
+                )}
               />
-              <Eye
-                className="mr-50"
-                size="20px"
-                color="blue"
-                onClick={() =>
-                  history.push(`/app/course/viewCourse/${params.data._id}`)
-                }
+              <Route
+                render={({ history }) => (
+                  <Eye
+                    className="mr-50"
+                    size="20px"
+                    color="blue"
+                    onClick={() =>
+                      history.push(`/app/course/viewCourse/${params.data._id}`)
+                    }
+                  />
+                )}
               />
               <Trash2
                 size="20px"
@@ -269,12 +282,16 @@ class CourseList extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/course/addCourse")}
-                >
-                  Add New Course
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() => history.push("/app/course/addCourse")}
+                    >
+                      Add New Course
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
             <CardBody>
@@ -336,12 +353,16 @@ class CourseList extends React.Component {
                         />
                       </div>
                       <div className="export-btn">
-                        <Button.Ripple
-                          color="primary"
-                          onClick={() => this.gridApi.exportDataAsCsv()}
-                        >
-                          Export as CSV
-                        </Button.Ripple>
+                        <Route
+                          render={({ history }) => (
+                            <Button.Ripple
+                              color="primary"
+                              onClick={() => this.gridApi.exportDataAsCsv()}
+                            >
+                              Export as CSV
+                            </Button.Ripple>
+                          )}
+                        />
                       </div>
                     </div>
                   </div>

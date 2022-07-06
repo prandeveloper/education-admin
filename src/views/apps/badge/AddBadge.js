@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
+import { Route } from "react-router-dom";
 export class AddBadge extends Component {
   constructor(props) {
     super(props);
@@ -28,21 +29,21 @@ export class AddBadge extends Component {
     //Student List
     axiosConfig
       .get("/allusers")
-      .then((response) => {
+      .then(response => {
         console.log(response);
         this.setState({ studentList: response.data.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
     //Badge List
     axiosConfig
       .get("/allLavel")
-      .then((response) => {
+      .then(response => {
         console.log(response);
         this.setState({ levelList: response.data.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -52,18 +53,18 @@ export class AddBadge extends Component {
   //     console.log(event.target.files[0]);
   //   };
 
-  changeHandler = (e) => {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
+  submitHandler = e => {
     e.preventDefault();
     axiosConfig
       .post("http://65.0.80.5:5000/api/user/addbatchn", this.state)
-      .then((response) => {
+      .then(response => {
         console.log(response);
         this.props.history.push("/app/badge/badgeList");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response);
       });
   };
@@ -78,12 +79,16 @@ export class AddBadge extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/badge/BadgeList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/badge/BadgeList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -98,7 +103,7 @@ export class AddBadge extends Component {
                     onChange={this.changeHandler}
                   >
                     <option>Select Student .....</option>
-                    {this.state.studentList.map((studentL) => (
+                    {this.state.studentList.map(studentL => (
                       <option key={studentL._id} value={studentL._id}>
                         {studentL.fullname}
                       </option>
@@ -114,7 +119,7 @@ export class AddBadge extends Component {
                     onChange={this.changeHandler}
                   >
                     <option>Select Level .....</option>
-                    {this.state.levelList.map((levelL) => (
+                    {this.state.levelList.map(levelL => (
                       <option key={levelL._id} value={levelL._id}>
                         {levelL.level}
                       </option>

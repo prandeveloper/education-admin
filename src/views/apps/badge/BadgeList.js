@@ -19,6 +19,7 @@ import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import { Route } from "react-router-dom";
 
 class BadgeList extends React.Component {
   state = {
@@ -48,7 +49,7 @@ class BadgeList extends React.Component {
         field: "icon",
         filter: true,
         width: 120,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <img
@@ -68,7 +69,7 @@ class BadgeList extends React.Component {
         //filter: true,
         filter: "agSetColumnFilter",
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <div className="ml-2">
@@ -84,7 +85,7 @@ class BadgeList extends React.Component {
         //filter: true,
         filter: "agSetColumnFilter",
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <div className="ml-2">
@@ -100,7 +101,7 @@ class BadgeList extends React.Component {
         //filter: true,
         filter: "agSetColumnFilter",
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <div className="ml-2">
@@ -115,7 +116,7 @@ class BadgeList extends React.Component {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
               {/* <Eye
@@ -153,7 +154,7 @@ class BadgeList extends React.Component {
   async componentDidMount() {
     await axiosConfig
       .get("http://65.0.80.5:5000/api/user/allbatch")
-      .then((response) => {
+      .then(response => {
         let rowData = response.data.data;
         this.setState({ rowData });
         console.log(rowData);
@@ -164,12 +165,12 @@ class BadgeList extends React.Component {
     console.log(id);
     await axiosConfig
       .get(`http://65.0.80.5:5000/api/user/deletebatch/${id}`)
-      .then((response) => {
+      .then(response => {
         console.log(response);
       });
   }
 
-  onGridReady = (params) => {
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -179,11 +180,11 @@ class BadgeList extends React.Component {
     });
   };
 
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -207,12 +208,16 @@ class BadgeList extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/badge/addBadge")}
-                >
-                  Add Badge
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() => history.push("/app/badge/addBadge")}
+                    >
+                      Add Badge
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
             <CardBody>
@@ -267,9 +272,7 @@ class BadgeList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={(e) =>
-                            this.updateSearchQuery(e.target.value)
-                          }
+                          onChange={e => this.updateSearchQuery(e.target.value)}
                           value={this.state.value}
                         />
                       </div>
@@ -284,7 +287,7 @@ class BadgeList extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {(context) => (
+                    {context => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

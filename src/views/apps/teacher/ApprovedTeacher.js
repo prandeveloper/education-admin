@@ -18,6 +18,7 @@ import { Edit, Trash2, ChevronDown } from "react-feather";
 import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
+import { Route } from "react-router-dom";
 
 class ApprovedTeacher extends React.Component {
   state = {
@@ -271,12 +272,16 @@ class ApprovedTeacher extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/teacher/addTeacher")}
-                >
-                  Add New Teacher
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() => history.push("/app/teacher/addTeacher")}
+                    >
+                      Add New Teacher
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
             <CardBody>
@@ -338,12 +343,16 @@ class ApprovedTeacher extends React.Component {
                         />
                       </div>
                       <div className="export-btn">
-                        <Button.Ripple
-                          color="primary"
-                          onClick={() => this.gridApi.exportDataAsCsv()}
-                        >
-                          Export as CSV
-                        </Button.Ripple>
+                        <Route
+                          render={({ history }) => (
+                            <Button.Ripple
+                              color="primary"
+                              onClick={() => this.gridApi.exportDataAsCsv()}
+                            >
+                              Export as CSV
+                            </Button.Ripple>
+                          )}
+                        />
                       </div>
                     </div>
                   </div>

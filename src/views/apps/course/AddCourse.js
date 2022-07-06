@@ -19,6 +19,7 @@ import "../../../assets/scss/plugins/extensions/editor.scss";
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
+import { Route } from "react-router-dom";
 
 export class AddCourse extends Component {
   constructor(props) {
@@ -140,12 +141,16 @@ export class AddCourse extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/course/courseList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/course/courseList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -288,13 +293,17 @@ export class AddCourse extends Component {
                 </Col>
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="ml-2 mb-1"
-                >
-                  Add Course
-                </Button.Ripple>
+                <Route
+                  render={({ history }) => (
+                    <Button.Ripple
+                      color="primary"
+                      type="submit"
+                      className="ml-2 mb-1"
+                    >
+                      Add Course
+                    </Button.Ripple>
+                  )}
+                />
               </Row>
             </Form>
           </CardBody>

@@ -14,6 +14,7 @@ import {
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
+import { Route } from "react-router-dom";
 
 export class AddNotiteach extends Component {
   constructor(props) {
@@ -67,12 +68,16 @@ export class AddNotiteach extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/notiteach/notiteachList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/notiteach/notiteachList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -124,13 +129,17 @@ export class AddNotiteach extends Component {
                 </Col>
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="ml-2 mb-1"
-                >
-                  Add
-                </Button.Ripple>
+                <Route
+                  render={({ history }) => (
+                    <Button.Ripple
+                      color="primary"
+                      type="submit"
+                      className="ml-2 mb-1"
+                    >
+                      Add
+                    </Button.Ripple>
+                  )}
+                />
               </Row>
             </Form>
           </CardBody>

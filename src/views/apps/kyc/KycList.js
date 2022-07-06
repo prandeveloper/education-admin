@@ -42,34 +42,61 @@ class KycList extends React.Component {
         // headerCheckboxSelectionFilteredOnly: true,
         // headerCheckboxSelection: true,
       },
+
       {
-        headerName: "Name",
-        field: "customerId",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
+        headerName: "Image",
+        field: "userid?.userimg",
+        filter: false,
+        width: 120,
+        cellRendererFramework: params => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.customerId}</span> */}
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle  mr-4"
+                src={params.data.userid?.userimg}
+                alt=" IMG"
+                height="40"
+                width="40"
+              />
             </div>
           );
         },
       },
       {
-        headerName: "Date Of Birth",
-        field: "image",
-        filter: false,
-        width: 120,
-        cellRendererFramework: (params) => {
+        headerName: "Name",
+        field: "userid?.fullname",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
-              {/* <img
-                className="rounded-circle  mr-4"
-                src={params.data.image}
-                alt=" brand"
-                height="40"
-                width="40"
-              /> */}
+            <div className="ml-2 mr-2">
+              <span>{params.data.userid?.fullname}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Email",
+        field: "userid?.email",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="ml-2 mr-2">
+              <span>{params.data.userid?.email}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Mobile No.",
+        field: "userid?.mobile",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="ml-2 mr-2">
+              <span>{params.data.userid?.mobile}</span>
             </div>
           );
         },
@@ -77,13 +104,13 @@ class KycList extends React.Component {
 
       {
         headerName: "Gender",
-        field: "first_name",
+        field: "gender",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.first_name}</span> */}
+              <span>{params.data.gender}</span>
             </div>
           );
         },
@@ -91,91 +118,95 @@ class KycList extends React.Component {
 
       {
         headerName: "Nationality",
-        field: "customer_email",
+        field: "nationality",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.customer_email}</span> */}
+              <span>{params.data.nationality}</span>
             </div>
           );
         },
       },
       {
         headerName: "Aadhar No.",
-        field: "mobile_no",
+        field: "aadhar_num",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+              <span>{params.data.aadhar_num}</span>
             </div>
           );
         },
       },
       {
-        headerName: "Document Image",
-        field: "mobile_no",
+        headerName: "Doc Front Image",
+        field: "front",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle  mr-4"
+                src={params.data.front}
+                alt=" IMG"
+                height="40"
+                width="40"
+              />
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Doc Back Image",
+        field: "back",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle  mr-4"
+                src={params.data.back}
+                alt=" IMG"
+                height="40"
+                width="40"
+              />
             </div>
           );
         },
       },
       {
         headerName: "Selfie Image",
-        field: "mobile_no",
+        field: "photo",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
-            <div className="ml-2 mr-4">
-              {/* <span>{params.data.mobile_no}</span> */}
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle  mr-4"
+                src={params.data.photo}
+                alt=" IMG"
+                height="40"
+                width="40"
+              />
             </div>
           );
         },
       },
 
-      //   {
-      //     headerName: "Status",
-      //     field: "status",
-      //     filter: true,
-      //     width: 150,
-      //     cellRendererFramework: (params) => {
-      //       return params.value === "Active" ? (
-      //         <div className="badge badge-pill badge-success ml-2">
-      //           {/* {params.data.status} */}
-      //         </div>
-      //       ) : params.value === "Inactive" ? (
-      //         <div className="badge badge-pill badge-danger">
-      //           {/* {params.data.status} */}
-      //         </div>
-      //       ) : null;
-      //     },
-      //   },
       {
         headerName: "Actions",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
-              <Edit
-                className="mr-50"
-                size="20px"
-                color="blue"
-                onClick={() =>
-                  history.push(
-                    `/app/contactUs/customer/editCustomer/${params.data._id}`
-                  )
-                }
-              />
               <Trash2
                 size="20px"
                 color="red"
@@ -192,25 +223,23 @@ class KycList extends React.Component {
     ],
   };
 
-  //   async componentDidMount() {
-  //     await axiosConfig
-  //       .get("http://35.154.86.59/api/user/allcustomer")
-  //       .then((response) => {
-  //         let rowData = response.data.data;
-  //         console.log(rowData);
-  //         this.setState({ rowData });
-  //       });
-  //   }
+  async componentDidMount() {
+    await axiosConfig.get(`/getkycform`).then(response => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
+  }
 
-  //   async runthisfunction(id) {
-  //     console.log(id);
-  //     await axiosConfig
-  //       .get(`http://35.154.86.59/api/user/delcustomer/${id}`)
-  //       .then((response) => {
-  //         console.log(response);
-  //       });
-  //   }
-  onGridReady = (params) => {
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig
+      .get(`http://65.0.80.5:5000/api/admin/deletekycform/${id}`)
+      .then(response => {
+        console.log(response);
+      });
+  }
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -220,11 +249,11 @@ class KycList extends React.Component {
     });
   };
 
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -308,9 +337,7 @@ class KycList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={(e) =>
-                            this.updateSearchQuery(e.target.value)
-                          }
+                          onChange={e => this.updateSearchQuery(e.target.value)}
                           value={this.state.value}
                         />
                       </div>
@@ -325,7 +352,7 @@ class KycList extends React.Component {
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {(context) => (
+                    {context => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

@@ -19,6 +19,7 @@ import "../../../assets/scss/plugins/extensions/editor.scss";
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
+import { Route } from "react-router-dom";
 
 export class EditCourse extends Component {
   constructor(props) {
@@ -31,9 +32,13 @@ export class EditCourse extends Component {
       course_type: "",
       category_id: "",
       course_image: "",
-      editorState: EditorState.createEmpty(),
       selectedFile: null,
       selectedName: "",
+      posterimg: "",
+      selectedFile1: null,
+      selectedName1: "",
+      editorState: EditorState.createEmpty(),
+
       teacherL: [],
       categ: [],
     };
@@ -71,6 +76,7 @@ export class EditCourse extends Component {
           long_desc: response.data.data.long_desc,
           course_type: response.data.data.course_type,
           course_image: response.data.data.course_image,
+          posterimg: response.data.data.posterimg,
         });
       })
       .catch(error => {
@@ -92,6 +98,11 @@ export class EditCourse extends Component {
     this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
+  onChangeHandler1 = event => {
+    this.setState({ selectedFile1: event.target.files[0] });
+    this.setState({ selectedName1: event.target.files[0].name });
+    console.log(event.target.files[0]);
+  };
 
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -110,6 +121,13 @@ export class EditCourse extends Component {
         "course_image",
         this.state.selectedFile,
         this.state.selectedName
+      );
+    }
+    if (this.state.selectedFile1 !== null) {
+      data.append(
+        "posterimg",
+        this.state.selectedFile1,
+        this.state.selectedName1
       );
     }
     for (var key of data.keys()) {
@@ -142,12 +160,16 @@ export class EditCourse extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/course/courseList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/course/courseList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -282,15 +304,25 @@ export class EditCourse extends Component {
                     <CustomInput type="file" onChange={this.onChangeHandler} />
                   </FormGroup>
                 </Col>
+                <Col lg="6" md="6">
+                  <FormGroup>
+                    <Label>Poster Image</Label>
+                    <CustomInput type="file" onChange={this.onChangeHandler1} />
+                  </FormGroup>
+                </Col>
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="ml-2 mb-1"
-                >
-                  Update
-                </Button.Ripple>
+                <Route
+                  render={({ history }) => (
+                    <Button.Ripple
+                      color="primary"
+                      type="submit"
+                      className="ml-2 mb-1"
+                    >
+                      Update
+                    </Button.Ripple>
+                  )}
+                />
               </Row>
             </Form>
           </CardBody>

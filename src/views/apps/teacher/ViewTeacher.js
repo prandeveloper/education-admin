@@ -20,6 +20,7 @@ import Swiper from "react-id-swiper";
 import "swiper/css/swiper.css";
 import "../../../assets/scss/plugins/extensions/swiper.scss";
 import Carousel from "react-elastic-carousel";
+import { Route } from "react-router-dom";
 
 const params = {
   spaceBetween: 10,
@@ -69,12 +70,16 @@ class ViewTeacher extends React.Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/teacher/teacherList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/teacher/teacherList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody className="pb-0">

@@ -9,6 +9,7 @@ import {
   FormGroup,
   Input,
 } from "reactstrap";
+import { Route } from "react-router-dom";
 
 class ModalForm extends React.Component {
   constructor(props) {
@@ -32,9 +33,13 @@ class ModalForm extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Button outline color="primary" onClick={this.toggleModal}>
-          Add Commis..
-        </Button>
+        <Route
+          render={({ history }) => (
+            <Button outline color="primary" onClick={this.toggleModal}>
+              Add Commis..
+            </Button>
+          )}
+        />
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggleModal}
@@ -57,9 +62,13 @@ class ModalForm extends React.Component {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggleModal}>
-              Submit
-            </Button>
+            <Route
+              render={({ history }) => (
+                <Button color="primary" onClick={this.toggleModal}>
+                  Submit
+                </Button>
+              )}
+            />
           </ModalFooter>
         </Modal>
       </React.Fragment>

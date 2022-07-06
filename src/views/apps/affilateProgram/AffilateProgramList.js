@@ -20,6 +20,7 @@ import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import axios from "axios";
 import ModalForm from "./Model";
+import { Route } from "react-router-dom";
 
 class AffilateProgramList extends React.Component {
   state = {
@@ -208,14 +209,17 @@ class AffilateProgramList extends React.Component {
       //     return (
       //       <div className="actions cursor-pointer">
 
-      //         {/* <Eye
+      //         {/*
+      // <Route
+      // render={({ history }) => ( <Eye
       //             className="mr-50"
       //             size="20px"
       //             color="blue"
       //             onClick={() =>
       //               history.push(`/app/course/viewCourse/${params.data._id}`)
       //             }
-      //           /> */}
+      //           /> )}/>
+      // */}
       //         <Trash2
       //           size="20px"
       //           color="red"
@@ -345,12 +349,16 @@ class AffilateProgramList extends React.Component {
                         />
                       </div>
                       <div className="export-btn">
-                        <Button.Ripple
-                          color="primary"
-                          onClick={() => this.gridApi.exportDataAsCsv()}
-                        >
-                          Export as CSV
-                        </Button.Ripple>
+                        <Route
+                          render={({ history }) => (
+                            <Button.Ripple
+                              color="primary"
+                              onClick={() => this.gridApi.exportDataAsCsv()}
+                            >
+                              Export as CSV
+                            </Button.Ripple>
+                          )}
+                        />
                       </div>
                     </div>
                   </div>

@@ -11,15 +11,17 @@ import {
   Button,
 } from "reactstrap";
 import axios from "axios";
+import { Route } from "react-router-dom";
+
 //import { history } from "../../../history";
 export default class AddUsers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       status: "",
-       selectedName: "",
-       selectedFile: null,
-     };
+      status: "",
+      selectedName: "",
+      selectedFile: null,
+    };
   }
 
   //Image Submit Handler
@@ -40,7 +42,7 @@ export default class AddUsers extends Component {
 
     const data = new FormData();
     data.append("usertype", this.state.usertype);
-       for (var value of data.values()) {
+    for (var value of data.values()) {
       console.log(value);
     }
 
@@ -63,7 +65,7 @@ export default class AddUsers extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-              Choose Payment Options
+                Choose Payment Options
               </h1>
             </Col>
             {/* <Col>
@@ -79,19 +81,30 @@ export default class AddUsers extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="6" md="6" sm="6" className="mb-2">
-                <div class="form-check">
-                  <Input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                  <Label class="form-check-label" for="flexRadioDefault1">
-                  Cash
-                  </Label>
-                </div>
-                <div class="form-check">
-                  <Input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-                  <Label class="form-check-label" for="flexRadioDefault2">
-                  Cheque
-                  </Label>
-                </div>
-                                {/* <div className="radio"> 
+                  <div class="form-check">
+                    <Input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                    />
+                    <Label class="form-check-label" for="flexRadioDefault1">
+                      Cash
+                    </Label>
+                  </div>
+                  <div class="form-check">
+                    <Input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                      checked
+                    />
+                    <Label class="form-check-label" for="flexRadioDefault2">
+                      Cheque
+                    </Label>
+                  </div>
+                  {/* <div className="radio"> 
                     <Input type="radio" name="cash" id="radio-p-1"  />
                     <Label class="">Cash</Label>
                   </div>
@@ -99,27 +112,37 @@ export default class AddUsers extends Component {
                     <Input type="radio" name="cheque" id="radio-p-2" />
                     <Label  class="cr">Cheque</Label>
                   </div> */}
-                  <div class="form-group">                
-                    <Input 
-                        type="text" 
-                        class="form-control" 
-                        name="cheque" 
-                        placeholder="Enter your cheque number"
+                  <div class="form-group">
+                    <Input
+                      type="text"
+                      class="form-control"
+                      name="cheque"
+                      placeholder="Enter your cheque number"
                     />
                   </div>
-                  <Button.Ripple   
+                  <Route
+                    render={({ history }) => (
+                      <Button.Ripple
                         color="danger"
-                        className="mr-1 mb-1 btn-danger-rgba" 
+                        className="mr-1 mb-1 btn-danger-rgba"
                         type="reset"
-                        value="Reset">
+                        value="Reset"
+                      >
                         Back
-                  </Button.Ripple>
-                  <Button.Ripple
+                      </Button.Ripple>
+                    )}
+                  />
+                  <Route
+                    render={({ history }) => (
+                      <Button.Ripple
                         color="primary"
                         type="submit"
-                        className="mr-1 mb-1">
-                        Next 
-                  </Button.Ripple>
+                        className="mr-1 mb-1"
+                      >
+                        Next
+                      </Button.Ripple>
+                    )}
+                  />
                 </Col>
               </Row>
             </Form>
@@ -129,9 +152,9 @@ export default class AddUsers extends Component {
     );
   }
 }
-     
-             
-                {/* <Col lg="6" md="6" sm="6" className="mb-2">
+
+{
+  /* <Col lg="6" md="6" sm="6" className="mb-2">
                   <Label className="mb-1">Status</Label>
                   <div
                     className="form-label-group"
@@ -153,33 +176,24 @@ export default class AddUsers extends Component {
                     />
                     <span style={{ marginRight: "3px" }}>Inactive</span>
                   </div>
-                </Col> */}
-            
-         
-         
-           
-       
-                  {/* <Button.Ripple
+                </Col> */
+}
+
+{
+  /* <Button.Ripple
                     color="primary"
                     type="submit"
                     className="mr-1 mb-1">
                     Add User
-                  </Button.Ripple> */}
-               
-                  {/* <div class="form-group">
+                  </Button.Ripple> */
+}
+
+{
+  /* <div class="form-group">
                   <button type="submit" class="btn btn-outline-primary">Back</button>
                  <br/> 
-               <button type="submit" class="btn btn-primary">Next</button></div> */}
-                
-              
-   
-
-
-
-
-
-
-
+               <button type="submit" class="btn btn-primary">Next</button></div> */
+}
 
 // <!DOCTYPE html>
 // <html lang="en">
@@ -717,7 +731,7 @@ export default class AddUsers extends Component {
 //                                                             <label for="radio-p-2" class="cr"><i class="fas fa-money-check-alt"></i> Cheque</label>
 //                                                         </div>
 //                                                     </div>
-//                                                     <div class="form-group">                
+//                                                     <div class="form-group">
 //                                                         <input type="text" class="form-control" name="cheque" placeholder="Enter your cheque number">
 //                                                     </div>
 //                                                     <div class="form-group text-right">

@@ -14,7 +14,7 @@ import {
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import swal from "sweetalert";
-
+import { Route } from "react-router-dom";
 export class EditTeacher extends Component {
   constructor(props) {
     super(props);
@@ -111,7 +111,7 @@ export class EditTeacher extends Component {
       .then((response) => {
         console.log(response);
         swal("Success!", "Submitted SuccessFull!", "success");
-        //this.props.history.push("/app/teacher/teacherList");
+        this.props.history.push("/app/teacher/teacherList");
       })
       .catch((error) => {
         console.log(error.response);
@@ -129,12 +129,16 @@ export class EditTeacher extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/teacher/teacherList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/teacher/teacherList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -318,13 +322,17 @@ export class EditTeacher extends Component {
                 </Col>
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="ml-2 mb-1"
-                >
-                  Update
-                </Button.Ripple>
+                <Route
+                  render={({ history }) => (
+                    <Button.Ripple
+                      color="primary"
+                      type="submit"
+                      className="ml-2 mb-1"
+                    >
+                      Update
+                    </Button.Ripple>
+                  )}
+                />
               </Row>
             </Form>
           </CardBody>

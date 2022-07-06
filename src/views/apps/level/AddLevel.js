@@ -13,6 +13,8 @@ import {
 } from "reactstrap";
 import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
+import { Route } from "react-router-dom";
+
 export class AddLevel extends Component {
   constructor(props) {
     super(props);
@@ -61,12 +63,16 @@ export class AddLevel extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/level/levelList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/level/levelList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -94,13 +100,17 @@ export class AddLevel extends Component {
                 </Col>
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="mr-1 mb-1"
-                >
-                  Add Level
-                </Button.Ripple>
+                <Route
+                  render={({ history }) => (
+                    <Button.Ripple
+                      color="primary"
+                      type="submit"
+                      className="mr-1 mb-1"
+                    >
+                      Add Level
+                    </Button.Ripple>
+                  )}
+                />
               </Row>
             </Form>
           </CardBody>

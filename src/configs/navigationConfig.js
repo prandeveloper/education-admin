@@ -21,7 +21,7 @@ const navigationConfig = [
 
   {
     type: "groupHeader",
-    groupTitle: "Seller Dashboard",
+    groupTitle: "Admin Dashboard",
   },
   // {
   //   id: "editProfile",

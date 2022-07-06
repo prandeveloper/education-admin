@@ -19,6 +19,8 @@ import { history } from "../../../history";
 import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../assets/scss/pages/users.scss";
 import moment from "moment";
+import { Route } from "react-router-dom";
+
 class SubscriptionList extends React.Component {
   state = {
     rowData: [],
@@ -48,7 +50,7 @@ class SubscriptionList extends React.Component {
         field: "student_Id.userimg",
         filter: false,
         width: 120,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <img
@@ -68,7 +70,7 @@ class SubscriptionList extends React.Component {
         field: "student_Id.fullname",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.student_Id?.fullname}</span>
@@ -82,7 +84,7 @@ class SubscriptionList extends React.Component {
         field: "student_Id.email",
         filter: true,
         width: 180,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="mr-2">
               <span>{params.data.student_Id?.email}</span>
@@ -95,7 +97,7 @@ class SubscriptionList extends React.Component {
         field: "student_Id.mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.student_Id?.mobile}</span>
@@ -109,7 +111,7 @@ class SubscriptionList extends React.Component {
         field: "plan_Id.plantitle",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
               <span>{params.data.plan_Id?.plantitle}</span>
@@ -122,7 +124,7 @@ class SubscriptionList extends React.Component {
         field: "plan_Id.createdAt",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="ml-2 mr-4">
               <span>{moment(params.data.plan_Id?.createdAt).format("ll")}</span>
@@ -170,7 +172,7 @@ class SubscriptionList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allenrollStudent").then(response => {
+    await axiosConfig.get("/allenrollStudent").then((response) => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -179,11 +181,11 @@ class SubscriptionList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/deletestaff/${id}`).then(response => {
+    await axiosConfig.get(`/deletestaff/${id}`).then((response) => {
       console.log(response);
     });
   }
-  onGridReady = params => {
+  onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -193,11 +195,11 @@ class SubscriptionList extends React.Component {
     });
   };
 
-  updateSearchQuery = val => {
+  updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);
   };
 
-  filterSize = val => {
+  filterSize = (val) => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -221,12 +223,16 @@ class SubscriptionList extends React.Component {
                 </h1>
               </Col>
               <Col>
-                <Button
-                  className=" btn btn-danger float-right"
-                  onClick={() => history.push("/app/teacher/addTeacher")}
-                >
-                  Add New Teacher
-                </Button>
+                <Route
+                  render={({ history }) => (
+                    <Button
+                      className=" btn btn-danger float-right"
+                      onClick={() => history.push("/app/teacher/addTeacher")}
+                    >
+                      Add New Teacher
+                    </Button>
+                  )}
+                />
               </Col>
             </Row>
             <CardBody>
@@ -281,22 +287,28 @@ class SubscriptionList extends React.Component {
                       <div className="table-input mr-1">
                         <Input
                           placeholder="search..."
-                          onChange={e => this.updateSearchQuery(e.target.value)}
+                          onChange={(e) =>
+                            this.updateSearchQuery(e.target.value)
+                          }
                           value={this.state.value}
                         />
                       </div>
                       <div className="export-btn">
-                        <Button.Ripple
-                          color="primary"
-                          onClick={() => this.gridApi.exportDataAsCsv()}
-                        >
-                          Export as CSV
-                        </Button.Ripple>
+                        <Route
+                          render={({ history }) => (
+                            <Button.Ripple
+                              color="primary"
+                              onClick={() => this.gridApi.exportDataAsCsv()}
+                            >
+                              Export as CSV
+                            </Button.Ripple>
+                          )}
+                        />
                       </div>
                     </div>
                   </div>
                   <ContextLayout.Consumer>
-                    {context => (
+                    {(context) => (
                       <AgGridReact
                         gridOptions={{}}
                         rowSelection="multiple"

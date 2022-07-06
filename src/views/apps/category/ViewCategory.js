@@ -3,6 +3,7 @@ import { Card, CardBody, Row, Col, Button } from "reactstrap";
 import { history } from "../../../history";
 import "../../../assets/scss/pages/app-ecommerce-shop.scss";
 import axiosConfig from "../../../axiosConfig";
+import { Route } from "react-router-dom";
 
 class ViewCategory extends React.Component {
   constructor(props) {
@@ -36,12 +37,16 @@ class ViewCategory extends React.Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/category/categoryList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/category/categoryList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody className="pb-0">

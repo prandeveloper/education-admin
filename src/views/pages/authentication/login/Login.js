@@ -19,6 +19,8 @@ import glogo from "../../../../assets/img/pages/glogo.png";
 import { history } from "../../../../history";
 import axios from "axios";
 import swal from "sweetalert";
+import { Route } from "react-router-dom";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +54,7 @@ class Login extends React.Component {
       .then((response) => {
         console.log(response);
         localStorage.setItem("ad-token", response.data.token);
-        history.push("/");
+        history.push("/#/");
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -128,9 +130,13 @@ class Login extends React.Component {
                     >
                       Register
                     </Button.Ripple> */}
-                    <Button.Ripple color="primary" type="submit">
-                      Login
-                    </Button.Ripple>
+                    <Route
+                      render={({ history }) => (
+                        <Button.Ripple color="primary" type="submit">
+                          Login
+                        </Button.Ripple>
+                      )}
+                    />
                   </div>
                 </Form>
               </Card>

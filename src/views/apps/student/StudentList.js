@@ -11,7 +11,7 @@ import {
   DropdownToggle,
   Button,
 } from "reactstrap";
-
+import { Route } from "react-router-dom";
 import axiosConfig from "../../../axiosConfig";
 import { ContextLayout } from "../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -129,13 +129,19 @@ class StudentList extends React.Component {
         cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
-              <Edit
-                className="mr-50"
-                size="20px"
-                color="blue"
-                onClick={() =>
-                  history.push(`/app/student/editStudent/${params.data._id}`)
-                }
+              <Route
+                render={({ history }) => (
+                  <Edit
+                    className="mr-50"
+                    size="20px"
+                    color="blue"
+                    onClick={() =>
+                      history.push(
+                        `/app/student/editStudent/${params.data._id}`
+                      )
+                    }
+                  />
+                )}
               />
 
               <Trash2

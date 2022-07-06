@@ -16,6 +16,7 @@ import axiosConfig from "../../../axiosConfig";
 // import { useParams } from "react-router-dom";
 //import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { Route } from "react-router-dom";
 
 export class EditCategory extends Component {
   constructor(props) {
@@ -107,12 +108,16 @@ export class EditCategory extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/category/categoryList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() => history.push("/app/category/categoryList")}
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>
@@ -186,13 +191,17 @@ export class EditCategory extends Component {
                 </Col>
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="mr-1 mb-1"
-                >
-                  Update Category
-                </Button.Ripple>
+                <Route
+                  render={({ history }) => (
+                    <Button.Ripple
+                      color="primary"
+                      type="submit"
+                      className="mr-1 mb-1"
+                    >
+                      Update Category
+                    </Button.Ripple>
+                  )}
+                />
               </Row>
             </Form>
           </CardBody>
