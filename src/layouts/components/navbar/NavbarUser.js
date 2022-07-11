@@ -20,54 +20,43 @@ import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteCo
 import { history } from "../../../history";
 import { IntlContext } from "../../../utility/context/Internationalization";
 import axiosConfig from "../../../axiosConfig";
+import { Route, Router } from "react-router-dom";
+import { Path } from "react-leaflet";
 
 const handleNavigation = (e, path) => {
   e.preventDefault();
-  history.push(path);
+  //history.push(path);
+  window.location.replace(path);
 };
 
-const UserDropdown = (props) => {
+const UserDropdown = props => {
   // const { logout, isAuthenticated } = useAuth0()
   return (
     <DropdownMenu right>
       <DropdownItem
         tag="a"
-        href="#"
-        onClick={(e) => handleNavigation(e, "/pages/profile/userProfile")}
+        // href="#"
+        onClick={e => handleNavigation(e, "/#/pages/profile/userProfile")}
       >
         <Icon.User size={14} className="mr-50" />
         <span className="align-middle">Edit Profile</span>
       </DropdownItem>
 
       <DropdownItem divider />
-
-      <DropdownItem
-        tag="a"
-        href="/pages/login"
-        // onClick={(e) => {
-        //   e.preventDefault();
-        //   if () {
-        //     return logout({
-        //       returnTo:
-        //         window.location.origin + process.env.REACT_APP_PUBLIC_PATH,
-        //     });
-        //   } else {
-        //     history.push("/");
-        //   }
-        // }}
-      >
-        <Icon.Power size={14} className="mr-50" />
-        <span
-          className="align-middle"
-          onClick={(e) => {
-            window.localStorage.removeItem("ad-token");
-            window.location.push = "#";
-            return false;
-          }}
-        >
-          Log Out
-        </span>
-      </DropdownItem>
+      <Route
+        render={({ history }) => (
+          <DropdownItem
+            tag="a"
+            onClick={e => {
+              localStorage.removeItem("ad-token");
+              window.location.replace("/#/pages/login");
+            }}
+          >
+            <Icon.Power size={14} className="mr-50" />
+            <span className="align-middle">Log Out</span>
+          </DropdownItem>
+        )}
+      />
     </DropdownMenu>
   );
 };
@@ -93,19 +82,19 @@ class NavbarUser extends React.PureComponent {
           "ad-token": localStorage.getItem("ad-token"),
         },
       })
-      .then((response) => {
+      .then(response => {
         console.log(response.data.data);
         this.setState({ admin: response.data.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
 
-  removeItem = (id) => {
+  removeItem = id => {
     let cart = this.state.shoppingCart;
 
-    let updatedCart = cart.filter((i) => i.id !== id);
+    let updatedCart = cart.filter(i => i.id !== id);
 
     this.setState({
       shoppingCart: updatedCart,
@@ -119,7 +108,7 @@ class NavbarUser extends React.PureComponent {
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
         <IntlContext.Consumer>
-          {(context) => {
+          {context => {
             let langArr = {
               // "en" : "English",
               // "de" : "German",

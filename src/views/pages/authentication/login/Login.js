@@ -41,22 +41,22 @@ class Login extends React.Component {
     }
   }
 
-  handlechange = (e) => {
+  handlechange = e => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  loginHandler = (e) => {
+  loginHandler = e => {
     e.preventDefault();
 
     axios
       .post("http://65.0.80.5:5000/api/admin/adminlogin", this.state)
-      .then((response) => {
-        console.log(response);
+      .then(response => {
+        console.log(response.data.token);
         localStorage.setItem("ad-token", response.data.token);
-        history.push("/#/");
+        window.location.replace("/#/");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response.data);
         if (
           error.response.data.status !== "true" &&
