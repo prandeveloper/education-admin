@@ -53,6 +53,7 @@ class Login extends React.Component {
       .post("http://65.0.80.5:5000/api/admin/adminlogin", this.state)
       .then(response => {
         console.log(response.data.token);
+        console.log(response.data);
         localStorage.setItem("ad-token", response.data.token);
         window.location.replace("/#/");
       })
