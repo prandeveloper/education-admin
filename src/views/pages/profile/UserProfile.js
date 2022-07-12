@@ -11,7 +11,7 @@ import {
   FormGroup,
   CustomInput,
 } from "reactstrap";
-import { history } from "../../../history";
+// import { history } from "../../../history";
 import axiosConfig from "../../../axiosConfig";
 import img from "../../../assets/img/portrait/small/avatar-s-11.jpg";
 
@@ -29,6 +29,12 @@ export class UserProfile extends Component {
       selectedName: "",
     };
   }
+  //Image Submit Handler
+  onChangeHandler = event => {
+    this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedName: event.target.files[0].name });
+    console.log(event.target.files[0]);
+  };
 
   componentDidMount() {
     axiosConfig
@@ -37,7 +43,7 @@ export class UserProfile extends Component {
           "ad-token": localStorage.getItem("ad-token"),
         },
       })
-      .then((response) => {
+      .then(response => {
         console.log(response);
         this.setState({
           adminname: response.data.data.adminname,
@@ -48,22 +54,22 @@ export class UserProfile extends Component {
           adminimg: response.data.data.adminimg,
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response);
       });
   }
 
-  onChangeHandler = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ selectedName: event.target.files[0].name });
-    console.log(event.target.files[0]);
-  };
+  // onChangeHandler = (event) => {
+  //   this.setState({ selectedFile: event.target.files[0] });
+  //   this.setState({ selectedName: event.target.files[0].name });
+  //   console.log(event.target.files[0]);
+  // };
 
-  changeHandler = (e) => {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = (e) => {
+  submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
     data.append("adminname", this.state.adminname);
@@ -86,11 +92,11 @@ export class UserProfile extends Component {
           "ad-token": localStorage.getItem("ad-token"),
         },
       })
-      .then((response) => {
+      .then(response => {
         console.log(response.data);
-        window.location.reload();
+        window.location.reload("/#/pages/profile/userProfile");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response);
       });
   };
@@ -110,7 +116,7 @@ export class UserProfile extends Component {
               <Row className="mb-2">
                 <Col lg="4" md="6">
                   <img
-                    src={this.state.adminimg || img}
+                    src={this.state.adminimg}
                     className="rounded mb-3"
                     height="240"
                     width="240"
