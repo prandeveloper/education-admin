@@ -59,12 +59,6 @@ export class UserProfile extends Component {
       });
   }
 
-  // onChangeHandler = (event) => {
-  //   this.setState({ selectedFile: event.target.files[0] });
-  //   this.setState({ selectedName: event.target.files[0].name });
-  //   console.log(event.target.files[0]);
-  // };
-
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
